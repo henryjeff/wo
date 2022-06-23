@@ -18,10 +18,13 @@
     flex: 1;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 0.25em;
 }
 
 .detailsContainer {
     display: flex;
+    row-gap: 0.25em;
     flex-direction: column;
 }
 
@@ -33,7 +36,9 @@
 .statsListContainer {
     display: flex;
     column-gap: 0.75em;
+    overflow-x: scroll;
 }
+
 
 .liftListContainer {
     display: flex;

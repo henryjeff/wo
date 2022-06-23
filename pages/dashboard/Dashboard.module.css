@@ -1,13 +1,21 @@
 .layout {
     display: grid;
-    grid-template-rows: 0fr 8fr;
     grid-template-columns: 2fr 3fr; 
-    grid-template-areas: " workout workout "
-                         " sidebar content";
+    grid-template-areas: "sidebar content";
     grid-gap: 1em;
     padding: 1em;
     width: 100vw;
     height: 100vh;
+}
+
+/* change grid layout when smaller screen */
+@media (max-width: 1024px) {
+    .layout {
+        grid-template-rows: 2fr;
+        grid-template-columns: 1fr;
+        grid-template-areas: "sidebar"
+                             "content";
+    }
 }
 
 .header {
@@ -34,6 +42,7 @@
     flex-direction: column;
     overflow-y: scroll;
     row-gap: 1em;
+    display: flex;
 }
 
 .content {
@@ -41,4 +50,33 @@
     border-radius: var(--br-md);
     grid-area: content;
     overflow: hidden;
+}
+
+.listContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+}
+
+.itemOverlay {
+    z-index: 10;
+    position: fixed;
+    top: 1em;
+    bottom: 1em;
+    left: 1em;
+    right: 1em;
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
+    /* width: 100%; */
+}
+
+.overlay {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
 }

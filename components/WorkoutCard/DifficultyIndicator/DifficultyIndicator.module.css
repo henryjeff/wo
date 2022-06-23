@@ -1,0 +1,27 @@
+.bar {
+    width: 0.2em;
+}
+
+
+.container {
+    width: 1em;
+    height: 1em;
+    display: flex;
+    align-items: flex-end;
+    column-gap: 0.2em;
+}
+
+.lowest {   
+    flex: 1;
+    height:33%;
+}
+
+.medium {
+    flex: 1;
+    height: 66%;
+}
+
+.highest {
+    flex: 1;
+    height: 100%;
+}

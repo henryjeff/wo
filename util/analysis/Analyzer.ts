@@ -12,8 +12,8 @@ class Analyzer {
   };
 
   analyzeWorkouts(workout: Workout[]): MetaWorkout[] {
-    let numSets = 0;
     const metaWorkouts: MetaWorkout[] = workout.map((workout) => {
+      let numSets = 0;
       const metaLifts: MetaLift[] = workout.lifts.map((lift) => {
         let volume = 0;
         let totalReps = 0;

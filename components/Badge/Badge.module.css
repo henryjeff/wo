@@ -8,6 +8,9 @@
     border-radius: var(--br-md);
     background-color: var(--fg-color);
     display: flex;
+    white-space: nowrap;
+    overflow: hidden;
+    column-gap: 0.25em;
 }
 
 .badgeText {

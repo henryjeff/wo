@@ -9,11 +9,15 @@
   --mg-color:#18181b;
   --fg-color: #27272a;
   --positive-color: #6eff8b;
-  --negative-color: #ff4e80;
-  /* --positive-color: #47d597;
-  --negative-color: #4c4935;
-  --negative-color: #af344b; */
+  --negative-color: #ff2e66;
+  --warning-color: #f5bd43;
+
+  /* Border radius */
   --br-md: 0.5rem;
+
+
+  /* Responsive design */
+  --screen-md : 768px;
 }
 
 html,

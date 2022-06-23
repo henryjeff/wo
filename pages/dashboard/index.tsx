@@ -24,43 +24,19 @@ const Home: NextPage = () => {
         });
 
         console.log(analyzer.liftToGroupMap);
-        // setData(workouts.splice(0, 10));
-        setData(workouts);
+        setData(workouts.splice(0, 10));
+        // setData(workouts);
       })
     );
   };
-
-  // const rowRenderer: ListRowRenderer = ({
-  //   key, // Unique key within array of rows
-  //   index, // Index of row within collection
-  //   // isScrolling, // The List is currently being scrolled
-  //   // isVisible, // This row is visible within the List (eg it is not an overscanned row)
-  //   // style, // Style object to be applied to row (to position it)
-  // }) => {
-  //   return (
-  //     <div style={{ height: 100, width: 200 }}>
-  //       <WorkoutCard key={key} workout={data[index]} />
-  //     </div>
-  //   );
-  // };
-
-  const Row = ({ index }: { index: number }) => (
-    <motion.div
-      style={{ flex: 1 }}
-      key={`workout-${index}`}
-      layoutId={`workout-card-${index}`}
-      onClick={() => setSelectedIndex(index)}
-    >
-      <WorkoutCard workout={data[index]} id={`${index}`} />
-    </motion.div>
-  );
 
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const WorkoutInfo = ({ index }: { index: number }) => {
     return (
       <motion.div
-        className={styles.selectedWorkoutInfo}
+        className={`${styles.selectedWorkoutInfo} ${styles.itemOverlay}`}
+        key={`workout-card-${index}`}
         layoutId={`workout-card-${index}`}
         onClick={() => setSelectedIndex(-1)}
       >
@@ -78,20 +54,36 @@ const Home: NextPage = () => {
       </Head>
       {/* @ts-ignore */}
       <AnimateSharedLayout type="crossfade">
+        <motion.div
+          className={styles.overlay}
+          animate={selectedIndex > -1 ? "open" : "closed"}
+          variants={overlayVars}
+        />
+        <div className={styles.selectedWorkout}>
+          <AnimatePresence>
+            {selectedIndex > -1 && (
+              <WorkoutInfo index={selectedIndex} key="item" />
+            )}
+          </AnimatePresence>
+        </div>
         <div className={styles.layout}>
           <div className={`${styles.sidebar} no-scrollbar`}>
-            {data.map((workout, i) => {
-              return (
-                <motion.div
-                  style={{ flex: 1 }}
-                  key={`workout-${i}`}
-                  layoutId={`workout-card-${i}`}
-                  onClick={() => setSelectedIndex(i)}
-                >
-                  <WorkoutCard workout={workout} id={`${i}`} />
-                </motion.div>
-              );
-            })}
+            <div className={styles.sidebarHeader}>
+              <h1>Workouts</h1>
+            </div>
+            <div className={styles.listContainer}>
+              {data.map((workout, i) => {
+                return (
+                  <motion.div
+                    key={`workout-card-${i}`}
+                    layoutId={`workout-card-${i}`}
+                    onClick={() => setSelectedIndex(i)}
+                  >
+                    <WorkoutCard workout={workout} id={`${i}`} />
+                  </motion.div>
+                );
+              })}
+            </div>
             {/* <List height={150} itemCount={1000} itemSize={35} width={300}>
               {Row}
             </List> */}
@@ -104,18 +96,28 @@ const Home: NextPage = () => {
               </button>
             </span>
             <div />
-            <div className={styles.selectedWorkout}>
-              <AnimatePresence>
-                {selectedIndex > 0 && (
-                  <WorkoutInfo index={selectedIndex} key="item" />
-                )}
-              </AnimatePresence>
-            </div>
           </motion.div>
         </div>
       </AnimateSharedLayout>
     </div>
   );
+};
+
+const overlayVars = {
+  open: {
+    opacity: 1,
+    transition: {
+      duration: 0.2,
+      ease: "easeInOut",
+    },
+  },
+  closed: {
+    opacity: 0,
+    transition: {
+      duration: 0.2,
+      ease: "easeInOut",
+    },
+  },
 };
 
 export default Home;

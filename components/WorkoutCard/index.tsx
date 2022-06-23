@@ -5,12 +5,26 @@ import Badge from "../Badge";
 import StatView from "./StatView";
 import LiftView from "./LiftView";
 import styles from "./WorkoutCard.module.css";
+import DifficultyIndicator from "./DifficultyIndicator";
+import colors from "../../styles/colors";
 // import colors from "../../styles/Colors";
 
 export type WorkoutCardProps = {
   workout: MetaWorkout;
   id: string;
   expanded?: boolean;
+};
+
+const intensityToNumber = {
+  easy: 1,
+  medium: 2,
+  hard: 3,
+};
+
+const difficultyToColor = {
+  easy: colors.positive,
+  medium: colors.warning,
+  hard: colors.negative,
 };
 
 const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout, id, expanded }) => {
@@ -24,48 +38,54 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout, id, expanded }) => {
   const intensity =
     workout.numSets > 22 ? "hard" : workout.numSets > 14 ? "medium" : "easy";
 
+  const headerText =
+    abbreviatedMonthNames[momentDate.month()] +
+    " " +
+    getOrdinalNum(Number(momentDate.format("D"))) +
+    ", " +
+    momentDate.format("YYYY");
+
   return (
-    <div className={styles.container} onClick={handleClick}>
+    <motion.div
+      className={styles.container}
+      onClick={handleClick}
+      style={expanded ? {} : { cursor: "pointer" }}
+      layoutId={`workout-card-container-${id}`}
+    >
       <div className={styles.detailsContainer}>
-        <motion.div
-          className={styles.mainDetailsContainer}
-          layoutId={`main-details-${id}`}
-        >
-          <motion.h2 className={styles.dateHeader} layoutId={`header-${id}`}>
-            {abbreviatedMonthNames[momentDate.month()] + " "}
-            {getOrdinalNum(Number(momentDate.format("D"))) +
-              ", " +
-              momentDate.format("YYYY")}
-          </motion.h2>
+        <div className={styles.mainDetailsContainer}>
+          {!expanded ? (
+            <motion.h3 className={styles.dateHeader} layoutId={`header-${id}`}>
+              {headerText}
+            </motion.h3>
+          ) : (
+            <motion.h1 className={styles.dateHeader} layoutId={`header-${id}`}>
+              {headerText}
+            </motion.h1>
+          )}
           <motion.div
             className={styles.badgeListContainer}
-            layoutId={`badges-${id}`}
+            layoutId={`workout-card-badges-${id}`}
           >
             <Badge text={`${momentDate.format("MM/DD/YYYY")}`} />
             <Badge text={workout.type} />
-            <Badge text={intensity} />
+            <Badge
+              text={intensity}
+              textColor={difficultyToColor[intensity]}
+              EndItem={() => (
+                <DifficultyIndicator
+                  difficulty={intensityToNumber[intensity]}
+                />
+              )}
+            />
           </motion.div>
-        </motion.div>
-        <div className={styles.statsListContainer}>
-          <StatView number={0} label="Overload" />
-          <StatView number={0} label="Strength" />
-          <StatView number={0} label="Endurance" />
+        </div>
+        <div className={`${styles.statsListContainer} no-scrollbar`}>
+          <StatView number={0} label="Overload" id={id} />
+          <StatView number={0} label="Strength" id={id} />
+          <StatView number={0} label="Endurance" id={id} />
         </div>
       </div>
-      {/* <motion.div
-        className={styles.summaryContainer}
-        initial={false}
-        variants={previewVars}
-        animate={opened ? "open" : "closed"}
-      > */}
-      {/* <div className={styles.summaryContainer}>
-        <div className={`${styles.liftListContainer} no-scrollbar`}>
-          {workout.lifts &&
-            workout.lifts.map((lift: MetaLift, i: number) => {
-              return <LiftView key={`lift-${lift.name}-${i}`} lift={lift} />;
-            })}
-        </div>
-      </div> */}
       {expanded && (
         <div className={styles.summaryContainer}>
           <div className={`${styles.liftListContainer} no-scrollbar`}>
@@ -76,8 +96,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ workout, id, expanded }) => {
           </div>
         </div>
       )}
-      {/* </motion.div> */}
-    </div>
+    </motion.div>
   );
 };
 
