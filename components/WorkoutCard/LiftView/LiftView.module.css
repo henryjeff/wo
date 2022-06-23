@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.setTable {
+    font-size: 1em;
+    color: var(--font-secondary);
+    margin: 0 0.5em;
+}
+
+.col > p {
+    margin: 0.1em;
+}
+
+.bold {
+    font-weight: bold;
+    text-transform: capitalize;
+    color: var(--font-primary);
+}
+
+.summary {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 0.8em;
+}
+
+.spacer {
+    margin: 0.5em 0;
+    height: 0.25em;
+    border-radius: var(--br-md);
+    width: 12em;
+    background-color: var(--fg-color);
+}
+
+.summaryTable {
+    color: var(--font-secondary);
+    font-size: 0.8em;
+}

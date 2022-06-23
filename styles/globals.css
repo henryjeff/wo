@@ -1,9 +1,47 @@
+@import url("https://use.typekit.net/zsk0swl.css");
+
+:root {
+  --primary-color: #302AE6;
+  --secondary-color: #536390;
+  --font-primary: #fafafa;
+  --font-secondary: #a1a1aa;
+  --bg-color: #0d0d0e;
+  --mg-color:#18181b;
+  --fg-color: #27272a;
+  --positive-color: #6eff8b;
+  --negative-color: #ff4e80;
+  /* --positive-color: #47d597;
+  --negative-color: #4c4935;
+  --negative-color: #af344b; */
+  --br-md: 0.5rem;
+}
+
 html,
 body {
+  font-family: 'soleil', sans-serif;
   padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  margin: 0;;
+  background-color: var(--bg-color);
+  color: var(--font-primary);
+}
+
+p {
+  margin: 0.25em;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0.25em;
+}
+
+h2 {
+  font-size: 1.5em;
+  margin: 0.25em;
+}
+
+h3 {
+  font-size: 1.25em;
+  margin: 0.25em;
 }
 
 a {
@@ -13,4 +51,54 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+
+button {
+  background-color: var(--fg-color);
+  color: var(--font-primary);
+  font-weight: bold;
+  padding:  0.5em 1em;
+  border: none;
+  border-radius: var(--br-md);
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--font-primary);
+  color: var(--fg-color);
+}
+
+button:active {
+  background-color: var(--font-secondary);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+
+.masked-overflow {
+  --scrollbar-width: 0px;
+  --mask-height: 32px;
+  overflow-y: auto;
+  --mask-image-content: linear-gradient(
+      to left,
+      transparent,
+      black var(--mask-height),
+      black calc(100% - var(--mask-height)),
+      transparent
+  );
+  --mask-size-content: calc(100% - var(--scrollbar-width)) 100%;
+  --mask-image-scrollbar: linear-gradient(black, black);
+  --mask-size-scrollbar: var(--scrollbar-width) 100%;
+  mask-image: var(--mask-image-content), var(--mask-image-scrollbar);
+  mask-size: var(--mask-size-content), var(--mask-size-scrollbar);
+  mask-position: 0 0, 100% 0;
+  mask-repeat: no-repeat, no-repeat;
 }

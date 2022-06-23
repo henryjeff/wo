@@ -1,0 +1,48 @@
+.container {
+    flex-direction: column;
+    display: flex;
+    border-radius: var(--br-md);
+    background-color: var(--mg-color);
+    padding: 1.5em;
+    row-gap: 1em;
+    overflow:hidden;
+    flex: 1;
+}
+
+.dateHeader {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.mainDetailsContainer {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.detailsContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.badgeListContainer {
+    display: flex;
+    column-gap: 0.75em;
+}
+
+.statsListContainer {
+    display: flex;
+    column-gap: 0.75em;
+}
+
+.liftListContainer {
+    display: flex;
+    overflow: scroll;
+    column-gap: 1.5em;
+}
+
+.summaryContainer {
+    display: flex;
+    overflow-x: scroll;
+    flex-direction: column;
+}

@@ -1,0 +1,21 @@
+.badgeContainer {
+    padding: 0 1em;
+    font-size: 0.8em;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 1;
+    border-radius: var(--br-md);
+    background-color: var(--fg-color);
+    display: flex;
+}
+
+.badgeText {
+    display: flex;
+    text-transform: capitalize;
+}
+
+.badgeWrapper {
+    align-items: center;
+    display: flex;
+}

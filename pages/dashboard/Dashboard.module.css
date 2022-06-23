@@ -1,0 +1,44 @@
+.layout {
+    display: grid;
+    grid-template-rows: 0fr 8fr;
+    grid-template-columns: 2fr 3fr; 
+    grid-template-areas: " workout workout "
+                         " sidebar content";
+    grid-gap: 1em;
+    padding: 1em;
+    width: 100vw;
+    height: 100vh;
+}
+
+.header {
+    background-color: red;
+    grid-area: header;
+}
+
+.fileUpload {
+    grid-area: upload;
+}
+
+.selectedWorkout {
+    grid-area: workout;
+    display: flex;
+}
+
+.selectedWorkoutInfo {
+    flex: 1;
+    overflow: hidden;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    flex-direction: column;
+    overflow-y: scroll;
+    row-gap: 1em;
+}
+
+.content {
+    background-color: var(--mg-color);
+    border-radius: var(--br-md);
+    grid-area: content;
+    overflow: hidden;
+}
