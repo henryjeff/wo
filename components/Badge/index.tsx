@@ -1,5 +1,5 @@
 import styles from "./Badge.module.css";
-import { useId } from "react";
+import { motion } from "framer-motion";
 
 export type BadgeProps = {
   text: string;

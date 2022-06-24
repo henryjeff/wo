@@ -1,23 +1,39 @@
 @import url("https://use.typekit.net/zsk0swl.css");
 
 :root {
+  /* --bg-color: #0d0d0e; */
+
   --primary-color: #302AE6;
   --secondary-color: #536390;
   --font-primary: #fafafa;
   --font-secondary: #a1a1aa;
-  --bg-color: #0d0d0e;
+  --bg-color: #000000;
   --mg-color:#18181b;
   --fg-color: #27272a;
   --positive-color: #6eff8b;
   --negative-color: #ff2e66;
   --warning-color: #f5bd43;
 
-  /* Border radius */
-  --br-md: 0.5rem;
 
+  /* Border */
+  --br-md: 0.5em;
+  --br-lg: 1em;
+  --layout-border: 2px solid var(--mg-color);
+
+  --overlay-shadow: 0px 20px 20px var(--bg-color);
 
   /* Responsive design */
   --screen-md : 768px;
+
+  /* Navbar */
+  --navbar-height: 5em;
+
+  /* Timings */
+  --transition-md: 0.2s;
+}
+
+div {
+  display: flex;
 }
 
 html,
@@ -35,17 +51,30 @@ p {
 
 h1 {
   font-size: 2em;
-  margin: 0.25em;
+  margin: 0em;
 }
 
 h2 {
   font-size: 1.5em;
-  margin: 0.25em;
+  margin: 0em;
 }
 
 h3 {
   font-size: 1.25em;
-  margin: 0.25em;
+  margin: 0em;
+}
+
+h4 {
+  font-size: 1em;
+  margin: 0em;
+  font-weight: normal;
+  color: var(--font-secondary);
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 a {
@@ -65,8 +94,9 @@ button {
   padding:  0.5em 1em;
   border: none;
   border-radius: var(--br-md);
-  transition: 0.2s;
+  transition: var(--transition-md);
   cursor: pointer;
+  flex-shrink: 1;
 }
 
 button:hover {
@@ -76,6 +106,19 @@ button:hover {
 
 button:active {
   background-color: var(--font-secondary);
+}
+
+::placeholder {
+  color: var(--fg-color);
+  opacity: 1;
+}
+
+:-ms-input-placeholder { 
+  color: var(--fg-color);
+}
+
+::-ms-input-placeholder { 
+  color: var(--fg-color);
 }
 
 .no-scrollbar::-webkit-scrollbar {

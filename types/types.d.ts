@@ -50,4 +50,5 @@ type MetaWorkout = {
   lifts: MetaLift[];
   type: WorkoutType;
   numSets: number;
+  key: string;
 };

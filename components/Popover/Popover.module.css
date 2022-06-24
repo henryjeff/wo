@@ -1,0 +1,17 @@
+.container {
+    position: relative;
+    display: block;
+}
+
+.popOver {
+    background-color: var(--bg-color);
+    min-width: 10em;
+    padding: 1.5em;
+    position: absolute;
+    border: var(--layout-border);
+    border-radius: var(--br-md);
+    
+    max-width: 100vw;
+    flex-direction: column;
+    box-shadow: var(--overlay-shadow);
+}

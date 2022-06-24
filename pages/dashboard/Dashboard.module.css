@@ -3,7 +3,7 @@
     grid-template-columns: 2fr 3fr; 
     grid-template-areas: "sidebar content";
     grid-gap: 1em;
-    padding: 1em;
+    padding: 1em 2em;
     width: 100vw;
     height: 100vh;
 }
@@ -18,18 +18,13 @@
     }
 }
 
-.header {
-    background-color: red;
-    grid-area: header;
-}
-
 .fileUpload {
     grid-area: upload;
 }
 
 .selectedWorkout {
     grid-area: workout;
-    display: flex;
+    
 }
 
 .selectedWorkoutInfo {
@@ -40,34 +35,36 @@
 .sidebar {
     grid-area: sidebar;
     flex-direction: column;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     row-gap: 1em;
-    display: flex;
+    
+}
+
+.sidebarHeader {
+    
+    flex-direction: column;
+    row-gap: 1em;
 }
 
 .content {
-    background-color: var(--mg-color);
+    background-color: var(--bg-color);
+    border: var(--layout-border);
     border-radius: var(--br-md);
     grid-area: content;
+    padding: 1em;
+    height: 600px;
     overflow: hidden;
-}
-
-.listContainer {
-    display: flex;
     flex-direction: column;
-    row-gap: 1em;
 }
 
 .itemOverlay {
     z-index: 10;
     position: fixed;
-    top: 1em;
+    top: calc(var(--navbar-height) + 1em);
     bottom: 1em;
     left: 1em;
     right: 1em;
-    /* left: 50%; */
-    /* transform: translateX(-50%); */
-    /* width: 100%; */
+    display: block;
 }
 
 .overlay {
@@ -79,4 +76,20 @@
     right: 0;
     background-color: rgba(0, 0, 0, 0.5);
     pointer-events: none;
+}
+
+.searchContainer {
+    
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-between;
+    column-gap: 1em;
+}
+.contentHeader {
+    justify-content: space-between;
+}
+
+.contentHeaderBadges{ 
+    flex-direction: row;
+    column-gap: 1em;
 }

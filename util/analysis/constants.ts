@@ -25,6 +25,7 @@ export const LEG_TOKENS = [
   "squat",
   "hack",
   "leg",
+  "leg",
   "press",
   "calf",
   "raise",

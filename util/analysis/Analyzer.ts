@@ -1,3 +1,4 @@
+import moment from "moment";
 import { MUSCLE_GROUP_TOKENS, PULL_GROUPS, PUSH_GROUPS } from "./constants";
 
 class Analyzer {
@@ -81,6 +82,7 @@ class Analyzer {
         lifts: metaLifts,
         type: workoutType,
         numSets: numSets,
+        key: `wo${moment(workout.date).format("YYYY-MM-DD")}`,
       };
     });
     return metaWorkouts;

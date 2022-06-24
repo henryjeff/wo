@@ -1,0 +1,24 @@
+.container {
+    height: var(--navbar-height);
+    border-bottom: 2px solid var(--mg-color);
+    background-color: var(--bg-color);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    
+    flex-direction: row;
+    align-items: center;
+    padding: 0 2em;
+    justify-content: space-between;
+    
+}
+
+.logo {
+    font-size: 1em;
+    font-weight: bold;
+    color: var(--font-primary);
+    cursor: pointer;
+    
+    column-gap: 1em;
+}

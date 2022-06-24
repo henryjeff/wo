@@ -1,0 +1,17 @@
+.listContainer {
+    
+    flex-direction: column;
+    row-gap: 1em;
+}
+
+.placeHolder {
+    width: 100%;
+    height: 100%;
+    
+    justify-content: center;
+    align-items: center;
+    border: 0.2em dashed var(--mg-color);
+    position: absolute;
+    border-radius: var(--br-md);
+    pointer-events: none;
+}

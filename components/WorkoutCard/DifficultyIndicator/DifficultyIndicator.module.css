@@ -6,7 +6,7 @@
 .container {
     width: 1em;
     height: 1em;
-    display: flex;
+    
     align-items: flex-end;
     column-gap: 0.2em;
 }
