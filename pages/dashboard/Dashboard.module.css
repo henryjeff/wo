@@ -67,6 +67,16 @@
     display: block;
 }
 
+.filters {
+    align-items: center;
+    column-gap: 0.5em;
+}
+
+.resultsLengthText {
+    color: var(--fg-color);
+    font-size: 0.9em;
+}
+
 .overlay {
     z-index: 1;
     position: fixed;
@@ -79,7 +89,7 @@
 }
 
 .searchContainer {
-    
+    align-items: center;
     flex: 1;
     flex-direction: row;
     justify-content: space-between;

@@ -37,13 +37,13 @@ type MuscleGroup =
   | "none";
 
 type WorkoutType =
-  | MuscleGroup
   | "push"
   | "pull"
   | "legs"
   | "upper"
   | "full-body"
-  | "misc";
+  | "misc"
+  | "none";
 
 type MetaWorkout = {
   date: string;
@@ -51,4 +51,8 @@ type MetaWorkout = {
   type: WorkoutType;
   numSets: number;
   key: string;
+  totalWeight: number;
+  datedStats: {
+    overload: number;
+  };
 };

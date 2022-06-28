@@ -1,0 +1,33 @@
+.difficultyButton {
+    padding: 0 0.8em;
+    border: var(--layout-border);
+    align-items: center;
+    border-radius: var(--br-md);
+    cursor: pointer;
+    transition: var(--transition-md);
+    font-weight: bold;
+    font-size: 0.8em
+}
+
+.difficultyButton:hover {
+    background-color: var(--fg-color);
+    border-color: var(--fg-color)
+}
+
+.difficultyButton:active {
+    background-color: var(--mg-color);
+    border-color: var(--mg-color);
+}
+
+.selected {
+    background-color: var(--fg-color);
+    border-color: var(--fg-color);
+}
+
+.indicatorContainer{
+    font-size: 0.9em
+}
+
+.container {
+    column-gap: 0.5em;
+}

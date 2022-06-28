@@ -11,18 +11,48 @@ import styles from "./StatView.module.css";
 export type StatViewProps = {
   label: string;
   number: number;
+  neutral?: number;
+  range?: number;
   id: string;
 };
 
-const StatView: React.FC<StatViewProps> = ({ label, number, id }) => {
+const StatView: React.FC<StatViewProps> = ({
+  label,
+  number,
+  range,
+  neutral,
+  id,
+}) => {
+  const neutralNumber = useMemo(() => {
+    if (!neutral) return 0;
+    return neutral;
+  }, [neutral]);
+
+  const rangeNumber = useMemo(() => {
+    if (!range) return 1;
+    return range;
+  }, [range]);
+
   const icon = useMemo(
-    () => (number > 1 ? faAngleUp : number < -1 ? faAngleDown : faGripLines),
-    [number]
+    () =>
+      number > neutralNumber + rangeNumber
+        ? faAngleUp
+        : number < neutralNumber - rangeNumber
+        ? faAngleDown
+        : faGripLines,
+    [number, neutralNumber, rangeNumber]
   );
 
   const color = useMemo(
-    () => (number > 1 ? styles.positive : number < -1 ? styles.negative : ""),
-    [number]
+    () =>
+      number > neutralNumber + rangeNumber
+        ? styles.positive
+        : number < neutralNumber - rangeNumber
+        ? number < neutralNumber - rangeNumber * 2
+          ? styles.negative
+          : styles.warning
+        : "",
+    [number, neutralNumber, rangeNumber]
   );
 
   return (

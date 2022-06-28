@@ -1,5 +1,11 @@
 import moment from "moment";
-import { MUSCLE_GROUP_TOKENS, PULL_GROUPS, PUSH_GROUPS } from "./constants";
+import {
+  MUSCLE_GROUP_TOKENS,
+  PULL_GROUPS,
+  PUSH_GROUPS,
+  WORKOUT_TYPES,
+} from "./constants";
+import { sortByAscDate, sortByDescDate } from "./sorting";
 
 class Analyzer {
   liftToGroupMap: { [key: string]: MuscleGroup };
@@ -26,10 +32,8 @@ class Analyzer {
         const liftKey = this.keyLiftName(lift.name);
 
         if (this.liftToGroupMap[liftKey]) {
-          // console.log("found ", liftKey, " in map, skipping");
           matchedGroup = this.liftToGroupMap[liftKey];
         } else {
-          console.log(liftKey, " not found in map, searching");
           let highestMatchedToken = 0;
 
           for (group in MUSCLE_GROUP_TOKENS) {
@@ -45,7 +49,6 @@ class Analyzer {
               matchedGroup = group as MuscleGroup;
             }
           }
-          // console.log("found ", matchedGroup, " in map, skipping");
           this.liftToGroupMap[liftKey] = matchedGroup;
         }
         for (const set of lift.sets) {
@@ -54,7 +57,6 @@ class Analyzer {
           totalReps += set.numReps * set.numSets;
           volume += set.numSets * set.weight * set.numReps;
         }
-        // console.log(liftToGroupMap);
 
         return {
           name: lift.name,
@@ -77,38 +79,78 @@ class Analyzer {
 
       // console.log(liftToGroupMap);
 
+      // calculate total weight
+      let totalWeight = 0;
+      metaLifts.forEach((lift) => {
+        totalWeight += lift.totalWeight;
+      });
+
       return {
         date: workout.date,
         lifts: metaLifts,
         type: workoutType,
         numSets: numSets,
+        totalWeight: totalWeight,
         key: `wo${moment(workout.date).format("YYYY-MM-DD")}`,
+        datedStats: {
+          overload: 0,
+        },
       };
     });
+
+    // sort the workouts by date
+    const sortedWorkouts = metaWorkouts.sort(sortByAscDate);
+
+    // split workouts into their respective muscle groups
+    const groupedWorkouts: { [key in WorkoutType]: MetaWorkout[] } = {} as any;
+    for (const workout of sortedWorkouts) {
+      if (!groupedWorkouts[workout.type]) {
+        groupedWorkouts[workout.type] = [];
+      }
+      groupedWorkouts[workout.type].push(workout);
+    }
+
+    // for each group calculate the overload in total weight from workout to workout
+    for (const group in groupedWorkouts) {
+      const currentGroupWorkouts: MetaWorkout[] =
+        groupedWorkouts[group as WorkoutType];
+      for (let i = 0; i < currentGroupWorkouts.length; i++) {
+        const workout = currentGroupWorkouts[i];
+        const lastWorkout = currentGroupWorkouts[i + 1];
+
+        if (lastWorkout) {
+          workout.datedStats.overload = Number(
+            ((workout.totalWeight / lastWorkout.totalWeight) * 100).toFixed(2)
+          );
+        }
+      }
+    }
+    // console.log(groupedWorkouts);
+
     return metaWorkouts;
   }
 
   defineWorkoutType = (groupsHit: MuscleGroup[]): WorkoutType => {
     // If we didn't hit any groups return none
     if (groupsHit.length === 0) return "none";
-    // If we only hit one group we can just return that group
-    if (groupsHit.length === 1) return groupsHit[0];
+
     // If we hit legs...
     if (groupsHit.indexOf("leg") !== -1) {
       // check if we hit at least 3 other groups
+      if (groupsHit.indexOf("abs") !== -1) return "legs";
       if (groupsHit.length > 3) return "full-body";
       if (groupsHit.length > 2) return "misc";
       // otherwise we just hit legs
       else return "legs";
     }
     // We didn't hit legs, so if we hit at least 4 groups of upper body, its an upper day
-    if (groupsHit.length > 3) return "upper";
 
     // Finally check if we hit push or pull
     if (groupsHit.sort().join(",") === PULL_GROUPS.sort().join(","))
       return "pull";
     if (groupsHit.some((group) => PUSH_GROUPS.includes(group))) return "push";
 
+    if (groupsHit.length > 3) return "upper";
     return "misc";
   };
 }

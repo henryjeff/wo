@@ -64,3 +64,13 @@ export const MUSCLE_GROUP_TOKENS: { [key in MuscleGroup]: string[] } = {
 export const PUSH_GROUPS: MuscleGroup[] = ["shoulder", "chest", "tricep"];
 
 export const PULL_GROUPS: MuscleGroup[] = ["back", "bicep"];
+
+export const WORKOUT_TYPES: WorkoutType[] = [
+  "full-body",
+  "upper",
+  "legs",
+  "push",
+  "pull",
+  "misc",
+  "none",
+];

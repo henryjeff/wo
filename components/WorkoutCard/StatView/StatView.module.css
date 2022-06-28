@@ -32,3 +32,8 @@
     border-color: var(--negative-color);
     color: var(--negative-color);
 }
+
+.warning {
+    border-color: var(--warning-color);
+    color: var(--warning-color);
+}

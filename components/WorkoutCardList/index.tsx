@@ -1,30 +1,88 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./WorkoutCardList.module.css";
 import WorkoutCard from "../../components/WorkoutCard";
 import { useCallback } from "react";
 import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import pagination from "../../util/pagination";
 
 type WorkoutCardListProps = {
   workouts: MetaWorkout[];
-  onCardClick: (index: number) => void;
+  onCardClick: (id: string) => void;
 };
+
+const PAGE_SIZE = 10;
 
 const WorkoutCardList: React.FC<WorkoutCardListProps> = ({
   workouts,
   onCardClick,
 }) => {
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+
+  const handleNextPage = useCallback(() => {
+    if (page + 1 >= totalPages) return;
+    setPage((prevPage) => prevPage + 1);
+  }, [page, totalPages]);
+
+  const handleBackPage = useCallback(() => {
+    if (page === 0) return;
+    setPage((prevPage) => prevPage - 1);
+  }, [page]);
+
+  useEffect(() => {
+    setPage(0);
+    setTotalPages(Math.ceil(workouts.length / PAGE_SIZE));
+  }, [workouts]);
+
   return (
     <div className={styles.listContainer}>
-      {workouts.map((workout, i) => {
-        return (
-          <MemoWorkoutCardRow
-            onClick={onCardClick}
-            key={`workout-card-${i}`}
-            workout={workout}
-            index={i}
-          />
-        );
-      })}
+      <div className={styles.pageContainer}>
+        <div
+          className={`${styles.pageBackButton} ${styles.pageButton}`}
+          onClick={handleBackPage}
+        >
+          <FontAwesomeIcon icon={faArrowLeft} width={12} />
+          <p>Back</p>
+        </div>
+        <div className={styles.pageNumbers}>
+          {pagination(page, totalPages).map((element, index) =>
+            element === "..." ? (
+              <p key={`${element}-${index}`}>...</p>
+            ) : (
+              <div
+                className={`${styles.pageNumber} ${
+                  element - 1 === page ? styles.selected : ""
+                }`}
+                onClick={() => setPage(element - 1)}
+                key={`${element}-${index}`}
+              >
+                <p>{element}</p>
+              </div>
+            )
+          )}
+        </div>
+        <div
+          className={`${styles.pageNextButton} ${styles.pageButton}`}
+          onClick={handleNextPage}
+        >
+          <p>Next</p>
+          <FontAwesomeIcon icon={faArrowRight} width={12} />
+        </div>
+      </div>
+      {workouts
+        .slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
+        .map((workout, i) => {
+          return (
+            <MemoWorkoutCardRow
+              onClick={onCardClick}
+              key={`workout-card-${workout.key}`}
+              workout={workout}
+              index={i}
+            />
+          );
+        })}
     </div>
   );
 };
@@ -32,7 +90,7 @@ const WorkoutCardList: React.FC<WorkoutCardListProps> = ({
 type WorkoutCardRowProps = {
   index: number;
   workout: MetaWorkout;
-  onClick: (index: number) => void;
+  onClick: (id: string) => void;
 };
 
 const WorkoutCardRow: React.FC<WorkoutCardRowProps> = ({
@@ -40,29 +98,41 @@ const WorkoutCardRow: React.FC<WorkoutCardRowProps> = ({
   workout,
   onClick,
 }) => {
-  const wrapperRef = useRef<HTMLDivElement>(null);
-
   const clickHandler = useCallback(() => {
-    onClick(index);
-    // wrapperRef.current?.scrollIntoView({
-    //   behavior: "smooth",
-    //   block: "center",
-    // });
-  }, [index, onClick]);
+    onClick(workout.key);
+  }, [workout, onClick]);
 
   return (
     <motion.div
-      key={`workout-card-${index}`}
-      layoutId={`workout-card-${index}`}
+      key={`workout-card-${workout.key}`}
+      layoutId={`workout-card-${workout.key}`}
       onClick={clickHandler}
-      ref={wrapperRef}
       style={{ display: "block" }}
     >
-      <WorkoutCard workout={workout} id={`${index}`} />
+      <motion.div {...mountAnimationProps(index)}>
+        <WorkoutCard workout={workout} id={`${workout.key}`} />
+      </motion.div>
     </motion.div>
   );
 };
 
+const mountAnimationProps = (index: number) => ({
+  initial: {
+    opacity: 0,
+    x: -16,
+  },
+  animate: {
+    opacity: 1,
+    x: 0,
+  },
+  transition: {
+    delay: 0.03 * index,
+    type: "spring",
+    stiffness: 400,
+    damping: 25,
+  },
+});
+
 const MemoWorkoutCardRow = React.memo(WorkoutCardRow);
 
-export default React.memo(WorkoutCardList);
+export default WorkoutCardList;

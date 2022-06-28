@@ -105,7 +105,13 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({
           </motion.div>
         </div>
         <div className={`${styles.statsListContainer} no-scrollbar`}>
-          <StatView number={0} label="Overload" id={id} />
+          <StatView
+            number={workout.datedStats.overload}
+            label="Overload"
+            neutral={100}
+            range={10}
+            id={id}
+          />
           <StatView number={0} label="Strength" id={id} />
           <StatView number={0} label="Endurance" id={id} />
         </div>
@@ -122,9 +128,9 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({
                 })}
             </div>
           </div>
-          <div className={styles.summaryFooter}>
+          {/* <div className={styles.summaryFooter}>
             <button onClick={onClose}>Close Summary</button>
-          </div>
+          </div> */}
         </>
       )}
     </motion.div>

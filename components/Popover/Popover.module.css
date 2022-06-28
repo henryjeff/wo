@@ -1,6 +1,7 @@
 .container {
     position: relative;
     display: block;
+    z-index: 10000;
 }
 
 .popOver {
@@ -14,4 +15,8 @@
     max-width: 100vw;
     flex-direction: column;
     box-shadow: var(--overlay-shadow);
+}
+
+.popOverButton {
+    column-gap: 0.5em;
 }

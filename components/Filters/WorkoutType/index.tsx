@@ -1,25 +1,32 @@
 import styles from "./WorkoutTypeFilter.module.css";
-import { motion } from "framer-motion";
 import { useState } from "react";
+import { WORKOUT_TYPES } from "../../../util/analysis/constants";
 
-export type WorkoutTypeFilterProps = {};
-const WORKOUT_TYPES: WorkoutType[] = [
-  "full-body",
-  "upper",
-  "legs",
-  "push",
-  "pull",
-];
+export type WorkoutTypeFilterProps = {
+  onPredicateChange: (predicate: (workout: MetaWorkout) => boolean) => void;
+};
 
-const WorkoutTypeFilter: React.FC<WorkoutTypeFilterProps> = ({}) => {
+const WorkoutTypeFilter: React.FC<WorkoutTypeFilterProps> = ({
+  onPredicateChange,
+}) => {
   const [selectedTypes, setSelectedTypes] = useState<WorkoutType[]>([]);
 
   const handleClick = (type: WorkoutType) => {
-    if (selectedTypes.includes(type)) {
-      setSelectedTypes(selectedTypes.filter((t) => t !== type));
-    } else {
-      setSelectedTypes([...selectedTypes, type]);
-    }
+    let newSelectedTypes: WorkoutType[] = [];
+    if (selectedTypes.includes(type))
+      newSelectedTypes = selectedTypes.filter((t) => t !== type);
+    else newSelectedTypes = [...selectedTypes, type];
+
+    console.log(newSelectedTypes);
+
+    const byTypePredicate = (workout: MetaWorkout) => {
+      if (newSelectedTypes.length === 0) return true;
+      if (newSelectedTypes.includes(workout.type)) return true;
+      return false;
+    };
+
+    onPredicateChange(byTypePredicate);
+    setSelectedTypes(newSelectedTypes);
   };
 
   return (

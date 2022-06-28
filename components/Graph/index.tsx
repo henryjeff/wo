@@ -9,12 +9,15 @@ import {
   Tooltip,
   Line,
 } from "recharts";
+import moment from "moment";
+import colors from "../../styles/colors";
 
 type GraphProps = {
-  data: any[];
+  data: MetaWorkout[];
+  dataKeys: string[];
 };
 
-const Graph: React.FC<GraphProps> = ({ data }) => {
+const Graph: React.FC<GraphProps> = ({ data, dataKeys }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ w: 0, h: 0 });
 
@@ -25,6 +28,10 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
       window.removeEventListener("resize", getSize);
     };
   }, []);
+  function formatXAxis(tickItem: any) {
+    // If using moment.js
+    return moment(tickItem).format("MM/YY");
+  }
 
   const getSize = () => {
     if (contentRef.current) {
@@ -37,11 +44,22 @@ const Graph: React.FC<GraphProps> = ({ data }) => {
     <div ref={contentRef} className={styles.graphContainer}>
       <LineChart width={dimensions.w} height={dimensions.h} data={data}>
         {/* <CartesianGrid strokeDasharray="3 3" /> */}
-        <XAxis dataKey="date" />
+        <XAxis reversed dataKey="date" tickFormatter={formatXAxis} />
         <YAxis />
         {/* <Tooltip /> */}
-        {/* <Legend /> */}
-        <Line type="monotone" dataKey="value" stroke="#8884d8" />
+        <Legend />
+        {dataKeys.map((key, i) => {
+          return (
+            <Line
+              key={`${i}`}
+              type="monotone"
+              dot={false}
+              dataKey={key}
+              stroke={colors.positive}
+            />
+          );
+        })}
+        {/* <Line type="monotone" dataKey="value" stroke="#8884d8" /> */}
         {/* <Line type="monotone" dataKey="date" stroke="#82ca9d" /> */}
       </LineChart>
     </div>
