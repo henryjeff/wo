@@ -11,15 +11,31 @@
 /* change grid layout when smaller screen */
 @media (max-width: 1024px) {
     .layout {
-        grid-template-rows: 2fr;
         grid-template-columns: 1fr;
         grid-template-areas: "sidebar"
                              "content";
     }
 }
 
+@media (max-width: 1024px) {
+    .content {
+        display: none;
+    }
+}
+
 .fileUpload {
-    grid-area: upload;
+    border: var(--layout-border);
+    border-radius: var(--br-md);
+    border-style: dashed;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2em 2em;
+}
+
+.fileUploadInformation {
+    padding: 0em 1em;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .selectedWorkout {
@@ -35,9 +51,8 @@
 .sidebar {
     grid-area: sidebar;
     flex-direction: column;
-    /* overflow-y: scroll; */
     row-gap: 1em;
-    
+    margin-bottom: 2em;
 }
 
 .sidebarHeader {
@@ -47,13 +62,21 @@
 }
 
 .content {
+    flex-direction: column;
+    row-gap: 1em;
+    grid-area: content;
+    padding: 1em;
+    overflow: scroll;
+}
+
+.statisticsContent {
     background-color: var(--bg-color);
     border: var(--layout-border);
     border-radius: var(--br-md);
-    grid-area: content;
+    width: 100%;
     padding: 1em;
-    height: 600px;
-    overflow: hidden;
+    height: 800px;
+    /* overflow: hidden; */
     flex-direction: column;
 }
 

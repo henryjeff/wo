@@ -9,6 +9,7 @@ import {
   parseWorkout,
   convertFileToWorkoutString,
 } from "../../util/workoutParsing";
+import moment from "moment";
 
 const dateSchema = z.object({
   year: z.number().min(0).max(99),
@@ -69,7 +70,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const workoutString = convertFileToWorkoutString(
       "/uploads/Takeout/Keep/" + fileName
     );
-    // console.log("ON WORKOUT STRING", date);
+    // console.log("ON WORKOUT STRING", moment(date).format("YYYY-MM-DD"));
     // console.log(workoutString);
 
     const workout = parseWorkout(workoutString);

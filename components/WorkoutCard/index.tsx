@@ -91,7 +91,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({
             className={styles.badgeListContainer}
             layoutId={`workout-card-badges-${id}`}
           >
-            <Badge text={`${momentDate.format("MM/DD/YYYY")}`} />
+            <Badge text={`${isoWeekdayToWeekday[momentDate.isoWeekday()]}`} />
             <Badge text={workout.type} />
             <Badge
               text={intensity}
@@ -112,8 +112,8 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({
             range={10}
             id={id}
           />
-          <StatView number={0} label="Strength" id={id} />
-          <StatView number={0} label="Endurance" id={id} />
+          {/* <StatView number={0} label="Strength" id={id} />
+          <StatView number={0} label="Endurance" id={id} /> */}
         </div>
       </div>
       {expanded && (
@@ -150,6 +150,17 @@ const abbreviatedMonthNames = [
   "Oct",
   "Nov",
   "Dec",
+];
+
+const isoWeekdayToWeekday = [
+  "_",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
 ];
 
 function getOrdinalNum(n: number) {

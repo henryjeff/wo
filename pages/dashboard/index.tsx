@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Dashboard.module.css";
 import WorkoutCard from "../../components/WorkoutCard";
 import { useState } from "react";
@@ -21,21 +21,21 @@ import { sortByAscDate } from "../../util/analysis/sorting";
 import useOrganizedWorkouts from "../../hooks/useOrganizedWorkouts";
 import useFetchWorkouts from "../../hooks/useFetchWorkouts";
 import DifficultyFilter from "../../components/Filters/Difficulty";
-import { faFilter } from "@fortawesome/free-solid-svg-icons";
+import { faFileZipper, faFilter } from "@fortawesome/free-solid-svg-icons";
 import Graph from "../../components/Graph";
-
-const str =
-  "Upright row\n3x8 @ 45\n1x8 @ 50\n\nLat pulldown (on shitty machine, fucking sucks)\n1x10 @ 70\n2x8 @ 85\n1x10 @ 85\n\nSeated cable rows (focus on good reps) \n1x10 @ 55\n3x8 @ 70\n\nCurls\n3x8 @ 20 (great weight rn)\n1x7 @ 25 (ok!)\n\nHammer Curls\n3x10 @ 15";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Home: NextPage = () => {
   const fetchWorkouts = useFetchWorkouts();
-  // const [workouts] = useState(fetchWorkouts.workouts);
+  const { progressions } = fetchWorkouts;
   const { workouts, sorting, addFilterPredicate } = useOrganizedWorkouts({
     workouts: fetchWorkouts.workouts,
     sortingFunction: sortByAscDate,
   });
-
   const [selectedId, setSelectedId] = useState("");
+  const [selectedLift, setSelectedLift] = useState("");
+
+  console.log(fetchWorkouts.progressions);
 
   const ExpandedWorkoutInfo = ({ id }: { id: string }) => {
     const workout = workouts.find((w) => w.key === id);
@@ -89,8 +89,8 @@ const Home: NextPage = () => {
                   <Popover text="Difficulty" icon={faFilter}>
                     <h3>Difficulty</h3>
                     <h4>
-                      Filter by workout difficulty, which is determined set
-                      volume.
+                      Filter by workout difficulty, which is determined by total
+                      set volume.
                     </h4>
                     <br></br>
                     <DifficultyFilter
@@ -114,22 +114,68 @@ const Home: NextPage = () => {
           </div>
 
           <div className={styles.content}>
-            <div className={styles.contentHeader}>
-              <h1>Statistics</h1>
-              <div className={styles.contentHeaderBadges}>
-                <Badge text={`${totalNumWorkouts(workouts)} workouts`} />
-                <Badge text={`${totalNumLifts(workouts)} lifts`} />
-                <Badge text={`${totalNumSets(workouts)} sets`} />
-                <Badge text={`${totalNumReps(workouts)} reps`} />
+            <div className={styles.fileUpload}>
+              <div>
+                <FontAwesomeIcon icon={faFileZipper} width={32} />
+                <div className={styles.fileUploadInformation}>
+                  <h3>Upload takeout.zip File</h3>
+                  <h4>
+                    Download takeout.zip from here and upload it here to parse
+                  </h4>
+                  <button onClick={fetchWorkouts.fetchWorkouts}>
+                    <p>Get workouts</p>
+                  </button>
+                </div>
               </div>
             </div>
-            <br />
-            <span>
-              <button onClick={fetchWorkouts.fetchWorkouts}>
-                <p>Get workouts</p>
-              </button>
-            </span>
-            <Graph data={workouts} dataKeys={["totalWeight"]} />
+            <div className={styles.statisticsContent}>
+              <div className={styles.contentHeader}>
+                <h1>Statistics</h1>
+                <div className={styles.contentHeaderBadges}>
+                  <Badge text={`${totalNumWorkouts(workouts)} workouts`} />
+                  <Badge text={`${totalNumLifts(workouts)} lifts`} />
+                  <Badge text={`${totalNumSets(workouts)} sets`} />
+                  <Badge text={`${totalNumReps(workouts)} reps`} />
+                </div>
+              </div>
+              <br />
+              {/* <div style={{ flex: 1 }}>
+                <Graph data={workouts} dataKeys={["totalWeight"]} />
+              </div> */}
+              <br />
+              <div style={{ flex: 1 }}>
+                {selectedLift !== "" && (
+                  <Graph
+                    // @ts-ignore
+                    data={progressions[selectedLift].progression}
+                    // @ts-ignore
+                    dataKeys={["averageWeightForSet", "averageReps"]}
+                  />
+                )}
+              </div>
+              <br />
+              <div
+                style={{
+                  flexWrap: "wrap",
+                  rowGap: "0.5em",
+                  columnGap: "0.5em",
+                }}
+              >
+                {Object.keys(progressions).map((progression) => {
+                  const p = progressions[progression];
+                  return (
+                    <button
+                      key={progression}
+                      onClick={() => {
+                        setSelectedLift(p.key);
+                      }}
+                    >
+                      {p.name} - {p.progression.length}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
         <AnimatePresence>

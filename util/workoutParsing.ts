@@ -26,6 +26,42 @@ const preProcessWorkout = (workout: string) => {
   return workout;
 };
 
+const keyName = (name: string) => {
+  let key = name.toLowerCase().trim().replace(/\s/g, "_") + "_";
+  Object.keys(AMALGAMATE_MAP).forEach((amalgamate) => {
+    const trailingAmalgamate = amalgamate + "_";
+    if (key.includes(trailingAmalgamate)) {
+      // @ts-ignore
+      key = key.replace(trailingAmalgamate, AMALGAMATE_MAP[amalgamate] + "_");
+      console.log(`${key} contains ${trailingAmalgamate}`);
+      // const splitKey = key.split(trailingAmalgamate);
+      // let newKey = "";
+      // splitKey.forEach((part) => {
+      //   if (part === "") {
+      //     // @ts-ignore
+      //     newKey += AMALGAMATE_MAP[amalgamate] + "_";
+      //   } else {
+      //     newKey += part;
+      //   }
+      // });
+      // key = newKey;
+      // // newKey += AMALGAMATE_MAP[amalgamate] + part;
+      // // console.log(key.split(trailingAmalgamate));
+      // // key = AMALGAMATE_MAP[amalgamate] + "_" + key.split(trailingAmalgamate);
+      console.log("newkey : ", name, " -> ", key);
+    }
+  });
+  if (name.includes("leg")) {
+  }
+
+  return key;
+};
+
+const nameKey = (key: string) => {
+  // replace _ with " " and remove trailing " "
+  return key.replace(/_/g, " ").trim();
+};
+
 export const parseWorkout = (workout: string): Lift[] => {
   const preProcessedWorkout = preProcessWorkout(workout);
 
@@ -44,11 +80,13 @@ export const parseWorkout = (workout: string): Lift[] => {
     // check if the first char is a letter
     if (!line[0]) continue;
     if (line[0].match(/[a-z]/i)) {
-      if (line === TOKENS.superSet) {
+      if (line.toLowerCase() === TOKENS.superSet) {
         continue;
       }
+
       workouts.push({
-        name: line,
+        key: keyName(line),
+        name: nameKey(keyName(line)),
         sets: [],
       });
       // if the first char is a number its a set
@@ -59,11 +97,6 @@ export const parseWorkout = (workout: string): Lift[] => {
 
       let weightUnit: WeightUnit = "lbs";
       let weight = Number(_weight);
-      if (_weight === "bw" || !_weight) weight = 0;
-      // if (_weight.includes(":")) {
-      //   const timeSplit = _weight.split(":");
-      //   weight = Number(timeSplit[0]) * 60 + Number(timeSplit[1]);
-      // }
 
       const setObj: LiftSet = {
         numSets: Number(set[0]),
@@ -80,6 +113,7 @@ export const parseWorkout = (workout: string): Lift[] => {
 
 import fs from "fs";
 import path from "path";
+import { AMALGAMATE_MAP } from "./analysis/constants";
 
 export const convertFileToWorkoutString = (fileName: string) => {
   const file = fs.readFileSync(path.join(process.cwd(), fileName)).toString();

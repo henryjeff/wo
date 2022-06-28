@@ -2,7 +2,7 @@ export const SHOULDER_TOKENS = [
   "press",
   "oh",
   "overhead",
-  "over head",
+  "over_head",
   "lat",
   "raise",
   "raises",
@@ -12,11 +12,13 @@ export const CHEST_TOKENS = ["press", "bench", "chest", "pec", "peck"];
 
 export const TRICEP_TOKENS = [
   "pushdown",
-  "push down",
+  "push_down",
   "tricep",
   "extension",
   "extensions",
   "skull",
+  "tri",
+  "ext",
 ];
 
 export const BICEP_TOKENS = ["curl", "curls", "preacher", "bar"];
@@ -32,23 +34,34 @@ export const LEG_TOKENS = [
   "raises",
   "stair",
   "lunge",
+  "hip",
 ];
 
 export const BACK_TOKENS = [
   "row",
   "pull",
-  "pull up",
+  "pull_up",
   "lat",
   "pulldown",
   "deadlift",
-  "dead lift",
+  "dead",
+  "dead_lift",
   "hang",
-  "dead hang",
-  "rear delt",
+  "dead_hang",
+  "rear_delt",
   "shrug",
+  "shrugs",
 ];
 
-export const AB_TOKENS = ["plank", "raises", "leg raises", "hanging"];
+export const AB_TOKENS = [
+  "plank",
+  "raises",
+  "leg raises",
+  "hanging leg raises",
+  "hanging",
+  "l-sit",
+  "crunches",
+];
 
 export const MUSCLE_GROUP_TOKENS: { [key in MuscleGroup]: string[] } = {
   shoulder: SHOULDER_TOKENS,
@@ -74,3 +87,19 @@ export const WORKOUT_TYPES: WorkoutType[] = [
   "misc",
   "none",
 ];
+
+export const AMALGAMATE_MAP = {
+  tri: "tricep",
+  ext: "extensions",
+  extension: "extensions",
+  peck: "pec",
+  oh: "overhead",
+  curl: "curls",
+  push_down: "pushdown",
+  pushdowns: "pushdown",
+  dumbell: "dumbbell",
+  inc: "incline",
+  dec: "decline",
+  sm: "smith_machine",
+  deadlifts: "deadlift",
+};

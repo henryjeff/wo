@@ -1,3 +1,17 @@
 .graphContainer {
     flex: 1;
+    cursor: pointer;
+}
+
+.tooltipContainer {
+    background-color: var(--bg-color);
+    flex-direction: column;
+    padding: 0.5em 1em;
+    row-gap: 0.5em;
+    border: var(--layout-border);
+    border-radius: var(--br-md);
+}
+
+.tooltipDataRow {
+    flex-direction: column;
 }

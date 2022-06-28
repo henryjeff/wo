@@ -8,6 +8,7 @@ type LiftSet = {
 type WeightUnit = "lbs" | "seconds";
 
 type Lift = {
+  key: string;
   name: string;
   sets: LiftSet[];
 };
@@ -19,6 +20,7 @@ type Workout = {
 
 type MetaLift = {
   name: string;
+  key: string;
   totalSets: number;
   averageReps: number;
   totalWeight: number;
@@ -52,7 +54,24 @@ type MetaWorkout = {
   numSets: number;
   key: string;
   totalWeight: number;
+  weightToSetsRatio: number;
   datedStats: {
     overload: number;
   };
+};
+
+type LiftProgressions = {
+  [key in string]: {
+    name: string;
+    key: string;
+    group: MuscleGroup;
+    progression: LiftProgression[];
+  };
+};
+
+type LiftProgression = {
+  date: string;
+  averageReps: number;
+  averageWeightForSet: number;
+  averageWeightPerSet: number;
 };

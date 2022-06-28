@@ -1,6 +1,5 @@
 import styles from "./DifficultyFilter.module.css";
-import { useEffect, useState } from "react";
-// import { WORKOUT_TYPES } from "../../../util/analysis/constants";
+import { useState } from "react";
 import colors from "../../../styles/colors";
 import DifficultyIndicator from "../../WorkoutCard/DifficultyIndicator";
 
@@ -29,23 +28,41 @@ const DIFFICULTY_TYPES = [
 const DifficultyFilter: React.FC<DifficultyFilterProps> = ({
   onPredicateChange,
 }) => {
-  const [selectedDifficulty, setSelectedDifficulty] = useState<number>(0);
+  const [selectedDifficulties, setSelectedDifficulties] = useState<number[]>(
+    []
+  );
 
   const handleClick = (difficulty: number) => {
-    setSelectedDifficulty(difficulty);
+    if (difficulty === 0) {
+      setSelectedDifficulties([]);
+      onPredicateChange(() => true);
+      return;
+    }
+    let newSelectedDifficulties: number[] = [];
+    if (selectedDifficulties.includes(difficulty)) {
+      newSelectedDifficulties = selectedDifficulties.filter(
+        (t) => t !== difficulty
+      );
+      if (newSelectedDifficulties.length === 0) {
+        onPredicateChange(() => true);
+        setSelectedDifficulties([]);
+        return;
+      }
+    } else newSelectedDifficulties = [...selectedDifficulties, difficulty];
+
     const byTypePredicate = (workout: MetaWorkout) => {
-      if (difficulty === 0) return true;
       const intensity = workout.numSets > 22 ? 3 : workout.numSets > 14 ? 2 : 1;
-      return intensity === difficulty;
+      return newSelectedDifficulties.includes(intensity);
     };
     onPredicateChange(byTypePredicate);
+    setSelectedDifficulties(newSelectedDifficulties);
   };
 
   return (
     <div className={styles.container}>
       <div
         className={`${styles.difficultyButton} ${
-          selectedDifficulty === 0 && styles.selected
+          selectedDifficulties.length === 0 && styles.selected
         }`}
         onClick={() => handleClick(0)}
       >
@@ -56,7 +73,8 @@ const DifficultyFilter: React.FC<DifficultyFilterProps> = ({
           <div
             key={`${difficulty.name}`}
             className={`${styles.difficultyButton} ${
-              selectedDifficulty === difficulty.intensity && styles.selected
+              selectedDifficulties.includes(difficulty.intensity) &&
+              styles.selected
             }`}
             onClick={() => handleClick(difficulty.intensity)}
           >
