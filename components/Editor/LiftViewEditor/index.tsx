@@ -140,6 +140,7 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
                     value={set.numSets}
                     inputMode="numeric"
                     pattern="[0-9]*"
+                    placeholder="# sets"
                     onChange={(e) => handleChangeNumSets(e, i)}
                   />
                 </td>
@@ -152,6 +153,7 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
                     value={set.numReps}
                     inputMode="numeric"
                     pattern="[0-9]*"
+                    placeholder="# reps"
                     onChange={(e) => handleChangeNumReps(e, i)}
                   />
                 </td>
@@ -164,6 +166,7 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
                     value={set.weight}
                     inputMode="numeric"
                     pattern="[0-9]*"
+                    placeholder="weight"
                     onChange={(e) => handleChangeWeight(e, i)}
                   />
                 </td>
