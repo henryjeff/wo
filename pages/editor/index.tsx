@@ -160,12 +160,12 @@ const Editor: NextPage = () => {
                 text="Load Mock Workout"
                 icon={faCopy}
               />
-              <Button
+              {/* <Button
                 outlined
                 onClick={resetEditor}
                 text="Reset"
                 icon={faPowerOff}
-              />
+              /> */}
             </motion.footer>
           </motion.section>
         </div>
