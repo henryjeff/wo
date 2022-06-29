@@ -124,7 +124,7 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
                 key={`lift-view-editor-tr-${index}-${i}`}
                 {...mountAnimationProps}
                 className={styles.row}
-                layoutId={`lift-view-editor-tr-${index}-${i}`}
+                layoutId={`lift-view-editor-tr-${name}-${index}-${i}`}
               >
                 <td className={styles.col}>
                   <input
@@ -179,6 +179,7 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
       </table>
       <motion.div
         layoutId={`lift-${index}-editor-footer`}
+        {...mountAnimationProps}
         className={styles.liftFooter}
       >
         <Button outlined onClick={createNewSet} text="Add Set" icon={faAdd} />
