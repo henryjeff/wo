@@ -3,25 +3,73 @@
     flex: 1
 }
 
+.liftNameInput {
+    flex-shrink: 1;
+    margin-bottom: 10px;
+    /* padding: 10px; */
+    padding: 0.4em 0.8em;
+    font-weight: bold;
+    border-radius: var(--br-md);
+    background-color: var(--fg-color);
+    outline: none;
+    text-transform: capitalize;
+}
+
 .liftNameRow {
     display: flex;
     justify-content: space-between;
-    flex: 1
+    align-items: center;
+}
+
+.deleteLiftButton {
+    align-items: center;
+    font-weight: bold;
+    color: var(--fg-color);
+    justify-content: flex-end;
+}
+
+.deleteLiftButtonIcon {
+    margin-right: 0.2em;
+    margin-top: 0.2em;
+}
+
+.addSetButton {
+    justify-content: center;
+    align-items: center;
+    border: var(--layout-border);
+    padding: 0.25em 1.5em;
+    font-size: 0.8em;
+    font-weight: bold;
+    border-radius: var(--br-md);
 }
 
 .liftSetTable {
     font-size: 1em;
     color: var(--font-secondary);
-    /* margin: 0 0.5em; */
-    /* background-color: red; */
+    padding: 0 0.2em;
 }
 
-.col > p {
-    margin: 0.1em;
+.liftFooter {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2em 0.8em;
+}
+
+.col > input {
+    max-width: 4em;
+    font-weight: bold;
+    padding: 0;
 }
 
 .bold {
     font-weight: bold;
     text-transform: capitalize;
     color: var(--font-primary);
+}
+
+.deleteSetIcon {
+    color: var(--fg-color);
+    margin-top: 0.5em
 }
