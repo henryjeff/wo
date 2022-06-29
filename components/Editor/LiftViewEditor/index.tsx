@@ -128,6 +128,8 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
                   <input
                     type="text"
                     value={set.numSets}
+                    inputMode="numeric"
+                    pattern="[0-9]*"
                     onChange={(e) => handleChangeNumSets(e, i)}
                   />
                 </td>
@@ -138,6 +140,8 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
                   <input
                     type="text"
                     value={set.numReps}
+                    inputMode="numeric"
+                    pattern="[0-9]*"
                     onChange={(e) => handleChangeNumReps(e, i)}
                   />
                 </td>
@@ -148,16 +152,16 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
                   <input
                     type="text"
                     value={set.weight}
+                    inputMode="numeric"
+                    pattern="[0-9]*"
                     onChange={(e) => handleChangeWeight(e, i)}
                   />
                 </td>
                 <td className={styles.col}>
                   <p>lbs</p>
                 </td>
-                {/* <td className={styles.col}></td> */}
                 <td
-                  className={styles.col}
-                  style={{ paddingLeft: "3em" }}
+                  className={styles.deleteSetColumn}
                   onClick={() => handleDeleteSet(i)}
                 >
                   <FontAwesomeIcon

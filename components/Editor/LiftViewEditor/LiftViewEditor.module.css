@@ -5,8 +5,6 @@
 
 .liftNameInput {
     flex-shrink: 1;
-    margin-bottom: 10px;
-    /* padding: 10px; */
     padding: 0.4em 0.8em;
     font-weight: bold;
     border-radius: var(--br-md);
@@ -41,6 +39,7 @@
     font-size: 0.8em;
     font-weight: bold;
     border-radius: var(--br-md);
+    white-space: nowrap;
 }
 
 .liftSetTable {
@@ -61,6 +60,10 @@
     max-width: 4em;
     font-weight: bold;
     padding: 0;
+}
+
+.deleteSetColumn {
+    padding-left: 3em;
 }
 
 .bold {
