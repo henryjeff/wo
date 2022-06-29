@@ -4,7 +4,7 @@ import styles from "./Layout.module.css";
 type LayoutProps = {
   flex?: boolean;
   center?: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 const Layout: React.FC<LayoutProps> = ({ flex, center, children }) => {
@@ -16,7 +16,7 @@ const Layout: React.FC<LayoutProps> = ({ flex, center, children }) => {
           center && styles.center
         }`}
       >
-        {children}
+        {children && children}
       </main>
     </>
   );
