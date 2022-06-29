@@ -9,8 +9,13 @@ const DefaultHeadMetaTags: React.FC<DefaultHeadMetaTagsProps> = ({
 }) => {
   return (
     <>
-      <title>{title || "Workout Analyzer"}</title>
-      <meta name="description" content={description || "Workout Analyzer"} />
+      <title>{title || "WO"}</title>
+      <meta
+        name="description"
+        content={
+          description || "WO is an open source workout tracker and analyzer"
+        }
+      />
       <link rel="icon" href="/favicon.ico" />
     </>
   );
