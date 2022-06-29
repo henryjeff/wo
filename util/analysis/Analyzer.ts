@@ -15,10 +15,10 @@ class Analyzer {
     this.liftToGroupMap = {};
   }
 
-  analyzeWorkouts(workout: Workout[]): MetaWorkout[] {
-    const metaWorkouts: MetaWorkout[] = workout.map((workout) => {
+  analyzeWorkouts(workout: ParsedWorkout[]): Workout[] {
+    const Workouts: Workout[] = workout.map((workout) => {
       let numSets = 0;
-      const metaLifts: MetaLift[] = workout.lifts.map((lift) => {
+      const Lifts: Lift[] = workout.lifts.map((lift) => {
         let volume = 0;
         let totalReps = 0;
         let totalSets = 0;
@@ -65,7 +65,7 @@ class Analyzer {
       });
       const groupsHit: MuscleGroup[] = [];
 
-      metaLifts.forEach((lift) => {
+      Lifts.forEach((lift) => {
         if (groupsHit.indexOf(lift.group) === -1) {
           groupsHit.push(lift.group);
         }
@@ -77,13 +77,13 @@ class Analyzer {
 
       // calculate total weight
       let totalWeight = 0;
-      metaLifts.forEach((lift) => {
+      Lifts.forEach((lift) => {
         totalWeight += lift.totalWeight;
       });
 
       return {
         date: workout.date,
-        lifts: metaLifts,
+        lifts: Lifts,
         type: workoutType,
         numSets: numSets,
         totalWeight: totalWeight,
@@ -96,10 +96,10 @@ class Analyzer {
     });
 
     // sort the workouts by date
-    const sortedWorkouts = metaWorkouts.sort(sortByAscDate);
+    const sortedWorkouts = Workouts.sort(sortByAscDate);
 
     // split workouts into their respective muscle groups
-    const groupedWorkouts: { [key in WorkoutType]: MetaWorkout[] } = {} as any;
+    const groupedWorkouts: { [key in WorkoutType]: Workout[] } = {} as any;
     for (const workout of sortedWorkouts) {
       if (!groupedWorkouts[workout.type]) {
         groupedWorkouts[workout.type] = [];
@@ -109,7 +109,7 @@ class Analyzer {
 
     // for each group calculate the overload in total weight from workout to workout
     for (const group in groupedWorkouts) {
-      const currentGroupWorkouts: MetaWorkout[] =
+      const currentGroupWorkouts: Workout[] =
         groupedWorkouts[group as WorkoutType];
       for (let i = 0; i < currentGroupWorkouts.length; i++) {
         const workout = currentGroupWorkouts[i];
@@ -122,7 +122,7 @@ class Analyzer {
         }
       }
     }
-    return metaWorkouts;
+    return Workouts;
   }
 
   defineWorkoutType = (groupsHit: MuscleGroup[]): WorkoutType => {
@@ -150,7 +150,7 @@ class Analyzer {
     return "misc";
   };
 
-  getLiftProgressions = (workouts: MetaWorkout[]): LiftProgressions => {
+  getLiftProgressions = (workouts: Workout[]): LiftProgressions => {
     const progressions: LiftProgressions = {};
 
     workouts.forEach((workout) => {

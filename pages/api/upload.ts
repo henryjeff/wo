@@ -153,11 +153,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   //           "/uploads/Takeout/Keep/" + fileName
   //         );
   //         const workout = parseWorkout(workoutString);
-  //         const metaWorkout: MetaWorkout = analyzeWorkout(
+  //         const Workout: Workout = analyzeWorkout(
   //           date.toISOString(),
   //           workout
   //         );
-  //         workouts.push(metaWorkout);
+  //         workouts.push(Workout);
   //       }
   //       res.status(status).json({ ...resultBody, workouts });
   //     }

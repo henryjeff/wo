@@ -3,7 +3,7 @@ import Badge from "../../Badge";
 import styles from "./LiftView.module.css";
 
 export type LiftProps = {
-  lift: MetaLift;
+  lift: Lift;
 };
 
 const LiftView: React.FC<LiftProps> = ({ lift }) => {

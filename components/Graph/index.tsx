@@ -26,7 +26,7 @@ type CustomToolTipProps = {
 
 const Graph: React.FC<GraphProps> = ({ data, dataKeys }) => {
   const contentRef = useRef<HTMLDivElement>(null);
-  const currentTooltipRef = useRef<MetaWorkout>();
+  const currentTooltipRef = useRef<Workout>();
   const [dimensions, setDimensions] = useState({ w: 0, h: 0 });
 
   const formatXAxis = useCallback((tickItem: any) => {
@@ -52,7 +52,7 @@ const Graph: React.FC<GraphProps> = ({ data, dataKeys }) => {
 
   const CustomTooltip = ({ payload, label, active }: CustomToolTipProps) => {
     if (payload && active && payload.length > 0) {
-      const workout: MetaWorkout = payload[0].payload;
+      const workout: Workout = payload[0].payload;
       currentTooltipRef.current = workout;
       return (
         <div className={styles.tooltipContainer}>

@@ -8,7 +8,7 @@ import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import pagination from "../../util/pagination";
 
 type WorkoutCardListProps = {
-  workouts: MetaWorkout[];
+  workouts: Workout[];
   onCardClick: (id: string) => void;
   pageSize: number;
 };
@@ -90,7 +90,7 @@ const WorkoutCardList: React.FC<WorkoutCardListProps> = ({
 
 type WorkoutCardRowProps = {
   index: number;
-  workout: MetaWorkout;
+  workout: Workout;
   onClick: (id: string) => void;
 };
 

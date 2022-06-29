@@ -11,7 +11,7 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export type WorkoutCardProps = {
-  workout: MetaWorkout;
+  workout: Workout;
   id: string;
   expanded?: boolean;
   onClose?: () => void;
@@ -121,7 +121,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({
           <div className={styles.summaryContainer}>
             <div className={`${styles.liftListContainer} no-scrollbar`}>
               {workout.lifts &&
-                workout.lifts.map((lift: MetaLift, i: number) => {
+                workout.lifts.map((lift: Lift, i: number) => {
                   return (
                     <LiftView key={`lift-${lift.name}-${i}`} lift={lift} />
                   );

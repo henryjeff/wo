@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const FileUpload: React.FC<{
-  onDataDelivered: (data: MetaWorkout[]) => void;
+  onDataDelivered: (data: Workout[]) => void;
 }> = ({ onDataDelivered }) => {
   const [isLoading, setIsLoading] = useState(false);
   const inputFileRef = React.useRef<HTMLInputElement | null>(null);
@@ -33,7 +33,7 @@ const FileUpload: React.FC<{
     const body = (await response.json()) as {
       status: "ok" | "fail";
       message: string;
-      workouts: MetaWorkout[];
+      workouts: Workout[];
     };
 
     if (body.status === "ok") {

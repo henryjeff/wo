@@ -3,7 +3,7 @@ import { useState } from "react";
 import { WORKOUT_TYPES } from "../../../util/analysis/constants";
 
 export type WorkoutTypeFilterProps = {
-  onPredicateChange: (predicate: (workout: MetaWorkout) => boolean) => void;
+  onPredicateChange: (predicate: (workout: Workout) => boolean) => void;
 };
 
 const WorkoutTypeFilter: React.FC<WorkoutTypeFilterProps> = ({
@@ -19,7 +19,7 @@ const WorkoutTypeFilter: React.FC<WorkoutTypeFilterProps> = ({
 
     console.log(newSelectedTypes);
 
-    const byTypePredicate = (workout: MetaWorkout) => {
+    const byTypePredicate = (workout: Workout) => {
       if (newSelectedTypes.length === 0) return true;
       if (newSelectedTypes.includes(workout.type)) return true;
       return false;

@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 
 export type useOrganizedWorkoutsParams = {
-  workouts: MetaWorkout[];
+  workouts: Workout[];
   initialSortReversed?: boolean;
-  sortingFunction: (a: MetaWorkout, b: MetaWorkout) => number;
+  sortingFunction: (a: Workout, b: Workout) => number;
 };
 
-type WorkoutFilterPredicate = (workout: MetaWorkout) => boolean;
+type WorkoutFilterPredicate = (workout: Workout) => boolean;
 
 export type useOrganizedWorkoutsReturn = {
-  workouts: MetaWorkout[];
+  workouts: Workout[];
   sorting: {
     isReversed: boolean;
     setIsReversed: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,7 +22,7 @@ const useOrganizedWorkouts = ({
   sortingFunction,
   initialSortReversed,
 }: useOrganizedWorkoutsParams): useOrganizedWorkoutsReturn => {
-  const [organizedWorkouts, setOrganizedWorkouts] = useState<MetaWorkout[]>([]);
+  const [organizedWorkouts, setOrganizedWorkouts] = useState<Workout[]>([]);
 
   const [filterPredicates, setFilterPredicates] = useState<{
     [key in string]: WorkoutFilterPredicate;

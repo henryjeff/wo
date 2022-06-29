@@ -36,7 +36,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const files = await fs.readdir(`${targetPath}/Takeout/Keep`);
   const jsonFiles = files.filter((file) => file.endsWith(".json"));
   // console.log(files);
-  const workouts: Workout[] = [];
+  const workouts: ParsedWorkout[] = [];
 
   for (const fileName of jsonFiles) {
     const fn = fileName.split(".json")[0].split("_");
@@ -75,7 +75,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const workout = parseWorkout(workoutString);
 
-    // const metaWorkout: MetaWorkout = analyzeWorkout(
+    // const Workout: Workout = analyzeWorkout(
     //   date.toISOString(),
     //   workout
     // );

@@ -2,7 +2,7 @@ import { useState } from "react";
 import Analyzer from "../util/analysis/Analyzer";
 
 const useFetchWorkouts = () => {
-  const [workouts, setWorkouts] = useState<MetaWorkout[]>([]);
+  const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [progressions, setProgressions] = useState<LiftProgressions>({});
 
   const fetchWorkouts = () => {

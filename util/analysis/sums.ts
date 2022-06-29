@@ -1,8 +1,8 @@
-export const totalNumWorkouts = (workouts: MetaWorkout[]) => {
+export const totalNumWorkouts = (workouts: Workout[]) => {
   return workouts.length;
 };
 
-export const totalNumLifts = (workouts: MetaWorkout[]) => {
+export const totalNumLifts = (workouts: Workout[]) => {
   return workouts
     .map((workout) => {
       return workout.lifts.length;
@@ -10,7 +10,7 @@ export const totalNumLifts = (workouts: MetaWorkout[]) => {
     .reduce((a, b) => a + b, 0);
 };
 
-export const totalNumSets = (workouts: MetaWorkout[]) => {
+export const totalNumSets = (workouts: Workout[]) => {
   return workouts
     .map((workout) => {
       return workout.lifts
@@ -20,7 +20,7 @@ export const totalNumSets = (workouts: MetaWorkout[]) => {
     .reduce((a, b) => a + b, 0);
 };
 
-export const totalNumReps = (workouts: MetaWorkout[]) => {
+export const totalNumReps = (workouts: Workout[]) => {
   return workouts
     .map((workout) => {
       return workout.lifts

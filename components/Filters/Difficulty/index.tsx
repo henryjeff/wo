@@ -4,7 +4,7 @@ import colors from "../../../styles/colors";
 import DifficultyIndicator from "../../WorkoutCard/DifficultyIndicator";
 
 export type DifficultyFilterProps = {
-  onPredicateChange: (predicate: (workout: MetaWorkout) => boolean) => void;
+  onPredicateChange: (predicate: (workout: Workout) => boolean) => void;
 };
 
 const DIFFICULTY_TYPES = [
@@ -50,7 +50,7 @@ const DifficultyFilter: React.FC<DifficultyFilterProps> = ({
       }
     } else newSelectedDifficulties = [...selectedDifficulties, difficulty];
 
-    const byTypePredicate = (workout: MetaWorkout) => {
+    const byTypePredicate = (workout: Workout) => {
       const intensity = workout.numSets > 22 ? 3 : workout.numSets > 14 ? 2 : 1;
       return newSelectedDifficulties.includes(intensity);
     };

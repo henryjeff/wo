@@ -1,3 +1,14 @@
+type ParsedWorkout = {
+  date: string;
+  lifts: ParsedLift[];
+};
+
+type ParsedLift = {
+  key: string;
+  name: string;
+  sets: LiftSet[];
+};
+
 type LiftSet = {
   numSets: number;
   numReps: number;
@@ -7,18 +18,20 @@ type LiftSet = {
 
 type WeightUnit = "lbs" | "seconds";
 
-type Lift = {
-  key: string;
-  name: string;
-  sets: LiftSet[];
-};
-
 type Workout = {
   date: string;
   lifts: Lift[];
+  type: WorkoutType;
+  numSets: number;
+  key: string;
+  totalWeight: number;
+  weightToSetsRatio: number;
+  datedStats: {
+    overload: number;
+  };
 };
 
-type MetaLift = {
+type Lift = {
   name: string;
   key: string;
   totalSets: number;
@@ -46,19 +59,6 @@ type WorkoutType =
   | "full-body"
   | "misc"
   | "none";
-
-type MetaWorkout = {
-  date: string;
-  lifts: MetaLift[];
-  type: WorkoutType;
-  numSets: number;
-  key: string;
-  totalWeight: number;
-  weightToSetsRatio: number;
-  datedStats: {
-    overload: number;
-  };
-};
 
 type LiftProgressions = {
   [key in string]: {
