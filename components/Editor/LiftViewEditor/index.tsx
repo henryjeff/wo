@@ -1,6 +1,6 @@
 import { faAdd, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback } from "react";
 import { EditorActions, InputLift } from "../../../pages/editor";
 import styles from "./LiftViewEditor.module.css";
 import { motion } from "framer-motion";
@@ -95,7 +95,10 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
   return (
     <div className={styles.container}>
       <div className={styles.liftNameRow}>
-        <div>
+        <motion.div
+          {...mountAnimationProps}
+          layoutId={`lift-name-input-${index}`}
+        >
           <input
             className={styles.liftNameInput}
             onChange={handleLiftNameChange}
@@ -103,7 +106,7 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
             type="text"
             placeholder="Exercise name"
           />
-        </div>
+        </motion.div>
         <div className={styles.deleteLiftButton} onClick={handleDeleteLift}>
           <FontAwesomeIcon
             icon={faXmark}
@@ -121,6 +124,7 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
                 key={`lift-view-editor-tr-${index}-${i}`}
                 {...mountAnimationProps}
                 className={styles.row}
+                layoutId={`lift-view-editor-tr-${index}-${i}`}
               >
                 <td className={styles.col}>
                   <input
