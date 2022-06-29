@@ -9,6 +9,8 @@ export const useWorkoutEditor = (): [
   const [state, dispatch] = useReducer(
     (state: EditorState, action: EditorActions) => {
       switch (action.type) {
+        case "SET_LIFTS":
+          return action.lifts;
         case "ADD_LIFT":
           return [...state, action.lift];
         case "DELETE_LIFT":
@@ -136,6 +138,10 @@ export const useWorkoutEditor = (): [
 };
 
 export type EditorActions =
+  | {
+      type: "SET_LIFTS";
+      lifts: InputLift[];
+    }
   | {
       type: "ADD_LIFT";
       lift: InputLift;

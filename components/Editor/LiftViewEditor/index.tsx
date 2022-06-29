@@ -6,6 +6,7 @@ import styles from "./LiftViewEditor.module.css";
 import { motion } from "framer-motion";
 import { mountAnimationProps } from "../../../styles/animation";
 import Button from "../../Button";
+import { z } from "zod";
 
 type LiftViewEditorProps = {
   index: number;
@@ -20,8 +21,13 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
 }) => {
   const { name, sets } = lift;
 
+  const validNumericalInput = (input: string) => {
+    return input.match(/^\d+$/) || input === "";
+  };
+
   const handleChangeNumSets = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>, setIndex: number) => {
+      if (!validNumericalInput(e.target.value)) return;
       editorDispatch({
         type: "UPDATE_LIFT_SET_NUM_SETS",
         liftIndex: index,
@@ -34,6 +40,7 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
 
   const handleChangeNumReps = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>, setIndex: number) => {
+      if (!validNumericalInput(e.target.value)) return;
       editorDispatch({
         type: "UPDATE_LIFT_SET_NUM_REPS",
         liftIndex: index,
@@ -46,6 +53,7 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
 
   const handleChangeWeight = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>, setIndex: number) => {
+      if (!validNumericalInput(e.target.value)) return;
       editorDispatch({
         type: "UPDATE_LIFT_SET_WEIGHT",
         liftIndex: index,
