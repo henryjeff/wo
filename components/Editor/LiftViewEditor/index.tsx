@@ -1,4 +1,4 @@
-import { faAdd, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faAdd, faTrash, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useCallback } from "react";
 import { EditorActions } from "../../../hooks/useWorkoutEditor";
@@ -116,12 +116,12 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
           />
         </motion.div>
         <div className={styles.deleteLiftButton} onClick={handleDeleteLift}>
+          <p>Delete</p>
           <FontAwesomeIcon
-            icon={faXmark}
+            icon={faTrash}
             width={12}
             className={styles.deleteLiftButtonIcon}
           />
-          <p>Delete</p>
         </div>
       </div>
       <table className={styles.liftSetTable}>

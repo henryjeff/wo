@@ -1,13 +1,22 @@
-.main{
-    margin-top: var(--navbar-height);
-    padding: 0 2em;
-    padding-top: 1em;
-    width: 100vw;
+.main {
+  margin-top: var(--navbar-height);
+  padding: 0 2em;
+  padding-top: 1em;
+  width: 100vw;
+}
+
+.flex {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 768px) {
-    .main {
-        padding: 0 1em;
-        padding-top: 0.5em;
-    }
+  .main {
+    padding: 0 1em;
+    padding-top: 0.5em;
+  }
 }

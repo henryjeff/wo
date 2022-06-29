@@ -108,7 +108,7 @@ const Home: NextPage = () => {
       <Head>
         <DefaultHeadMetaTags />
       </Head>
-      <Layout>
+      <Layout flex center>
         <div className={styles.layout}>
           <header className={styles.editorHeader}>
             <h1>Editor</h1>

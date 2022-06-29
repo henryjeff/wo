@@ -1,6 +1,7 @@
 .container {
   flex-direction: column;
   flex: 1;
+  row-gap: 1em;
 }
 
 .liftNameInput {
@@ -26,6 +27,7 @@
   justify-content: flex-end;
   cursor: pointer;
   user-select: none;
+  column-gap: 0.3em;
 }
 
 .deleteLiftButton:hover {
@@ -55,8 +57,6 @@
 .liftSetTable {
   font-size: 1em;
   color: var(--font-secondary);
-  padding: 0 0.2em;
-  margin-top: 0.5em;
 }
 
 .liftFooter {
@@ -65,7 +65,6 @@
   align-items: center;
   justify-content: center;
   padding: 0.2em 0.8em;
-  margin-top: 1em;
 }
 
 .col > input {
