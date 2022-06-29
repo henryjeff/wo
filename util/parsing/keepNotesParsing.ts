@@ -75,7 +75,7 @@ const nameKey = (key: string) => {
  * @param workout workout string to parse
  * @returns an array of Lift[] objects
  */
-export const parseWorkout = (workout: string): ParsedLift[] => {
+export const parseWorkout = (workout: string): BasicLift[] => {
   const preProcessedWorkout = preProcessWorkout(workout);
 
   const lines = preProcessedWorkout.split("\n");
@@ -86,7 +86,7 @@ export const parseWorkout = (workout: string): ParsedLift[] => {
     }
   });
 
-  const workouts: ParsedLift[] = [];
+  const workouts: BasicLift[] = [];
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];

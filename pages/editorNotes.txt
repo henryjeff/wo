@@ -1,0 +1,17 @@
+Flow:
+
+    2 ways to make a workout:
+    
+    Start fresh ->
+
+
+    Copy old workout ->
+        Potential automated overload (YES/NO)
+
+        If manually copied 
+
+
+    Editor Consists of components:
+    
+        (LIFT NAME COMPONENT)  + (LIFT ADD SET COMPONENT)
+        (LIFT SET COMPONENT)   - (DELETE SET)

@@ -1,0 +1,6 @@
+IDEA:
+    Save workout data in a database instead of using a file
+
+    
+
+Requirements:

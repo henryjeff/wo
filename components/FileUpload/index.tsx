@@ -25,7 +25,7 @@ const FileUpload: React.FC<{
     });
 
     /* Send request to our api route */
-    const response = await fetch("/api/upload", {
+    const response = await fetch("/api/dep/upload", {
       method: "POST",
       body: formData,
     });

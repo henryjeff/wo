@@ -6,7 +6,7 @@ const colors = {
   bg: "#0d0d0e",
   positive: "#6eff8b",
   negative: "#ff2e66",
-  warning: "#f5bd43",
+  warning: "#f3c86c",
 };
 
 export default colors;

@@ -3,8 +3,6 @@
     grid-template-columns: 2fr 3fr; 
     grid-template-areas: "sidebar content";
     grid-gap: 1em;
-    padding: 1em 2em;
-    width: 100vw;
     height: 100vh;
 }
 
@@ -29,7 +27,7 @@
     border-style: dashed;
     justify-content: space-between;
     align-items: center;
-    padding: 2em 2em;
+    padding: 1em 1em;
 }
 
 .fileUploadInformation {
@@ -76,7 +74,6 @@
     width: 100%;
     padding: 1em;
     height: 800px;
-    /* overflow: hidden; */
     flex-direction: column;
 }
 
@@ -93,6 +90,8 @@
 .filters {
     align-items: center;
     column-gap: 0.5em;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .resultsLengthText {
@@ -124,5 +123,8 @@
 
 .contentHeaderBadges{ 
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    row-gap: 0.8em;
     column-gap: 1em;
 }

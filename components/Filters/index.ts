@@ -1,3 +1,3 @@
 import WorkoutTypeFilter from "./WorkoutType";
-
-export { WorkoutTypeFilter };
+import DifficultyFilter from "./Difficulty";
+export { WorkoutTypeFilter, DifficultyFilter };

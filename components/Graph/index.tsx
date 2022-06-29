@@ -122,7 +122,7 @@ const Graph: React.FC<GraphProps> = ({ data, dataKeys }) => {
         />
         <Legend verticalAlign="top" height={48} />
         <Tooltip
-          animationDuration={500}
+          animationDuration={200}
           // @ts-ignore
           content={<CustomTooltip />}
         />
@@ -130,10 +130,10 @@ const Graph: React.FC<GraphProps> = ({ data, dataKeys }) => {
           return (
             <Line
               key={`${i}`}
-              type="natural"
+              type="monotone"
               dot={false}
               dataKey={key}
-              stroke={hashStringToColor(key + "___________")}
+              stroke={colors.textPrimary}
               strokeWidth={2}
               animationDuration={500}
               animationEasing="ease-out"

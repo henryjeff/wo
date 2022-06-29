@@ -1,9 +1,9 @@
-type ParsedWorkout = {
+type BasicWorkout = {
   date: string;
-  lifts: ParsedLift[];
+  lifts: BasicLift[];
 };
 
-type ParsedLift = {
+type BasicLift = {
   key: string;
   name: string;
   sets: LiftSet[];

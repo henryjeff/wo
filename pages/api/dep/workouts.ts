@@ -8,7 +8,7 @@ import { z } from "zod";
 import {
   parseWorkout,
   convertFileToWorkoutString,
-} from "../../util/parsing/keepNotesParsing";
+} from "../../../util/parsing/keepNotesParsing";
 import moment from "moment";
 
 const dateSchema = z.object({
@@ -36,7 +36,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const files = await fs.readdir(`${targetPath}/Takeout/Keep`);
   const jsonFiles = files.filter((file) => file.endsWith(".json"));
   // console.log(files);
-  const workouts: ParsedWorkout[] = [];
+  const workouts: BasicWorkout[] = [];
 
   for (const fileName of jsonFiles) {
     const fn = fileName.split(".json")[0].split("_");

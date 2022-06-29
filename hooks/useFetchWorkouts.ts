@@ -2,13 +2,13 @@ import { useState } from "react";
 import useAnalyzeWorkouts from "./useAnalyzeWorkouts";
 
 const useFetchWorkouts = () => {
-  const [parsedWorkouts, setParsedWorkouts] = useState<ParsedWorkout[]>([]);
-  const { workouts, liftProgressions } = useAnalyzeWorkouts({ parsedWorkouts });
+  const [BasicWorkouts, setBasicWorkouts] = useState<BasicWorkout[]>([]);
+  const { workouts, liftProgressions } = useAnalyzeWorkouts({ BasicWorkouts });
 
   const fetchWorkouts = () => {
-    fetch("/api/workouts").then((res) =>
+    fetch("/api/dep/workouts").then((res) =>
       res.json().then((data) => {
-        setParsedWorkouts(data.workouts);
+        setBasicWorkouts(data.workouts);
       })
     );
   };

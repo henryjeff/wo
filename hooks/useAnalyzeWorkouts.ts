@@ -10,7 +10,7 @@ import { sortByAscDate } from "../util/workout/sorting";
 type LiftToGroupMap = { [key: string]: MuscleGroup };
 
 type useAnalyzeWorkoutsProps = {
-  parsedWorkouts: ParsedWorkout[];
+  BasicWorkouts: BasicWorkout[];
 };
 
 type useAnalyzeWorkoutsReturn = {
@@ -19,7 +19,7 @@ type useAnalyzeWorkoutsReturn = {
 };
 
 const useAnalyzeWorkouts = ({
-  parsedWorkouts,
+  BasicWorkouts,
 }: useAnalyzeWorkoutsProps): useAnalyzeWorkoutsReturn => {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [liftProgressions, setLiftProgressions] = useState<LiftProgressions>(
@@ -27,8 +27,8 @@ const useAnalyzeWorkouts = ({
   );
 
   useEffect(() => {
-    setWorkouts(analyzeWorkouts(parsedWorkouts));
-  }, [parsedWorkouts]);
+    setWorkouts(analyzeWorkouts(BasicWorkouts));
+  }, [BasicWorkouts]);
 
   useEffect(() => {
     setLiftProgressions(getLiftProgressions(workouts));
@@ -95,9 +95,9 @@ export const defineWorkoutType = (groupsHit: MuscleGroup[]): WorkoutType => {
   return "misc";
 };
 
-export const analyzeWorkouts = (parsedWorkouts: ParsedWorkout[]): Workout[] => {
+export const analyzeWorkouts = (BasicWorkouts: BasicWorkout[]): Workout[] => {
   const liftToGroupMap: LiftToGroupMap = {};
-  const Workouts: Workout[] = parsedWorkouts.map((workout) => {
+  const Workouts: Workout[] = BasicWorkouts.map((workout) => {
     let numSets = 0;
     const Lifts: Lift[] = workout.lifts.map((lift) => {
       let volume = 0;

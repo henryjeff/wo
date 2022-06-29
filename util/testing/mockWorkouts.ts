@@ -14,9 +14,9 @@ const makeMockWorkout = ({
   intensityScale: number;
   weightScale: number;
   index?: number;
-}): ParsedWorkout => {
+}): BasicWorkout => {
   const date = new Date(year, month - 1, day).toISOString();
-  const mockWorkouts: ParsedWorkout[] = [
+  const mockWorkouts: BasicWorkout[] = [
     {
       date,
       lifts: [
@@ -145,10 +145,8 @@ const makeMockWorkout = ({
   return mockWorkouts[index === undefined ? randomWorkout : index];
 };
 
-export const makeParsedWorkouts = (
-  numberOfWorkouts: number
-): ParsedWorkout[] => {
-  const workouts: ParsedWorkout[] = [];
+export const makeBasicWorkouts = (numberOfWorkouts: number): BasicWorkout[] => {
+  const workouts: BasicWorkout[] = [];
   const date = new Date();
   for (let i = 0; i < numberOfWorkouts; i++) {
     date.setDate(date.getDate() + 1);
@@ -167,11 +165,11 @@ export const makeParsedWorkouts = (
 };
 
 export const makeWorkouts = (numberOfWorkouts: number): Workout[] => {
-  return analyzeWorkouts(makeParsedWorkouts(numberOfWorkouts));
+  return analyzeWorkouts(makeBasicWorkouts(numberOfWorkouts));
 };
 
 const exportObject = {
-  parsedWorkouts: makeParsedWorkouts,
+  BasicWorkouts: makeBasicWorkouts,
   workouts: makeWorkouts,
 };
 

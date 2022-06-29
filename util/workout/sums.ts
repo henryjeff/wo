@@ -31,3 +31,12 @@ export const totalNumReps = (workouts: Workout[]) => {
     })
     .reduce((a, b) => a + b, 0);
 };
+
+const exportObj = {
+  totalNumWorkouts,
+  totalNumLifts,
+  totalNumSets,
+  totalNumReps,
+};
+
+export default exportObj;

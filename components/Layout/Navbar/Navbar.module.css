@@ -6,7 +6,6 @@
     position: fixed;
     top: 0;
     z-index: 100000;
-    
     flex-direction: row;
     align-items: center;
     padding: 0 2em;
@@ -14,11 +13,56 @@
     
 }
 
-.logo {
+.navLinks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex: 1;
+    column-gap: 2em;
+    font-weight: bold;
+}
+
+
+@media (max-width: 768px) {
+    .navLinks {
+        display: none;
+    }
+    .container {
+        padding: 0 1em;
+    }
+}
+
+
+.navLinkHere {
+    color: var(--font-primary);
+}
+
+.leftContent {
     font-size: 1em;
     font-weight: bold;
     color: var(--font-primary);
     cursor: pointer;
-    
+    width: 8em;
     column-gap: 1em;
+}
+
+.rightContent {
+    width: 8em;
+    justify-content: flex-end;
+
+}
+
+.locationIndicator {
+    width: 3em;
+    height: 0.25em;
+    margin-top: 0.5em;
+    background-color: var(--font-primary);
+}
+
+.navLinkContainer{ 
+    transition: 300;
+    flex-direction: column;
+    align-items: center;
+    color: var(--mg-color);
 }

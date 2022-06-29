@@ -1,31 +1,28 @@
-import type { NextPage } from "next";
+import React, { useState } from "react";
 import Head from "next/head";
-import React from "react";
-import styles from "./Dashboard.module.css";
-import WorkoutCard from "../../components/WorkoutCard";
-import { useState } from "react";
+import type { NextPage } from "next";
 import { motion, AnimatePresence } from "framer-motion";
-import WorkoutCardList from "../../components/WorkoutCardList";
-import Layout from "../../components/Layout";
+import { Layout, DefaultHeadMetaTags } from "../../components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFileZipper, faFilter } from "@fortawesome/free-solid-svg-icons";
+// Components
+import Graph from "../../components/Graph";
 import Badge from "../../components/Badge";
-import {
-  totalNumLifts,
-  totalNumReps,
-  totalNumSets,
-  totalNumWorkouts,
-} from "../../util/workout/sums";
 import Popover from "../../components/Popover";
-import { WorkoutTypeFilter } from "../../components/Filters";
+import WorkoutCard from "../../components/WorkoutCard";
+import WorkoutCardList from "../../components/WorkoutCardList";
 import SortByTimeToggle from "../../components/Filters/SortDirectionalToggle";
+import { WorkoutTypeFilter, DifficultyFilter } from "../../components/Filters";
+// Util
+import workoutSums from "../../util/workout/sums";
 import { sortByAscDate } from "../../util/workout/sorting";
+// Hooks
 import useOrganizedWorkouts from "../../hooks/useOrganizedWorkouts";
 import useFetchWorkouts from "../../hooks/useFetchWorkouts";
-import DifficultyFilter from "../../components/Filters/Difficulty";
-import { faFileZipper, faFilter } from "@fortawesome/free-solid-svg-icons";
-import Graph from "../../components/Graph";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Home: NextPage = () => {
+import styles from "./Dashboard.module.css";
+
+const Dashboard: NextPage = () => {
   const fetchWorkouts = useFetchWorkouts();
   const { workouts, sorting, addFilterPredicate } = useOrganizedWorkouts({
     workouts: fetchWorkouts.workouts,
@@ -56,9 +53,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Workout Analyzer</title>
-        <meta name="description" content="WO" />
-        <link rel="icon" href="/favicon.ico" />
+        <DefaultHeadMetaTags />
       </Head>
       <Layout>
         <motion.div
@@ -114,34 +109,48 @@ const Home: NextPage = () => {
           </div>
 
           <div className={styles.content}>
-            <div className={styles.fileUpload}>
-              <div>
-                <FontAwesomeIcon icon={faFileZipper} width={32} />
-                <div className={styles.fileUploadInformation}>
-                  <h3>Upload takeout.zip File</h3>
-                  <h4>
-                    Download takeout.zip from here and upload it here to parse
-                  </h4>
-                  <button onClick={fetchWorkouts.fetchWorkouts}>
-                    <p>Get workouts</p>
-                  </button>
+            {!workouts.length && (
+              <div className={styles.fileUpload}>
+                <div>
+                  <FontAwesomeIcon icon={faFileZipper} width={32} />
+                  <div className={styles.fileUploadInformation}>
+                    {/* <h3>Upload takeout.zip File</h3>
+                    <h4>
+                      Download takeout.zip from here and upload it here to parse
+                    </h4> */}
+                    <button onClick={fetchWorkouts.fetchWorkouts}>
+                      <p>Get workouts</p>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className={styles.statisticsContent}>
-              <div className={styles.contentHeader}>
-                <h1>Statistics</h1>
-                <div className={styles.contentHeaderBadges}>
-                  <Badge text={`${totalNumWorkouts(workouts)} workouts`} />
-                  <Badge text={`${totalNumLifts(workouts)} lifts`} />
-                  <Badge text={`${totalNumSets(workouts)} sets`} />
-                  <Badge text={`${totalNumReps(workouts)} reps`} />
+            )}
+            {!!workouts.length && (
+              <div className={styles.statisticsContent}>
+                <div className={styles.contentHeader}>
+                  <h1>Statistics</h1>
+                  <div className={styles.contentHeaderBadges}>
+                    <Badge
+                      text={`${workoutSums.totalNumWorkouts(
+                        workouts
+                      )} workouts`}
+                    />
+                    <Badge
+                      text={`${workoutSums.totalNumLifts(workouts)} lifts`}
+                    />
+                    <Badge
+                      text={`${workoutSums.totalNumSets(workouts)} sets`}
+                    />
+                    <Badge
+                      text={`${workoutSums.totalNumReps(workouts)} reps`}
+                    />
+                  </div>
                 </div>
+                <br />
+                <Graph data={workouts} dataKeys={["totalWeight"]} />
+                <br />
               </div>
-              <br />
-              <Graph data={workouts} dataKeys={["totalWeight"]} />
-              <br />
-            </div>
+            )}
           </div>
         </div>
         <AnimatePresence>
@@ -170,41 +179,4 @@ const overlayVars = {
   },
 };
 
-// SOME GARBAGE vvv IGNORE
-
-{
-  /* <div style={{ flex: 1 }}>
-{selectedLift !== "" && (
-  <Graph
-    // @ts-ignore
-    data={progressions[selectedLift].progression}
-    // @ts-ignore
-    dataKeys={["averageWeightForSet", "averageReps"]}
-  />
-)}
-</div>
-<br />
-<div
-style={{
-  flexWrap: "wrap",
-  rowGap: "0.5em",
-  columnGap: "0.5em",
-}}
->
-{Object.keys(progressions).map((progression) => {
-  const p = progressions[progression];
-  return (
-    <button
-      key={progression}
-      onClick={() => {
-        setSelectedLift(p.key);
-      }}
-    >
-      {p.name} - {p.progression.length}
-    </button>
-  );
-})}
-</div> */
-}
-
-export default Home;
+export default Dashboard;

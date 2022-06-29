@@ -2,10 +2,10 @@ import { renderHook, act } from "@testing-library/react-hooks";
 import useAnalyzeWorkouts, { analyzeWorkouts } from "./useAnalyzeWorkouts";
 import mock from "../util/testing/mockWorkouts";
 
-const mockParsedWorkouts = mock.parsedWorkouts(10);
+const mockBasicWorkouts = mock.BasicWorkouts(10);
 
 const defaultHookProps = {
-  parsedWorkouts: mockParsedWorkouts,
+  BasicWorkouts: mockBasicWorkouts,
 };
 
 const defaultHook = () => {
@@ -16,8 +16,8 @@ const defaultHook = () => {
 };
 
 test("Check analysis useEffect", () => {
-  const { parsedWorkouts } = defaultHook().props;
-  const ownAnalysis = analyzeWorkouts(parsedWorkouts);
+  const { BasicWorkouts } = defaultHook().props;
+  const ownAnalysis = analyzeWorkouts(BasicWorkouts);
   const { result } = defaultHook().render;
   expect(result.current.workouts).toStrictEqual(ownAnalysis);
 });

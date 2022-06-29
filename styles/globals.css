@@ -12,7 +12,7 @@
   --fg-color: #27272a;
   --positive-color: #6eff8b;
   --negative-color: #ff2e66;
-  --warning-color: #f5bd43;
+  --warning-color: #f3c86c;
 
 
   /* Border */
@@ -34,6 +34,16 @@
 
 div {
   display: flex;
+}
+
+input {
+  flex: 1;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  color: var(--font-primary);
+  font-family: 'soleil', sans-serif;
 }
 
 html,
@@ -97,6 +107,7 @@ button {
   transition: var(--transition-md);
   cursor: pointer;
   flex-shrink: 1;
+  white-space: nowrap;
 }
 
 button:hover {

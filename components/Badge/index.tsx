@@ -1,5 +1,4 @@
 import styles from "./Badge.module.css";
-import { motion } from "framer-motion";
 
 export type BadgeProps = {
   text: string;

@@ -1,4 +1,13 @@
 .main{
     margin-top: var(--navbar-height);
-    
+    padding: 0 2em;
+    padding-top: 1em;
+    width: 100vw;
+}
+
+@media (max-width: 768px) {
+    .main {
+        padding: 0 1em;
+        padding-top: 0.5em;
+    }
 }

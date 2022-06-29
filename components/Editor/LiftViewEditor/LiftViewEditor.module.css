@@ -1,0 +1,27 @@
+.container {
+    flex-direction: column;
+    flex: 1
+}
+
+.liftNameRow {
+    display: flex;
+    justify-content: space-between;
+    flex: 1
+}
+
+.liftSetTable {
+    font-size: 1em;
+    color: var(--font-secondary);
+    /* margin: 0 0.5em; */
+    /* background-color: red; */
+}
+
+.col > p {
+    margin: 0.1em;
+}
+
+.bold {
+    font-weight: bold;
+    text-transform: capitalize;
+    color: var(--font-primary);
+}
