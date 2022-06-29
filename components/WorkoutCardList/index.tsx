@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./WorkoutCardList.module.css";
 import WorkoutCard from "../../components/WorkoutCard";
 import { useCallback } from "react";
@@ -10,13 +10,13 @@ import pagination from "../../util/pagination";
 type WorkoutCardListProps = {
   workouts: MetaWorkout[];
   onCardClick: (id: string) => void;
+  pageSize: number;
 };
-
-const PAGE_SIZE = 10;
 
 const WorkoutCardList: React.FC<WorkoutCardListProps> = ({
   workouts,
   onCardClick,
+  pageSize,
 }) => {
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -31,10 +31,11 @@ const WorkoutCardList: React.FC<WorkoutCardListProps> = ({
     setPage((prevPage) => prevPage - 1);
   }, [page]);
 
+  // @FIX_USE_EFFECT
   useEffect(() => {
     setPage(0);
-    setTotalPages(Math.ceil(workouts.length / PAGE_SIZE));
-  }, [workouts]);
+    setTotalPages(Math.ceil(workouts.length / pageSize));
+  }, [workouts, pageSize]);
 
   return (
     <div className={styles.listContainer}>
@@ -72,7 +73,7 @@ const WorkoutCardList: React.FC<WorkoutCardListProps> = ({
         </div>
       </div>
       {workouts
-        .slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
+        .slice(page * pageSize, (page + 1) * pageSize)
         .map((workout, i) => {
           return (
             <MemoWorkoutCardRow

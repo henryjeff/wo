@@ -9,7 +9,7 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
     <div className={styles.container}>
       <div className={styles.logo}>
         <Image src={logo} color="#fff" width={64} height={24} alt="logo" />
-        <h4>by henry heffernan</h4>
+        {/* <h4>by henry heffernan</h4> */}
       </div>
     </div>
   );

@@ -32,6 +32,7 @@ const useOrganizedWorkouts = ({
     initialSortReversed || false
   );
 
+  // @FIX_USE_EFFECT
   useEffect(() => {
     let _workouts = [...workouts];
 

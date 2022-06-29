@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./Graph.module.css";
 import {
   LineChart,
@@ -18,39 +18,39 @@ type GraphProps = {
   dataKeys: string[];
 };
 
+type CustomToolTipProps = {
+  payload: any;
+  label: string;
+  active: boolean;
+};
+
 const Graph: React.FC<GraphProps> = ({ data, dataKeys }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const currentTooltipRef = useRef<MetaWorkout>();
   const [dimensions, setDimensions] = useState({ w: 0, h: 0 });
 
-  useEffect(() => {
-    window.addEventListener("resize", getSize);
-    getSize();
-    return () => {
-      window.removeEventListener("resize", getSize);
-    };
+  const formatXAxis = useCallback((tickItem: any) => {
+    return moment(tickItem).format("M/YY");
   }, []);
 
-  function formatXAxis(tickItem: any) {
-    return moment(tickItem).format("M/YY");
-  }
-
-  const getSize = () => {
+  const getSize = useCallback(() => {
     if (contentRef.current) {
       const content = contentRef.current;
       setDimensions({ w: content.clientWidth, h: content.clientHeight });
     }
-  };
+  }, []);
 
-  function CustomTooltip({
-    payload,
-    label,
-    active,
-  }: {
-    payload: any;
-    label: string;
-    active: boolean;
-  }) {
+  useEffect(() => {
+    // Listen for resize events
+    window.addEventListener("resize", getSize);
+    getSize();
+    return () => {
+      // Use effect cleanup
+      window.removeEventListener("resize", getSize);
+    };
+  }, [getSize]);
+
+  const CustomTooltip = ({ payload, label, active }: CustomToolTipProps) => {
     if (payload && active && payload.length > 0) {
       const workout: MetaWorkout = payload[0].payload;
       currentTooltipRef.current = workout;
@@ -71,12 +71,12 @@ const Graph: React.FC<GraphProps> = ({ data, dataKeys }) => {
       );
     }
     return null;
-  }
+  };
 
   function djb2(str: string) {
     var hash = 5381;
     for (var i = 0; i < str.length; i++) {
-      hash = (hash << 5) + hash + str.charCodeAt(i); /* hash * 33 + c */
+      hash = (hash << 5) + hash + str.charCodeAt(i);
     }
     return hash;
   }
@@ -126,11 +126,6 @@ const Graph: React.FC<GraphProps> = ({ data, dataKeys }) => {
           // @ts-ignore
           content={<CustomTooltip />}
         />
-        {/* {refDates.map((date, index) => {
-          // console.log(date);
-          // console.log(formatXAxis(date));
-          return <ReferenceLine key={date} x={date} stroke={"#fff"} />;
-        })} */}
         {dataKeys.map((key, i) => {
           return (
             <Line
@@ -149,7 +144,5 @@ const Graph: React.FC<GraphProps> = ({ data, dataKeys }) => {
     </div>
   );
 };
-
-const refDates = [new Date(2021, 0, 1).toISOString()];
 
 export default Graph;

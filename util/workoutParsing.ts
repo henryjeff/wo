@@ -6,17 +6,23 @@ const TOKENS = {
   closeComment: ")",
 };
 
+/**
+ * Removes comments and converts the workout string to lowercase
+ * @param workout workout as a string to parse
+ * @returns workout string without comments and lowercase
+ */
 const preProcessWorkout = (workout: string) => {
   workout = workout.toLowerCase();
   for (let i = 0; i < workout.length; i++) {
-    // if char is a comment
+    // If char is a comment
     if (workout[i] === TOKENS.openComment) {
-      // find the end of the comment
+      // Find the end of the comment
       let j = i + 1;
       while (workout[j] !== TOKENS.closeComment) {
         j++;
+        // Potential inf. loop if there is no closing comment
       }
-      // remove the comment
+      // Remove the comment
       workout = workout.slice(0, i) + workout.slice(j + 1);
     }
     if (workout[i] === TOKENS.closeComment) {
@@ -26,42 +32,49 @@ const preProcessWorkout = (workout: string) => {
   return workout;
 };
 
+/**
+ * Key name will convert a workout name to a valid key
+ * @param name workout name to convert to key
+ * @returns amalgamated key name
+ */
 const keyName = (name: string) => {
+  // replace " " with _ and remove leading/trailing " " and add a trailing "_"
+  // ex) overhead dumbbell press -> overhead_dumbbell_press_
   let key = name.toLowerCase().trim().replace(/\s/g, "_") + "_";
-  Object.keys(AMALGAMATE_MAP).forEach((amalgamate) => {
+
+  // Get keys of amalgamations
+  const amalgamateKeys = Object.keys(AMALGAMATE_MAP) as Array<
+    keyof typeof AMALGAMATE_MAP
+  >;
+
+  // For each key, check if the exercise name includes an amalgamation
+  amalgamateKeys.forEach((amalgamate) => {
     const trailingAmalgamate = amalgamate + "_";
+    // If the exercise name includes the amalgamation key, replace the key with respective value
     if (key.includes(trailingAmalgamate)) {
-      // @ts-ignore
       key = key.replace(trailingAmalgamate, AMALGAMATE_MAP[amalgamate] + "_");
-      console.log(`${key} contains ${trailingAmalgamate}`);
-      // const splitKey = key.split(trailingAmalgamate);
-      // let newKey = "";
-      // splitKey.forEach((part) => {
-      //   if (part === "") {
-      //     // @ts-ignore
-      //     newKey += AMALGAMATE_MAP[amalgamate] + "_";
-      //   } else {
-      //     newKey += part;
-      //   }
-      // });
-      // key = newKey;
-      // // newKey += AMALGAMATE_MAP[amalgamate] + part;
-      // // console.log(key.split(trailingAmalgamate));
-      // // key = AMALGAMATE_MAP[amalgamate] + "_" + key.split(trailingAmalgamate);
-      console.log("newkey : ", name, " -> ", key);
     }
   });
-  if (name.includes("leg")) {
-  }
 
+  // Return the key
   return key;
 };
 
+/**
+ * Returns a readable workout name from a workout key
+ * @param key key to convert to workout name
+ * @returns workout name with _ replaced with " " and removed trailing "_"
+ */
 const nameKey = (key: string) => {
   // replace _ with " " and remove trailing " "
   return key.replace(/_/g, " ").trim();
 };
 
+/**
+ * Parses a workout string and returns an array of Lift objects
+ * @param workout workout string to parse
+ * @returns an array of Lift[] objects
+ */
 export const parseWorkout = (workout: string): Lift[] => {
   const preProcessedWorkout = preProcessWorkout(workout);
 
@@ -113,6 +126,7 @@ export const parseWorkout = (workout: string): Lift[] => {
 
 import fs from "fs";
 import path from "path";
+import { unknown } from "zod";
 import { AMALGAMATE_MAP } from "./analysis/constants";
 
 export const convertFileToWorkoutString = (fileName: string) => {
