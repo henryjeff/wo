@@ -111,20 +111,26 @@ const Dashboard: NextPage = () => {
 
           <div className={styles.content}>
             {!workouts.length && (
-              <div className={styles.fileUpload}>
-                <div>
-                  <FontAwesomeIcon icon={faFileZipper} width={32} />
-                  <div className={styles.fileUploadInformation}>
-                    {/* <h3>Upload takeout.zip File</h3>
-                    <h4>
-                      Download takeout.zip from here and upload it here to parse
-                    </h4> */}
-                    <Button
-                      onClick={fetchWorkouts.fetchWorkouts}
-                      text="Get Workouts"
-                    />
-                  </div>
-                </div>
+              // <div className={styles.fileUpload}>
+              //   <div>
+              //     <FontAwesomeIcon icon={faFileZipper} width={32} />
+              //     <div className={styles.fileUploadInformation}>
+              //       {/* <h3>Upload takeout.zip File</h3>
+              //       <h4>
+              //         Download takeout.zip from here and upload it here to parse
+              //       </h4> */}
+              //       <Button
+              //         onClick={fetchWorkouts.fetchWorkouts}
+              //         text="Get Workouts"
+              //       />
+              //     </div>
+              //   </div>
+              // </div>
+              <div>
+                <Button
+                  onClick={fetchWorkouts.fetchWorkouts}
+                  text="Get Workouts"
+                />
               </div>
             )}
             {!!workouts.length && (

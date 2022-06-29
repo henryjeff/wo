@@ -1,11 +1,11 @@
 export const mountAnimationProps = {
   initial: {
     opacity: 0,
-    x: -16,
+    y: -16,
   },
   animate: {
     opacity: 1,
-    x: 0,
+    y: 0,
   },
   transition: {
     type: "spring",

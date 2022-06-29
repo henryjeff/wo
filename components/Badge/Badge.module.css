@@ -1,24 +1,21 @@
 .badgeContainer {
-    padding: 0 1em;
-    font-size: 0.8em;
-    font-weight: bold;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 1;
-    border-radius: var(--br-md);
-    background-color: var(--fg-color);
-    
-    white-space: nowrap;
-    overflow: hidden;
-    column-gap: 0.25em;
+  padding: 0.1em 0.8em;
+  font-size: 0.8em;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 1;
+  border-radius: var(--br-md);
+  background-color: var(--fg-color);
+  white-space: nowrap;
+  overflow: hidden;
+  column-gap: 0.25em;
 }
 
 .badgeText {
-    
-    text-transform: capitalize;
+  text-transform: capitalize;
 }
 
 .badgeWrapper {
-    align-items: center;
-    
+  align-items: center;
 }
