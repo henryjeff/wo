@@ -21,6 +21,7 @@ import useOrganizedWorkouts from "../../hooks/useOrganizedWorkouts";
 import useFetchWorkouts from "../../hooks/useFetchWorkouts";
 
 import styles from "./Dashboard.module.css";
+import Button from "../../components/Button";
 
 const Dashboard: NextPage = () => {
   const fetchWorkouts = useFetchWorkouts();
@@ -118,9 +119,10 @@ const Dashboard: NextPage = () => {
                     <h4>
                       Download takeout.zip from here and upload it here to parse
                     </h4> */}
-                    <button onClick={fetchWorkouts.fetchWorkouts}>
-                      <p>Get workouts</p>
-                    </button>
+                    <Button
+                      onClick={fetchWorkouts.fetchWorkouts}
+                      text="Get Workouts"
+                    />
                   </div>
                 </div>
               </div>

@@ -3,17 +3,16 @@
 :root {
   /* --bg-color: #0d0d0e; */
 
-  --primary-color: #302AE6;
+  --primary-color: #302ae6;
   --secondary-color: #536390;
   --font-primary: #fafafa;
   --font-secondary: #a1a1aa;
   --bg-color: #000000;
-  --mg-color:#18181b;
+  --mg-color: #18181b;
   --fg-color: #27272a;
   --positive-color: #6eff8b;
   --negative-color: #ff2e66;
   --warning-color: #f3c86c;
-
 
   /* Border */
   --br-md: 0.5em;
@@ -23,7 +22,7 @@
   --overlay-shadow: 0px 20px 20px var(--bg-color);
 
   /* Responsive design */
-  --screen-md : 768px;
+  --screen-md: 768px;
 
   /* Navbar */
   --navbar-height: 5em;
@@ -43,15 +42,14 @@ input {
   outline: none;
   font-size: 1em;
   color: var(--font-primary);
-  font-family: 'soleil', sans-serif;
-  min-width: 0;
+  font-family: "soleil", sans-serif;
 }
 
 html,
 body {
-  font-family: 'soleil', sans-serif;
+  font-family: "soleil", sans-serif;
   padding: 0;
-  margin: 0;;
+  margin: 0;
   background-color: var(--bg-color);
   color: var(--font-primary);
 }
@@ -97,39 +95,16 @@ a {
   box-sizing: border-box;
 }
 
-
-button {
-  background-color: var(--fg-color);
-  color: var(--font-primary);
-  font-weight: bold;
-  padding:  0.5em 1em;
-  border: none;
-  border-radius: var(--br-md);
-  transition: var(--transition-md);
-  cursor: pointer;
-  flex-shrink: 1;
-  white-space: nowrap;
-}
-
-button:hover {
-  background-color: var(--font-primary);
-  color: var(--fg-color);
-}
-
-button:active {
-  background-color: var(--font-secondary);
-}
-
 ::placeholder {
   color: var(--fg-color);
   opacity: 1;
 }
 
-:-ms-input-placeholder { 
+:-ms-input-placeholder {
   color: var(--fg-color);
 }
 
-::-ms-input-placeholder { 
+::-ms-input-placeholder {
   color: var(--fg-color);
 }
 
@@ -138,8 +113,8 @@ button:active {
 }
 
 .no-scrollbar {
-  -ms-overflow-style: none; 
-  scrollbar-width: none; 
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .masked-overflow {
@@ -147,11 +122,11 @@ button:active {
   --mask-height: 32px;
   overflow-y: auto;
   --mask-image-content: linear-gradient(
-      to left,
-      transparent,
-      black var(--mask-height),
-      black calc(100% - var(--mask-height)),
-      transparent
+    to left,
+    transparent,
+    black var(--mask-height),
+    black calc(100% - var(--mask-height)),
+    transparent
   );
   --mask-size-content: calc(100% - var(--scrollbar-width)) 100%;
   --mask-image-scrollbar: linear-gradient(black, black);

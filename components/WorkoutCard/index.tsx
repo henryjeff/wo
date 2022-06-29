@@ -128,9 +128,6 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({
                 })}
             </div>
           </div>
-          {/* <div className={styles.summaryFooter}>
-            <button onClick={onClose}>Close Summary</button>
-          </div> */}
         </>
       )}
     </motion.div>

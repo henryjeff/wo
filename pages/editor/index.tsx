@@ -9,6 +9,7 @@ import styles from "./Editor.module.css";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAdd } from "@fortawesome/free-solid-svg-icons";
+import Button from "../../components/Button";
 
 export type EditorState = InputLift[];
 
@@ -225,7 +226,15 @@ const Home: NextPage = () => {
           <br />
           <motion.div className={styles.liftEditorViews}>
             {state.map((lift, index) => (
-              <motion.div key={`lift-${index}`} {...mountAnimationProps}>
+              <motion.div
+                key={`lift-${index}`}
+                {...mountAnimationProps}
+                exit={{
+                  opacity: 0,
+                  y: -100,
+                  transition: { duration: 0.2 },
+                }}
+              >
                 <LiftViewEditor
                   lift={lift}
                   editorDispatch={dispatch}
@@ -234,12 +243,14 @@ const Home: NextPage = () => {
                 <br />
               </motion.div>
             ))}
-            <div>
-              <div className={styles.addLiftButton} onClick={handleAddLift}>
-                <FontAwesomeIcon width={12} icon={faAdd} />
-                <p>Add Lift</p>
-              </div>
-            </div>
+            <motion.div layoutId="workout-editor-footer">
+              <Button
+                outlined
+                onClick={handleAddLift}
+                text="Add Exercise"
+                icon={faAdd}
+              />
+            </motion.div>
           </motion.div>
         </div>
       </Layout>

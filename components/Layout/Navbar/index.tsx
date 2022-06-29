@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import Button from "../../Button";
 
 export type NavbarLinkProps = {
   name: string;
@@ -60,7 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
         <NavbarLink name="Editor" href="/editor" />
       </nav>
       <div className={styles.rightContent}>
-        <button>Sign In</button>
+        <Button text="Sign Up" outlined />
       </div>
     </div>
   );

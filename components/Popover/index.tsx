@@ -5,6 +5,7 @@ import {
   FontAwesomeIcon,
   FontAwesomeIconProps,
 } from "@fortawesome/react-fontawesome";
+import Button from "../Button";
 
 export type PopoverProps = {
   text: string;
@@ -35,12 +36,7 @@ const Popover: React.FC<PopoverProps> = (props) => {
       style={isOpen ? {} : { zIndex: 1 }}
     >
       <div onClick={() => setIsOpen(!isOpen)}>
-        <button>
-          <div className={styles.popOverButton}>
-            {props.icon && <FontAwesomeIcon icon={props.icon} width={12} />}
-            {props.text}
-          </div>
-        </button>
+        <Button text={props.text} icon={props.icon} />
       </div>
       <motion.div
         animate={isOpen ? "open" : "closed"}

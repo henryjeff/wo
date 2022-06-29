@@ -5,6 +5,7 @@ import { EditorActions, InputLift } from "../../../pages/editor";
 import styles from "./LiftViewEditor.module.css";
 import { motion } from "framer-motion";
 import { mountAnimationProps } from "../../../styles/animation";
+import Button from "../../Button";
 
 type LiftViewEditorProps = {
   index: number;
@@ -172,12 +173,12 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
           })}
         </tbody>
       </table>
-      <div className={styles.liftFooter}>
-        <div onClick={createNewSet} className={styles.addSetButton}>
-          <FontAwesomeIcon width={12} icon={faAdd} />
-          <p>Add Set</p>
-        </div>
-      </div>
+      <motion.div
+        layoutId={`lift-${index}-editor-footer`}
+        className={styles.liftFooter}
+      >
+        <Button outlined onClick={createNewSet} text="Add Set" icon={faAdd} />
+      </motion.div>
     </div>
   );
 };

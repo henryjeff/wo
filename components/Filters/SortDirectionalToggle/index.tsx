@@ -1,6 +1,8 @@
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
+import { useMemo } from "react";
+import Button from "../../Button";
 import styles from "./SortDirectionalToggle.module.css";
 
 export type SortDirectionalToggleProps = {
@@ -15,16 +17,19 @@ const SortDirectionalToggle: React.FC<SortDirectionalToggleProps> = ({
   text,
 }) => {
   return (
-    <button onClick={() => setUp(!up)} className={styles.container}>
-      <p className={styles.sortText}>{text ? text : "Sort"}</p>
-      <motion.div variants={arrowVars} animate={up ? "up" : "down"}>
-        <FontAwesomeIcon
-          icon={faArrowDown}
-          width={10}
-          className={styles.icon}
-        />
-      </motion.div>
-    </button>
+    <Button
+      onClick={() => setUp(!up)}
+      text={text ? text : "Sort"}
+      EndItem={
+        <motion.div variants={arrowVars} animate={up ? "up" : "down"}>
+          <FontAwesomeIcon
+            icon={faArrowDown}
+            width={10}
+            className={styles.icon}
+          />
+        </motion.div>
+      }
+    />
   );
 };
 
