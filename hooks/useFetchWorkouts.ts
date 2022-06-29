@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Analyzer from "../util/analysis/Analyzer";
+import Analyzer from "../util/analysis/analyzer";
 
 const useFetchWorkouts = () => {
   const [workouts, setWorkouts] = useState<Workout[]>([]);

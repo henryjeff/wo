@@ -1,12 +1,6 @@
 import moment from "moment";
-import {
-  AMALGAMATE_MAP,
-  MUSCLE_GROUP_TOKENS,
-  PULL_GROUPS,
-  PUSH_GROUPS,
-  WORKOUT_TYPES,
-} from "./constants";
-import { sortByAscDate, sortByDescDate } from "./sorting";
+import { MUSCLE_GROUP_TOKENS, PULL_GROUPS, PUSH_GROUPS } from "./constants";
+import { sortByAscDate } from "./sorting";
 
 class Analyzer {
   liftToGroupMap: { [key: string]: MuscleGroup };
@@ -72,8 +66,6 @@ class Analyzer {
       });
 
       const workoutType = this.defineWorkoutType(groupsHit);
-
-      // console.log(liftToGroupMap);
 
       // calculate total weight
       let totalWeight = 0;
@@ -172,7 +164,7 @@ class Analyzer {
         });
       });
     });
-    // remove all progressions that have < 2 progressions
+    // remove all progressions that have <= 2 progressions
     for (const progression in progressions) {
       if (progressions[progression].progression.length < 3)
         delete progressions[progression];

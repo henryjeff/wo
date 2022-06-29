@@ -15,6 +15,7 @@ export type useOrganizedWorkoutsReturn = {
     setIsReversed: React.Dispatch<React.SetStateAction<boolean>>;
   };
   addFilterPredicate: (id: string, predicate: WorkoutFilterPredicate) => void;
+  removeFilterPredicate: (id: string) => void;
 };
 
 const useOrganizedWorkouts = ({
@@ -59,6 +60,12 @@ const useOrganizedWorkouts = ({
     setFilterPredicates({ ...filterPredicates, [id]: predicate });
   };
 
+  const removeFilterPredicate = (id: string) => {
+    const newFilterPredicates = { ...filterPredicates };
+    delete newFilterPredicates[id];
+    setFilterPredicates(newFilterPredicates);
+  };
+
   return {
     workouts: organizedWorkouts,
     sorting: {
@@ -66,6 +73,7 @@ const useOrganizedWorkouts = ({
       setIsReversed: setSortReversed,
     },
     addFilterPredicate,
+    removeFilterPredicate,
   };
 };
 
