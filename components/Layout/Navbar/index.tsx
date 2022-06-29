@@ -1,5 +1,5 @@
 import styles from "./Navbar.module.css";
-import logo from "../../../public/vercel.svg";
+import logo from "../../../public/logo.svg";
 import Image from "next/image";
 
 export type NavbarProps = {};
