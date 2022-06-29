@@ -1,32 +1,22 @@
 .layout {
     flex: 1;
     font-size: 1em;
-}
-
-.container {
     flex-direction: column;
-    flex: 1
 }
 
-.liftNameRow {
-    display: flex;
-    justify-content: space-between;
-    flex: 1
+.liftEditorViews {
+    flex: 1;
+    flex-direction: column;
+    row-gap: 2em;
 }
 
-.liftSetTable {
-    font-size: 1em;
-    color: var(--font-secondary);
-    /* margin: 0 0.5em; */
-    /* background-color: red; */
-}
-
-.col > p {
-    margin: 0.1em;
-}
-
-.bold {
+.addLiftButton {
+    justify-content: center;
+    align-items: center;
+    border: var(--layout-border);
+    padding: 0.25em 1.5em;
+    font-size: 0.8em;
     font-weight: bold;
-    text-transform: capitalize;
-    color: var(--font-primary);
+    border-radius: var(--br-md);
+    white-space: nowrap;
 }

@@ -1,18 +1,28 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
 import { Layout, DefaultHeadMetaTags } from "../../components";
 import Badge from "../../components/Badge";
-import LiftViewEditor, {
-  InputLiftSet,
-} from "../../components/Editor/LiftViewEditor";
+import LiftViewEditor from "../../components/Editor/LiftViewEditor";
+import { mountAnimationProps } from "../../styles/animation";
 import styles from "./Editor.module.css";
+import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAdd } from "@fortawesome/free-solid-svg-icons";
 
 export type EditorState = InputLift[];
 
-type InputLift = {
+export type InputLift = {
   name: string;
+  key: string;
   sets: InputLiftSet[];
+};
+
+export type InputLiftSet = {
+  numSets: string;
+  numReps: string;
+  weight: string;
+  weightUnit: WeightUnit;
 };
 
 export type EditorActions =
@@ -64,6 +74,8 @@ export type EditorActions =
     };
 
 const Home: NextPage = () => {
+  const [layoutIdCount, setLayoutIdCount] = useState(0);
+
   const [state, dispatch] = useReducer(
     (state: EditorState, action: EditorActions) => {
       switch (action.type) {
@@ -195,9 +207,11 @@ const Home: NextPage = () => {
       type: "ADD_LIFT",
       lift: {
         name: "",
+        key: `lift-view-layout-${layoutIdCount}`,
         sets: [],
       },
     });
+    setLayoutIdCount(layoutIdCount + 1);
   };
 
   return (
@@ -207,25 +221,26 @@ const Home: NextPage = () => {
       </Head>
       <Layout>
         <div className={styles.layout}>
-          {/* <h1>Editor</h1> */}
-          {/* <LiftViewEditor
-            editorState={state}
-            editorDispatch={dispatch}
-            index={0}
-          /> */}
-          <div style={{ flexDirection: "column", flex: 1 }}>
-            {state.map((_, index) => (
-              <LiftViewEditor
-                key={`lift-${index}`}
-                editorState={state}
-                editorDispatch={dispatch}
-                index={index}
-              />
+          <h1>Editor</h1>
+          <br />
+          <motion.div className={styles.liftEditorViews}>
+            {state.map((lift, index) => (
+              <motion.div key={`lift-${index}`} {...mountAnimationProps}>
+                <LiftViewEditor
+                  lift={lift}
+                  editorDispatch={dispatch}
+                  index={index}
+                />
+                <br />
+              </motion.div>
             ))}
-            <span>
-              <button onClick={handleAddLift}>Create Lift</button>
-            </span>
-          </div>
+            <div>
+              <div className={styles.addLiftButton} onClick={handleAddLift}>
+                <FontAwesomeIcon width={12} icon={faAdd} />
+                <p>Add Lift</p>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </Layout>
     </>

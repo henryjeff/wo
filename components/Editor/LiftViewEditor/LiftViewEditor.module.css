@@ -5,12 +5,11 @@
 
 .liftNameInput {
     flex-shrink: 1;
-    padding: 0.4em 0.8em;
     font-weight: bold;
-    border-radius: var(--br-md);
-    background-color: var(--fg-color);
     outline: none;
     text-transform: capitalize;
+    padding-bottom: 0.5em;
+    border-bottom: var(--layout-border);
 }
 
 .liftNameRow {
@@ -54,6 +53,7 @@
     align-items: center;
     justify-content: center;
     padding: 0.2em 0.8em;
+    margin-top: 1em;
 }
 
 .col > input {

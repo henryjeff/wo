@@ -1,28 +1,23 @@
 import { faAdd, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCallback, useEffect, useState } from "react";
-import { EditorActions, EditorState } from "../../../pages/editor";
+import { EditorActions, InputLift } from "../../../pages/editor";
 import styles from "./LiftViewEditor.module.css";
+import { motion } from "framer-motion";
+import { mountAnimationProps } from "../../../styles/animation";
 
 type LiftViewEditorProps = {
   index: number;
-  editorState: EditorState;
+  lift: InputLift;
   editorDispatch: React.Dispatch<EditorActions>;
-};
-
-export type InputLiftSet = {
-  numSets: string;
-  numReps: string;
-  weight: string;
-  weightUnit: WeightUnit;
 };
 
 const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
   index,
-  editorState,
+  lift,
   editorDispatch,
 }) => {
-  const { name, sets } = editorState[index];
+  const { name, sets } = lift;
 
   const handleChangeNumSets = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>, setIndex: number) => {
@@ -100,20 +95,18 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
     <div className={styles.container}>
       <div className={styles.liftNameRow}>
         <div>
-          <span
+          <input
             className={styles.liftNameInput}
-            role="textbox"
             onChange={handleLiftNameChange}
-            contentEditable
-            placeholder="Lift Name"
-            suppressContentEditableWarning={true}
-          >
-            {name}
-          </span>
+            value={name}
+            type="text"
+            placeholder="Exercise name"
+          />
         </div>
         <div className={styles.deleteLiftButton} onClick={handleDeleteLift}>
           <FontAwesomeIcon
             icon={faXmark}
+            width={12}
             className={styles.deleteLiftButtonIcon}
           />
           <p>Delete</p>
@@ -123,7 +116,11 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
         <tbody>
           {sets.map((set, i) => {
             return (
-              <tr key={i} className={styles.row}>
+              <motion.tr
+                key={`lift-view-editor-tr-${index}-${i}`}
+                {...mountAnimationProps}
+                className={styles.row}
+              >
                 <td className={styles.col}>
                   <input
                     type="text"
@@ -165,18 +162,19 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
                   onClick={() => handleDeleteSet(i)}
                 >
                   <FontAwesomeIcon
+                    width={12}
                     icon={faXmark}
                     className={styles.deleteSetIcon}
                   />
                 </td>
-              </tr>
+              </motion.tr>
             );
           })}
         </tbody>
       </table>
       <div className={styles.liftFooter}>
         <div onClick={createNewSet} className={styles.addSetButton}>
-          <FontAwesomeIcon icon={faAdd} />
+          <FontAwesomeIcon width={12} icon={faAdd} />
           <p>Add Set</p>
         </div>
       </div>
