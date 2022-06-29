@@ -66,7 +66,7 @@ const copyData: BasicLift[] = [
   },
 ];
 
-const Home: NextPage = () => {
+const Editor: NextPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [state, dispatch] = useWorkoutEditor();
 
@@ -106,7 +106,10 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <DefaultHeadMetaTags />
+        <DefaultHeadMetaTags
+          title="WO editor"
+          description="Create and modify workouts with this simple editor"
+        />
       </Head>
       <Layout flex center>
         <div className={styles.layout}>
@@ -171,4 +174,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Editor;
