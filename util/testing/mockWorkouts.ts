@@ -1,4 +1,4 @@
-import Analyzer from "../analysis/analyzer";
+import { analyzeWorkouts } from "../../hooks/useAnalyzeWorkouts";
 
 const makeMockWorkout = ({
   month,
@@ -145,7 +145,9 @@ const makeMockWorkout = ({
   return mockWorkouts[index === undefined ? randomWorkout : index];
 };
 
-const makeWorkouts = (numberOfWorkouts: number): Workout[] => {
+export const makeParsedWorkouts = (
+  numberOfWorkouts: number
+): ParsedWorkout[] => {
   const workouts: ParsedWorkout[] = [];
   const date = new Date();
   for (let i = 0; i < numberOfWorkouts; i++) {
@@ -161,8 +163,16 @@ const makeWorkouts = (numberOfWorkouts: number): Workout[] => {
       })
     );
   }
-  const analyzer = new Analyzer();
-  return analyzer.analyzeWorkouts(workouts);
+  return workouts;
 };
 
-export default makeWorkouts;
+export const makeWorkouts = (numberOfWorkouts: number): Workout[] => {
+  return analyzeWorkouts(makeParsedWorkouts(numberOfWorkouts));
+};
+
+const exportObject = {
+  parsedWorkouts: makeParsedWorkouts,
+  workouts: makeWorkouts,
+};
+
+export default exportObject;

@@ -1,24 +1,21 @@
 import { useState } from "react";
-import Analyzer from "../util/analysis/analyzer";
+import useAnalyzeWorkouts from "./useAnalyzeWorkouts";
 
 const useFetchWorkouts = () => {
-  const [workouts, setWorkouts] = useState<Workout[]>([]);
-  const [progressions, setProgressions] = useState<LiftProgressions>({});
+  const [parsedWorkouts, setParsedWorkouts] = useState<ParsedWorkout[]>([]);
+  const { workouts, liftProgressions } = useAnalyzeWorkouts({ parsedWorkouts });
 
   const fetchWorkouts = () => {
     fetch("/api/workouts").then((res) =>
       res.json().then((data) => {
-        const analyzer = new Analyzer();
-        const analyzedWorkouts = analyzer.analyzeWorkouts(data.workouts);
-        setProgressions(analyzer.getLiftProgressions(analyzedWorkouts));
-        setWorkouts(analyzedWorkouts);
+        setParsedWorkouts(data.workouts);
       })
     );
   };
 
   return {
     workouts,
-    progressions,
+    liftProgressions,
     fetchWorkouts,
   };
 };

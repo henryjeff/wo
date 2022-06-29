@@ -1,9 +1,9 @@
 import { renderHook, act } from "@testing-library/react-hooks";
 import useOrganizedWorkouts from "./useOrganizedWorkouts";
-import makeMockWorkouts from "../util/testing/mockWorkouts";
-import { sortByAscDate } from "../util/analysis/sorting";
+import { sortByAscDate } from "../util/workout/sorting";
+import mock from "../util/testing/mockWorkouts";
 
-const mockWorkouts = makeMockWorkouts(10);
+const mockWorkouts = mock.workouts(10);
 
 const defaultHookProps = {
   workouts: mockWorkouts,

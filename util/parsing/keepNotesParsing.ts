@@ -127,7 +127,7 @@ export const parseWorkout = (workout: string): ParsedLift[] => {
 import fs from "fs";
 import path from "path";
 import { unknown } from "zod";
-import { AMALGAMATE_MAP } from "./analysis/constants";
+import { AMALGAMATE_MAP } from "../workout/constants";
 
 export const convertFileToWorkoutString = (fileName: string) => {
   const file = fs.readFileSync(path.join(process.cwd(), fileName)).toString();

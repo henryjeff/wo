@@ -13,11 +13,11 @@ import {
   totalNumReps,
   totalNumSets,
   totalNumWorkouts,
-} from "../../util/analysis/sums";
+} from "../../util/workout/sums";
 import Popover from "../../components/Popover";
 import { WorkoutTypeFilter } from "../../components/Filters";
 import SortByTimeToggle from "../../components/Filters/SortDirectionalToggle";
-import { sortByAscDate } from "../../util/analysis/sorting";
+import { sortByAscDate } from "../../util/workout/sorting";
 import useOrganizedWorkouts from "../../hooks/useOrganizedWorkouts";
 import useFetchWorkouts from "../../hooks/useFetchWorkouts";
 import DifficultyFilter from "../../components/Filters/Difficulty";
