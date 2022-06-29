@@ -1,7 +1,7 @@
 import { faAdd, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useCallback } from "react";
-import { EditorActions, InputLift } from "../../../pages/editor";
+import { EditorActions } from "../../../hooks/useWorkoutEditor";
 import styles from "./LiftViewEditor.module.css";
 import { motion } from "framer-motion";
 import { mountAnimationProps } from "../../../styles/animation";

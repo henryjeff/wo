@@ -41,6 +41,19 @@ type Lift = {
   sets: LiftSet[];
 };
 
+type InputLift = {
+  name: string;
+  key: string;
+  sets: InputLiftSet[];
+};
+
+type InputLiftSet = {
+  numSets: string;
+  numReps: string;
+  weight: string;
+  weightUnit: WeightUnit;
+};
+
 type MuscleGroup =
   | "shoulder"
   | "chest"
