@@ -1,5 +1,5 @@
 import styles from "./Navbar.module.css";
-import logo from "../../../public/logo.svg";
+import logo from "../../../public/logo-new.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";

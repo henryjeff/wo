@@ -26,7 +26,7 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       className={`${styles.button} ${outlined && styles.outlined}`}
     >
-      {icon && <FontAwesomeIcon icon={icon} width={12} />}
+      {icon && <FontAwesomeIcon icon={icon} width={"1em"} height={"1em"} />}
       {<>{StartItem}</>}
       <p>{text}</p>
       {<>{EndItem}</>}

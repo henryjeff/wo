@@ -17,6 +17,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
+    "@react-three/fiber": "^8.0.27",
     "formidable": "^2.0.1",
     "framer-motion": "^6.3.13",
     "jest-environment-jsdom": "^28.1.1",
@@ -29,6 +30,7 @@
     "react-virtualized": "^9.22.3",
     "react-window": "^1.8.7",
     "recharts": "^2.1.10",
+    "three": "^0.142.0",
     "yauzl": "^2.10.0",
     "zod": "^3.17.3"
   },
@@ -43,6 +45,7 @@
     "@types/react-virtualized": "^9.21.21",
     "@types/react-vis": "^1.11.11",
     "@types/react-window": "^1.8.5",
+    "@types/three": "^0.141.0",
     "@types/yauzl": "^2.10.0",
     "eslint": "8.18.0",
     "eslint-config-next": "12.1.6",

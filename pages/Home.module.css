@@ -1,0 +1,98 @@
+.layout {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 4em;
+  grid-template-areas:
+    "hero "
+    "content ";
+}
+
+.heroContainer {
+  grid-area: hero;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 32em;
+  overflow: hidden;
+  background-color: var(--bg-color);
+  color: var(--fg-color);
+  border-bottom: var(--layout-border);
+}
+
+.logoBadge {
+  color: var(--font-primary);
+  background-color: var(--fg-color);
+  padding: 0.5em 1em;
+  border-radius: var(--br-md);
+}
+
+.heroOverlayContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 2em;
+
+  /* add a drop shadow */
+}
+
+.heroOverlayShadow {
+  box-shadow: 0 0 50em 5em var(--bg-color);
+  position: absolute;
+}
+
+.heroOverlayButtons {
+  z-index: 100;
+  justify-content: space-between;
+  column-gap: 1em;
+}
+.heroOverlayButtons > button {
+  font-size: 1em;
+  background-color: var(--bg-color);
+}
+
+.heroCards {
+  grid-area: content;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 4em;
+  overflow: hidden;
+  margin-bottom: 4em;
+}
+
+/* when < 1024 turn template colums to rows */
+@media (max-width: 1024px) {
+  .heroCards {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+}
+
+.heroCardHeader {
+  display: flex;
+  /* flex-direction: column; */
+  /* justify-content: center;
+  align-items: center; */
+  padding: 2em;
+  background-color: var(--bg-color);
+  border-bottom: var(--layout-border);
+}
+
+.heroCardHeaderTextContainer {
+  /* flex-direction: column; */
+  align-items: center;
+  text-align: center;
+}
+
+.heroCardHeaderText {
+  column-gap: 1em;
+}
+
+.heroCardContainer {
+  overflow: hidden;
+  border-radius: var(--br-md);
+  background-color: var(--bg-color);
+  border: var(--layout-border);
+}
