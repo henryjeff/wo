@@ -113,7 +113,7 @@ const Home: NextPage = () => {
       <Layout>
         <div className={styles.layout}>
           <section className={styles.heroContainer}>
-            <div
+            <motion.div
               style={{
                 width: "100%",
                 height: "100%",
@@ -127,7 +127,7 @@ const Home: NextPage = () => {
                 <Grid />
                 <Controls />
               </Canvas>
-            </div>
+            </motion.div>
             <motion.div
               {...mountAnimProps}
               className={styles.heroOverlayContainer}
@@ -218,7 +218,7 @@ const delayedMountAnimProps = (delay: number) => ({
 const bgAnimMountProps = {
   initial: { opacity: 0 },
   animate: { opacity: 0.5 },
-  transition: { duration: 3, delay: 1.2 },
+  transition: { duration: 2, delay: 0.5 },
 };
 
 export default Home;
