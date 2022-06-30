@@ -87,8 +87,9 @@ const Grid = () => {
   );
 };
 
-function Box() {
+const Box = () => {
   const box = useRef<any>();
+
   useFrame(() => {
     if (box.current) {
       box.current.rotation.x += 0.01;
@@ -102,7 +103,21 @@ function Box() {
       <meshBasicMaterial wireframe attach="material" color="#fff" />
     </mesh>
   );
-}
+};
+
+type AnimatedCanvasWrapperProps = {
+  children?: React.ReactNode;
+};
+
+const AnimatedCanvasWrapper: React.FC<AnimatedCanvasWrapperProps> = ({
+  children,
+}) => {
+  return (
+    <motion.div className={styles.canvasWrapper} {...bgAnimMountProps}>
+      <Canvas>{children}</Canvas>
+    </motion.div>
+  );
+};
 
 const Home: NextPage = () => {
   return (
@@ -113,21 +128,11 @@ const Home: NextPage = () => {
       <Layout>
         <div className={styles.layout}>
           <section className={styles.heroContainer}>
-            <motion.div
-              style={{
-                width: "100%",
-                height: "100%",
-                opacity: 0.5,
-                pointerEvents: "none",
-              }}
-              {...bgAnimMountProps}
-            >
-              <Canvas>
-                <fog attach="fog" args={[colors.bg, 5, 10]} />
-                <Grid />
-                <Controls />
-              </Canvas>
-            </motion.div>
+            <AnimatedCanvasWrapper>
+              <fog attach="fog" args={[colors.bg, 5, 10]} />
+              <Grid />
+              <Controls />
+            </AnimatedCanvasWrapper>
             <motion.div
               {...mountAnimProps}
               className={styles.heroOverlayContainer}
@@ -149,26 +154,29 @@ const Home: NextPage = () => {
               </motion.div>
             </motion.div>
           </section>
-          {/* <motion.section
+          <motion.section
             {...delayedMountAnimProps(1)}
             className={styles.heroCards}
           >
-            <HeroCard
-              icon={faListNumeric}
-              headerText="Track"
-              subText="Easily track your lifts"
-            ></HeroCard>
-            <HeroCard
-              icon={faComputer}
-              headerText="Analyze"
-              subText="Get detailed analytics"
-            ></HeroCard>
-            <HeroCard
-              icon={faComputer}
-              headerText="Progress"
-              subText="Make meaningful progress"
-            ></HeroCard>
-          </motion.section> */}
+            <HeroCard headerText="Track" subText="Easily track your Lifts">
+              <AnimatedCanvasWrapper>
+                <Box />
+              </AnimatedCanvasWrapper>
+              <Button outlined text="Learn More" />
+            </HeroCard>
+            <HeroCard headerText="Analyze" subText="Get detailed Analytics">
+              <AnimatedCanvasWrapper>
+                <Box />
+              </AnimatedCanvasWrapper>
+              <Button outlined text="Learn More" />
+            </HeroCard>
+            <HeroCard headerText="Progress" subText="Make meaningful progress">
+              <AnimatedCanvasWrapper>
+                <Box />
+              </AnimatedCanvasWrapper>
+              <Button outlined text="Learn More" />
+            </HeroCard>
+          </motion.section>
         </div>
       </Layout>
     </>
@@ -191,15 +199,12 @@ const HeroCard: React.FC<HeroCardProps> = ({
   return (
     <div className={styles.heroCardContainer}>
       <div className={styles.heroCardHeader}>
-        <div className={styles.heroCardHeaderTextContainer}>
-          <div className={styles.heroCardHeaderText}>
-            {icon && <FontAwesomeIcon icon={icon} width={"2em"} />}
-            <h1>{headerText}</h1>
-          </div>
+        <div className={styles.heroCardHeaderText}>
+          <h1 style={{ fontSize: "2.5em" }}>{headerText}</h1>
           <h4>{subText}</h4>
         </div>
       </div>
-      <div>{children}</div>
+      <div className={styles.heroCardContent}>{children}</div>
     </div>
   );
 };

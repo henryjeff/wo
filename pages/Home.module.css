@@ -1,14 +1,10 @@
 .layout {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-gap: 4em;
-  grid-template-areas:
-    "hero "
-    "content ";
+  flex-direction: column;
+  row-gap: 2em;
+  padding-bottom: 2em;
 }
 
 .heroContainer {
-  grid-area: hero;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,8 +30,6 @@
   justify-content: center;
   align-items: center;
   row-gap: 2em;
-
-  /* add a drop shadow */
 }
 
 .heroOverlayShadow {
@@ -54,45 +48,59 @@
 }
 
 .heroCards {
-  grid-area: content;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 4em;
-  overflow: hidden;
-  margin-bottom: 4em;
+  grid-column-gap: 2em;
 }
 
-/* when < 1024 turn template colums to rows */
 @media (max-width: 1024px) {
   .heroCards {
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-auto-rows: 1fr;
+    grid-row-gap: 2em;
   }
+}
+
+.heroCardContainer {
+  border-radius: var(--br-md);
+  background-color: var(--bg-color);
+  border: var(--layout-border);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 4em;
+  row-gap: 1em;
 }
 
 .heroCardHeader {
   display: flex;
-  /* flex-direction: column; */
-  /* justify-content: center;
-  align-items: center; */
-  padding: 2em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 2em;
   background-color: var(--bg-color);
   border-bottom: var(--layout-border);
 }
 
-.heroCardHeaderTextContainer {
-  /* flex-direction: column; */
+.heroCardContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  text-align: center;
+  row-gap: 1em;
+  width: 8em;
 }
 
 .heroCardHeaderText {
-  column-gap: 1em;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  row-gap: 0.5em;
 }
 
-.heroCardContainer {
-  overflow: hidden;
-  border-radius: var(--br-md);
-  background-color: var(--bg-color);
-  border: var(--layout-border);
+.canvasWrapper {
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  pointer-events: none;
 }

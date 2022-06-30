@@ -112,8 +112,6 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({
             range={10}
             id={id}
           />
-          {/* <StatView number={0} label="Strength" id={id} />
-          <StatView number={0} label="Endurance" id={id} /> */}
         </div>
       </div>
       {expanded && (
