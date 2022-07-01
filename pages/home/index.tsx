@@ -66,7 +66,7 @@ const Home: NextPage = () => {
               />
             </AnimatedCanvasWrapper>
             <motion.div
-              {...mountAnimProps(0.25)}
+              {...mountAnimProps(0)}
               className={styles.heroOverlayContainer}
             >
               <div className={styles.heroOverlayShadow} />
