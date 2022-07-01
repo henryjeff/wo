@@ -1,5 +1,5 @@
 import styles from "./DifficultyIndicator.module.css";
-import colors from "../../../styles/colors";
+import colors from "@/styles/colors";
 
 export type DifficultyIndicatorProps = {
   difficulty: number;

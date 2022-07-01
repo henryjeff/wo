@@ -8,8 +8,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 // import {
 //   parseWorkout,
 //   convertFileToWorkoutString,
-// } from "../../util/workoutParsing";
-// // import { analyzeWorkout } from "../../util/analysis";
+// } from "@/util/workoutParsing";
+// // import { analyzeWorkout } from "@/util/analysis";
 
 // const dateSchema = z.object({
 //   year: z.number().min(0).max(99),

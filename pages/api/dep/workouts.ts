@@ -8,7 +8,7 @@ import { z } from "zod";
 import {
   parseWorkout,
   convertFileToWorkoutString,
-} from "../../../util/parsing/keepNotesParsing";
+} from "@/util/parsing/keepNotesParsing";
 import moment from "moment";
 
 const dateSchema = z.object({

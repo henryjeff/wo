@@ -1,4 +1,4 @@
-import { keyName, nameKey } from "../workout/key";
+import { keyName, nameKey } from "@/util/workout/key";
 
 export function inputLiftToBasicLift(inputLift: InputLift): BasicLift {
   const key = keyName(inputLift.name);

@@ -2,26 +2,27 @@ import React, { useState } from "react";
 import Head from "next/head";
 import type { NextPage } from "next";
 import { motion, AnimatePresence } from "framer-motion";
-import { Layout, DefaultHeadMetaTags } from "../../components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileZipper, faFilter } from "@fortawesome/free-solid-svg-icons";
+import { Layout, DefaultHeadMetaTags } from "@/components/Page";
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
+
 // Components
-import Graph from "../../components/Graph";
-import Badge from "../../components/Badge";
-import Popover from "../../components/Popover";
-import WorkoutCard from "../../components/WorkoutCard";
-import WorkoutCardList from "../../components/WorkoutCardList";
-import SortByTimeToggle from "../../components/Filters/SortDirectionalToggle";
-import { WorkoutTypeFilter, DifficultyFilter } from "../../components/Filters";
+import Graph from "@/components/Graph";
+import Badge from "@/components/Badge";
+import Button from "@/components/Button";
+import Popover from "@/components/Popover";
+import WorkoutCard from "@/components/WorkoutCard";
+import WorkoutCardList from "@/components/WorkoutCardList";
+import SortByTimeToggle from "@/components/Filters/SortDirectionalToggle";
+import { WorkoutTypeFilter, DifficultyFilter } from "@/components/Filters";
 // Util
-import workoutSums from "../../util/workout/sums";
-import { sortByAscDate } from "../../util/workout/sorting";
+import workoutSums from "@/util/workout/sums";
+import { sortByAscDate } from "@/util/workout/sorting";
+
 // Hooks
-import useOrganizedWorkouts from "../../hooks/useOrganizedWorkouts";
-import useFetchWorkouts from "../../hooks/useFetchWorkouts";
+import useOrganizedWorkouts from "@/hooks/useOrganizedWorkouts";
+import useFetchWorkouts from "@/hooks/useFetchWorkouts";
 
 import styles from "./Dashboard.module.css";
-import Button from "../../components/Button";
 
 const Dashboard: NextPage = () => {
   const fetchWorkouts = useFetchWorkouts();

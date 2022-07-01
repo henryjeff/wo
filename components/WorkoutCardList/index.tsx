@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styles from "./WorkoutCardList.module.css";
-import WorkoutCard from "../../components/WorkoutCard";
+import WorkoutCard from "@/components/WorkoutCard";
 import { useCallback } from "react";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import pagination from "../../util/pagination";
+import pagination from "@/util/pagination";
 
 type WorkoutCardListProps = {
   workouts: Workout[];

@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { keyName, nameKey } from "../workout/key";
+import { keyName, nameKey } from "@/util/workout/key";
 
 const TOKENS = {
   superSet: "ss",

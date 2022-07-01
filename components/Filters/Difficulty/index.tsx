@@ -1,7 +1,7 @@
 import styles from "./DifficultyFilter.module.css";
 import { useState } from "react";
-import colors from "../../../styles/colors";
-import DifficultyIndicator from "../../WorkoutCard/DifficultyIndicator";
+import colors from "@/styles/colors";
+import DifficultyIndicator from "@/components/WorkoutCard/DifficultyIndicator";
 
 export type DifficultyFilterProps = {
   onPredicateChange: (predicate: (workout: Workout) => boolean) => void;

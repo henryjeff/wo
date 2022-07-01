@@ -2,7 +2,7 @@ import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 import { useMemo } from "react";
-import Button from "../../Button";
+import Button from "@/components/Button";
 import styles from "./SortDirectionalToggle.module.css";
 
 export type SortDirectionalToggleProps = {

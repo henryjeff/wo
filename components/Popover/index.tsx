@@ -5,7 +5,7 @@ import {
   FontAwesomeIcon,
   FontAwesomeIconProps,
 } from "@fortawesome/react-fontawesome";
-import Button from "../Button";
+import Button from "@/components/Button";
 
 export type PopoverProps = {
   text: string;

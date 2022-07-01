@@ -4,8 +4,8 @@ import {
   MUSCLE_GROUP_TOKENS,
   PULL_GROUPS,
   PUSH_GROUPS,
-} from "../util/workout/constants";
-import { sortByAscDate } from "../util/workout/sorting";
+} from "@/util/workout/constants";
+import { sortByAscDate } from "@/util/workout/sorting";
 
 type LiftToGroupMap = { [key: string]: MuscleGroup };
 

@@ -1,12 +1,12 @@
 import React, { useCallback, useState } from "react";
 import moment from "moment";
 import { motion } from "framer-motion";
-import Badge from "../Badge";
+import Badge from "@/components/Badge";
 import StatView from "./StatView";
 import LiftView from "./LiftView";
 import styles from "./WorkoutCard.module.css";
 import DifficultyIndicator from "./DifficultyIndicator";
-import colors from "../../styles/colors";
+import colors from "@/styles/colors";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

@@ -1,11 +1,11 @@
 import { faAdd, faTrash, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useCallback } from "react";
-import { EditorActions } from "../../../hooks/useWorkoutEditor";
+import { EditorActions } from "@/hooks/useWorkoutEditor";
 import styles from "./LiftViewEditor.module.css";
 import { motion } from "framer-motion";
-import { mountAnimationProps } from "../../../styles/animation";
-import Button from "../../Button";
+import { mountAnimationProps } from "@/styles/animation";
+import Button from "@/components/Button";
 import { z } from "zod";
 
 type LiftViewEditorProps = {
@@ -193,7 +193,7 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
         {...mountAnimationProps}
         className={styles.liftFooter}
       >
-        <Button outlined onClick={createNewSet} text="Add Set" icon={faAdd} />
+        <Button onClick={createNewSet} text="Add Set" icon={faAdd} />
       </motion.div>
     </div>
   );

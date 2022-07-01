@@ -97,10 +97,3 @@
   text-align: center;
   row-gap: 0.5em;
 }
-
-.canvasWrapper {
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  pointer-events: none;
-}

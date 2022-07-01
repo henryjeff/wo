@@ -1,25 +1,23 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import { Layout, DefaultHeadMetaTags } from "../../components";
-import LiftViewEditor from "../../components/Editor/LiftViewEditor";
-import { mountAnimationProps } from "../../styles/animation";
-import styles from "./Editor.module.css";
+import { faAdd, faCopy } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
-import {
-  faAdd,
-  faCopy,
-  faCopyright,
-  faPowerOff,
-} from "@fortawesome/free-solid-svg-icons";
-import Button from "../../components/Button";
-import { useWorkoutEditor } from "../../hooks/useWorkoutEditor";
-import LoadingIndicator from "../../components/LoadingIndicator";
-import colors from "../../styles/colors";
+// Components
+import Button from "@/components/Button";
+import { Layout, DefaultHeadMetaTags } from "@/components/Page";
+import LiftViewEditor from "@/components/Editor/LiftViewEditor";
+import LoadingIndicator from "@/components/LoadingIndicator";
+// Hooks
+import { useWorkoutEditor } from "@/hooks/useWorkoutEditor";
+// Util
 import {
   basicLiftsToInputLifts,
   inputLiftsToBasicLifts,
-} from "../../util/parsing/editorInputParsing";
+} from "@/util/parsing/editorInputParsing";
+// Styles
+import { mountAnimationProps } from "@/styles/animation";
+import styles from "./Editor.module.css";
 
 const copyData: BasicLift[] = [
   {
@@ -149,19 +147,17 @@ const Editor: NextPage = () => {
               layoutId="workout-editor-footer"
             >
               <Button
-                outlined
                 onClick={handleAddLift}
                 text="Add Exercise"
                 icon={faAdd}
               />
               <Button
-                outlined
                 onClick={loadMockWorkout}
                 text="Load Mock Workout"
                 icon={faCopy}
               />
               {/* <Button
-                outlined
+                
                 onClick={resetEditor}
                 text="Reset"
                 icon={faPowerOff}

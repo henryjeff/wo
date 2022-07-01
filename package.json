@@ -7,11 +7,20 @@
     "build": "next build",
     "test": "jest",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clear_jest": "jest --clearCache"
   },
   "jest": {
     "preset": "ts-jest",
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "moduleNameMapper": {},
+    "rootDir": "./",
+    "modulePaths": [
+      "<rootDir>"
+    ],
+    "moduleDirectories": [
+      "node_modules"
+    ]
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",

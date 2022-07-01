@@ -1,4 +1,4 @@
-import { analyzeWorkouts } from "../../hooks/useAnalyzeWorkouts";
+import { analyzeWorkouts } from "@/hooks/useAnalyzeWorkouts";
 
 const makeMockWorkout = ({
   month,

@@ -11,7 +11,7 @@ import {
   ReferenceLine,
 } from "recharts";
 import moment from "moment";
-import colors from "../../styles/colors";
+import colors from "@/styles/colors";
 
 type GraphProps = {
   data: any[];

@@ -1,10 +1,10 @@
 import styles from "./Navbar.module.css";
-import logo from "../../../public/logo-new.svg";
+import logo from "@/public/logo-new.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
-import Button from "../../Button";
+import Button from "@/components/Button";
 
 export type NavbarLinkProps = {
   name: string;
@@ -61,7 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
         <NavbarLink name="Editor" href="/editor" />
       </nav>
       <div className={styles.rightContent}>
-        <Button text="Sign Up" outlined />
+        <Button text="Sign Up" />
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ type ButtonProps = {
   StartItem?: React.ClassicElement<any>;
   EndItem?: React.ClassicElement<any>;
   icon?: FontAwesomeIconProps["icon"];
-  outlined?: boolean;
+  filled?: boolean;
   onClick?: () => void;
 };
 
@@ -18,13 +18,13 @@ const Button: React.FC<ButtonProps> = ({
   StartItem,
   EndItem,
   icon,
-  outlined,
+  filled,
   onClick,
 }) => {
   return (
     <button
       onClick={onClick}
-      className={`${styles.button} ${outlined && styles.outlined}`}
+      className={`${styles.button} ${filled || styles.outlined}`}
     >
       {icon && <FontAwesomeIcon icon={icon} width={"1em"} height={"1em"} />}
       {<>{StartItem}</>}

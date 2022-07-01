@@ -1,6 +1,6 @@
 import styles from "./WorkoutTypeFilter.module.css";
 import { useState } from "react";
-import { WORKOUT_TYPES } from "../../../util/workout/constants";
+import { WORKOUT_TYPES } from "@/util/workout/constants";
 
 export type WorkoutTypeFilterProps = {
   onPredicateChange: (predicate: (workout: Workout) => boolean) => void;
