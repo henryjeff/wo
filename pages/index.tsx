@@ -12,31 +12,21 @@ import {
   ReactThreeFiber,
 } from "@react-three/fiber";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { Ref, useRef } from "react";
-import { GridHelper } from "three";
+import { useRef, useState } from "react";
+import { GridHelper, Mesh, ShaderMaterial } from "three";
 import colors from "../styles/colors";
 import Button from "../components/Button";
 import Badge from "../components/Badge";
 import { motion } from "framer-motion";
-import {
-  faArrowRight,
-  faChartLine,
-  faComputer,
-  faListNumeric,
-  faSign,
-  faSignal,
-  faSignIn,
-  faUser,
-  faUserAlt,
-  faUserAstronaut,
-  faUserCircle,
-  faUserCog,
-  faWeight,
-} from "@fortawesome/free-solid-svg-icons";
-import {
-  FontAwesomeIcon,
-  FontAwesomeIconProps,
-} from "@fortawesome/react-fontawesome";
+import { faArrowRight, faChartLine } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIconProps } from "@fortawesome/react-fontawesome";
+import { shaderMaterial } from "@react-three/drei";
+import * as THREE from "three";
+// @ts-ignore
+import vertex from "./vertex.glsl";
+// @ts-ignore
+import fragment from "./fragment.glsl";
+import gsap from "gsap";
 
 extend({ OrbitControls });
 declare global {
@@ -53,9 +43,9 @@ const Controls = () => {
   const { camera, gl } = useThree();
 
   useFrame(() => {
-    camera.position.x = 3;
-    camera.position.y = 3;
-    camera.position.z = Math.sin(Date.now() / 5000) * 3;
+    camera.position.x = 4;
+    camera.position.y = Math.sin(Date.now() / 5000) * 3 + 6;
+    camera.position.z = Math.sin(Date.now() / 10000) * 3;
     camera.lookAt(0, 0, 0);
   });
 
@@ -68,22 +58,40 @@ const Controls = () => {
   );
 };
 
-const Grid = () => {
-  const gridRef = useRef<GridHelper>(null);
+const Grid = ({ isHovering }: { isHovering: boolean }) => {
+  const meshRef = useRef<Mesh>(null);
 
+  const material = new THREE.ShaderMaterial({
+    vertexShader: vertex,
+    fragmentShader: fragment,
+    uniforms: {
+      uTime: {
+        value: 0.0,
+      },
+      uCamPos: {
+        value: new THREE.Vector3(0, 0, 0),
+      },
+      uPosScale: {
+        value: 0.0,
+      },
+    },
+    wireframe: true,
+  });
   // move the grids z every frame
   useFrame((state, delta) => {
-    const time = -performance.now() / 2000;
-    if (gridRef.current) {
-      // gridRef.current.rotation.y += 0.001;
-      gridRef.current.position.z = -time % 1;
+    const time = -performance.now() / 1000;
+    material.uniforms.uTime.value = time;
+    material.uniforms.uCamPos.value = state.camera.position;
+    material.uniforms.uPosScale.value = 1.0;
+    if (meshRef.current) {
+      meshRef.current.rotation.z += 0.002;
+      meshRef.current.rotation.x = Math.PI / 2;
     }
   });
   return (
-    <gridHelper
-      ref={gridRef}
-      args={[100, 100, colors.textSecondary, colors.textSecondary]}
-    />
+    <mesh ref={meshRef} material={material}>
+      <planeBufferGeometry attach="geometry" args={[50, 50, 64, 64]} />
+    </mesh>
   );
 };
 
@@ -113,13 +121,18 @@ const AnimatedCanvasWrapper: React.FC<AnimatedCanvasWrapperProps> = ({
   children,
 }) => {
   return (
-    <motion.div className={styles.canvasWrapper} {...bgAnimMountProps}>
+    <motion.div
+      className={styles.canvasWrapper}
+      // {...bgAnimMountProps}
+    >
       <Canvas>{children}</Canvas>
     </motion.div>
   );
 };
 
 const Home: NextPage = () => {
+  const [isHovering, setIsHovering] = useState(false);
+
   return (
     <>
       <Head>
@@ -129,8 +142,7 @@ const Home: NextPage = () => {
         <div className={styles.layout}>
           <section className={styles.heroContainer}>
             <AnimatedCanvasWrapper>
-              <fog attach="fog" args={[colors.bg, 5, 10]} />
-              <Grid />
+              <Grid isHovering={isHovering} />
               <Controls />
             </AnimatedCanvasWrapper>
             <motion.div
@@ -144,6 +156,8 @@ const Home: NextPage = () => {
                 height={300 / 5}
                 width={1000 / 5}
                 alt="logo"
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
               />
               <motion.div
                 {...delayedMountAnimProps(0.5)}
