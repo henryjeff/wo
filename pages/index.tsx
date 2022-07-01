@@ -44,8 +44,8 @@ const Controls = () => {
 
   useFrame(() => {
     camera.position.x = 4;
-    camera.position.y = Math.sin(Date.now() / 5000) * 3 + 6;
-    camera.position.z = Math.sin(Date.now() / 10000) * 3;
+    camera.position.y = Math.sin(Date.now() / 5000) * 2 + 6;
+    camera.position.z = Math.sin(Date.now() / 10000) * 2;
     camera.lookAt(0, 0, 0);
   });
 
@@ -80,11 +80,11 @@ const Grid = ({ isHovering }: { isHovering: boolean }) => {
   // move the grids z every frame
   useFrame((state, delta) => {
     const time = -performance.now() / 1000;
-    material.uniforms.uTime.value = time;
+    material.uniforms.uTime.value = time / 5;
     material.uniforms.uCamPos.value = state.camera.position;
     material.uniforms.uPosScale.value = 1.0;
     if (meshRef.current) {
-      meshRef.current.rotation.z += 0.002;
+      meshRef.current.rotation.z += 0.0005;
       meshRef.current.rotation.x = Math.PI / 2;
     }
   });
@@ -121,10 +121,7 @@ const AnimatedCanvasWrapper: React.FC<AnimatedCanvasWrapperProps> = ({
   children,
 }) => {
   return (
-    <motion.div
-      className={styles.canvasWrapper}
-      // {...bgAnimMountProps}
-    >
+    <motion.div className={styles.canvasWrapper} {...bgAnimMountProps}>
       <Canvas>{children}</Canvas>
     </motion.div>
   );
@@ -236,7 +233,7 @@ const delayedMountAnimProps = (delay: number) => ({
 
 const bgAnimMountProps = {
   initial: { opacity: 0 },
-  animate: { opacity: 0.5 },
+  animate: { opacity: 0.8 },
   transition: { duration: 2, delay: 0.5 },
 };
 
