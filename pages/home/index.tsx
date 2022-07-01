@@ -54,7 +54,7 @@ const Home: NextPage = () => {
       <Layout>
         <div className={styles.layout}>
           <section className={styles.heroContainer}>
-            <AnimatedCanvasWrapper delay={1} duration={3} acceptPointerEvents>
+            <AnimatedCanvasWrapper delay={1} duration={3}>
               <WavePlane />
               <OrbitControls
                 position={{ x: 4 }}
@@ -73,8 +73,8 @@ const Home: NextPage = () => {
               <Image
                 src={logo}
                 color="#fff"
-                height={300 / 5}
-                width={1000 / 5}
+                height={75}
+                width={280}
                 alt="logo"
               />
               <motion.div
