@@ -19,11 +19,21 @@ import logo from "@/public/logo-new.svg";
 
 const Box = () => {
   const box = useRef<any>();
+  const randRef = useRef(Math.random());
 
   useFrame(() => {
     if (box.current) {
-      box.current.rotation.x += 0.001;
-      box.current.rotation.y += 0.005;
+      // randonly offset x y and z
+      const rand = randRef.current;
+      randRef.current = rand + 0.01;
+      const x = Math.sin(rand) * 2;
+      const y = Math.cos(rand) * 2;
+      const z = Math.sin(rand) * 2;
+
+      box.current.rotation.set(x, y, z);
+
+      // box.current.rotation.x += 0.005;
+      // box.current.rotation.y += 0.005;
     }
   });
 
@@ -105,12 +115,10 @@ const Home: NextPage = () => {
 type HeroCardProps = {
   headerText: string;
   subText: string;
-  icon?: FontAwesomeIconProps["icon"];
   children?: React.ReactNode;
 };
 
 const HeroCard: React.FC<HeroCardProps> = ({
-  icon,
   headerText,
   subText,
   children,
