@@ -33,8 +33,9 @@
 }
 
 .heroOverlayShadow {
-  box-shadow: 0 0 50em 5em var(--bg-color);
+  box-shadow: 0 0 50em 6em var(--bg-color);
   position: absolute;
+  transform: scaleX(1.8);
 }
 
 .heroOverlayButtons {
@@ -44,7 +45,6 @@
 }
 .heroOverlayButtons > button {
   font-size: 1em;
-  background-color: var(--bg-color);
 }
 
 .heroCards {

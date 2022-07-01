@@ -90,7 +90,7 @@ const Grid = ({ isHovering }: { isHovering: boolean }) => {
   });
   return (
     <mesh ref={meshRef} material={material}>
-      <planeBufferGeometry attach="geometry" args={[50, 50, 64, 64]} />
+      <planeBufferGeometry attach="geometry" args={[64, 64, 84, 84]} />
     </mesh>
   );
 };
@@ -100,8 +100,8 @@ const Box = () => {
 
   useFrame(() => {
     if (box.current) {
-      box.current.rotation.x += 0.01;
-      box.current.rotation.y += 0.01;
+      box.current.rotation.x += 0.001;
+      box.current.rotation.y += 0.005;
     }
   });
 
