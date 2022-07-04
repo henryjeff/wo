@@ -130,10 +130,10 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
           {sets.map((set, i) => {
             return (
               <motion.tr
-                key={`lift-view-editor-tr-${index}-${i}`}
+                key={`lift-view-editor-tr-${lift.key}-${i}`}
                 {...defaultMountAnimation}
                 className={styles.row}
-                layoutId={`lift-view-editor-tr-${name}-${index}-${i}`}
+                layoutId={`lift-view-editor-tr-${lift.key}-${i}`}
               >
                 <td className={styles.col}>
                   <input
