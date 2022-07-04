@@ -67,7 +67,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({
       onClick={handleClick}
       layoutId={`workout-card-container-${id}`}
     >
-      <div className={styles.detailsContainer}>
+      <div className={`${styles.detailsContainer} no-scrollbar`}>
         <div className={styles.mainDetailsContainer}>
           {!expanded ? (
             <motion.h3 className={styles.dateHeader} layoutId={`header-${id}`}>

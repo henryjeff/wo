@@ -6,8 +6,9 @@ const useFetchWorkouts = () => {
   const { workouts, liftProgressions } = useAnalyzeWorkouts({ BasicWorkouts });
 
   const fetchWorkouts = () => {
-    fetch("/api/dep/workouts").then((res) =>
+    fetch("/api/dep/static").then((res) =>
       res.json().then((data) => {
+        console.log(data);
         setBasicWorkouts(data.workouts);
       })
     );

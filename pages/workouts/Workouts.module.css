@@ -32,11 +32,22 @@
   align-items: center;
   column-gap: 0.5em;
   overflow: hidden;
+  white-space: no-wrap;
+}
+
+.resultsTextContainer {
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .resultsLengthText {
   color: var(--fg-color);
   font-size: 0.9em;
+  /* do not wrap text */
+  /* overflow: hidden; */
+  /* do not overflow text */
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .overlay {

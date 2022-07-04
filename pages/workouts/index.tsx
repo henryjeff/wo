@@ -82,10 +82,7 @@ const Dashboard: NextPage = () => {
                 </Popover>
                 <Popover text="Difficulty" icon={faFilter}>
                   <h3>Difficulty</h3>
-                  <h4>
-                    Filter by workout difficulty, which is determined by total
-                    set volume.
-                  </h4>
+                  <h4>Filter by workout difficulty</h4>
                   <br></br>
                   <DifficultyFilter
                     onPredicateChange={(predicate) =>
@@ -93,9 +90,11 @@ const Dashboard: NextPage = () => {
                     }
                   />
                 </Popover>
-                <p className={styles.resultsLengthText}>
-                  {workouts.length} filtered results
-                </p>
+                <div className={styles.resultsTextContainer}>
+                  <p className={styles.resultsLengthText}>
+                    {workouts.length} filtered results
+                  </p>
+                </div>
               </div>
               <SortByTimeToggle
                 text={"By Date"}
