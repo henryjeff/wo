@@ -42,5 +42,5 @@
 .outlined:active {
   background-color: var(--bg-color);
   color: var(--font-secondary);
-  border-color: var(--mg-color);
+  border-color: var(--fg-color);
 }
