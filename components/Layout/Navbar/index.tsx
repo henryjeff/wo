@@ -57,7 +57,7 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
       </div>
       <nav className={styles.navLinks}>
         <NavbarLink name="Home" href="/" />
-        <NavbarLink name="Dashboard" href="/dashboard" />
+        <NavbarLink name="Workouts" href="/workouts" />
         <NavbarLink name="Editor" href="/editor" />
       </nav>
       <div className={styles.rightContent}>

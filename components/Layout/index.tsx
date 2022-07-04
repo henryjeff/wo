@@ -6,16 +6,23 @@ type LayoutProps = {
   center?: boolean;
   vh?: string;
   children?: React.ReactNode;
+  className?: string;
 };
 
-const Layout: React.FC<LayoutProps> = ({ flex, center, children, vh }) => {
+const Layout: React.FC<LayoutProps> = ({
+  flex,
+  center,
+  children,
+  vh,
+  className,
+}) => {
   return (
     <>
       <Navbar />
       <main
         className={`${styles.main} ${flex && styles.flex} ${
           center && styles.center
-        }`}
+        } ${className}`}
         style={vh ? { height: vh } : {}}
       >
         {children && children}

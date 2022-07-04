@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import pagination from "@/util/pagination";
+import { mountAnimation } from "@/styles/animation";
 
 type WorkoutCardListProps = {
   workouts: Workout[];
@@ -110,29 +111,12 @@ const WorkoutCardRow: React.FC<WorkoutCardRowProps> = ({
       onClick={clickHandler}
       style={{ display: "block" }}
     >
-      <motion.div {...mountAnimationProps(index)}>
+      <motion.div {...mountAnimation({ delay: index / 100 })}>
         <WorkoutCard workout={workout} id={`${workout.key}`} />
       </motion.div>
     </motion.div>
   );
 };
-
-const mountAnimationProps = (index: number) => ({
-  initial: {
-    opacity: 0,
-    x: -16,
-  },
-  animate: {
-    opacity: 1,
-    x: 0,
-  },
-  transition: {
-    delay: 0.03 * index,
-    type: "spring",
-    stiffness: 400,
-    damping: 25,
-  },
-});
 
 const MemoWorkoutCardRow = React.memo(WorkoutCardRow);
 

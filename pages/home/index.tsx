@@ -4,7 +4,10 @@ import { motion } from "framer-motion";
 import { useRef } from "react";
 import { Vector3 } from "three";
 import { useFrame } from "@react-three/fiber";
-import { FontAwesomeIconProps } from "@fortawesome/react-fontawesome";
+import {
+  FontAwesomeIcon,
+  FontAwesomeIconProps,
+} from "@fortawesome/react-fontawesome";
 import { faArrowRight, faChartLine } from "@fortawesome/free-solid-svg-icons";
 // Components
 import { Layout, DefaultHeadMetaTags } from "@/components/Page";
@@ -16,6 +19,7 @@ import OrbitControls from "@/components/Three/OrbitControls";
 import styles from "./Home.module.css";
 import Image from "next/image";
 import logo from "@/public/logo-new.svg";
+import { defaultMountAnimation, mountAnimation } from "@/styles/animation";
 
 const Box = () => {
   const box = useRef<any>();
@@ -53,7 +57,10 @@ const Home: NextPage = () => {
       </Head>
       <Layout>
         <div className={styles.layout}>
-          <section className={styles.heroContainer}>
+          <motion.section
+            {...mountAnimation({ delay: 0.2, duration: 1 })}
+            className={styles.heroContainer}
+          >
             <AnimatedCanvasWrapper delay={1} duration={3}>
               <WavePlane />
               <OrbitControls
@@ -65,10 +72,7 @@ const Home: NextPage = () => {
                 }}
               />
             </AnimatedCanvasWrapper>
-            <motion.div
-              {...mountAnimProps(0)}
-              className={styles.heroOverlayContainer}
-            >
+            <div className={styles.heroOverlayContainer}>
               <div className={styles.heroOverlayShadow} />
               <Image
                 src={logo}
@@ -77,16 +81,21 @@ const Home: NextPage = () => {
                 width={280}
                 alt="logo"
               />
-              <motion.div
-                {...mountAnimProps(0.5)}
-                className={styles.heroOverlayButtons}
-              >
+              <div className={styles.heroOverlayButtons}>
                 <Button icon={faChartLine} text="Start Tracking" />
                 <Button icon={faArrowRight} text="Login" />
-              </motion.div>
-            </motion.div>
-          </section>
-          <motion.section {...mountAnimProps(1)} className={styles.heroCards}>
+              </div>
+              <div className={styles.heroOverlaySubtext}>
+                <a href="https://github.com/henryjeff/wo">
+                  <p>Contribute on GitHub</p>
+                </a>
+              </div>
+            </div>
+          </motion.section>
+          <motion.section
+            {...mountAnimation({ delay: 1.5, duration: 1 })}
+            className={styles.heroCards}
+          >
             <HeroCard headerText="Track" subText="Easily track your Lifts">
               <AnimatedCanvasWrapper>
                 <Box />
@@ -135,11 +144,5 @@ const HeroCard: React.FC<HeroCardProps> = ({
     </div>
   );
 };
-
-const mountAnimProps = (delay: number) => ({
-  initial: { opacity: 0, y: 16 },
-  animate: { opacity: 1, y: 0 },
-  transition: { ease: "easeOut", duration: 0.5, delay },
-});
 
 export default Home;

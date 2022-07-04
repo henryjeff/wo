@@ -16,7 +16,7 @@ import {
   inputLiftsToBasicLifts,
 } from "@/util/parsing/editorInputParsing";
 // Styles
-import { mountAnimationProps } from "@/styles/animation";
+import { defaultMountAnimation } from "@/styles/animation";
 import styles from "./Editor.module.css";
 
 const copyData: BasicLift[] = [
@@ -109,62 +109,51 @@ const Editor: NextPage = () => {
           description="Create and modify workouts with this simple editor"
         />
       </Head>
-      <Layout flex center>
-        <div className={styles.layout}>
-          <header className={styles.editorHeader}>
-            <h1>Editor</h1>
-            {isLoading && (
-              <motion.div
-                {...mountAnimationProps}
-                className={styles.savingInfo}
-              >
-                <LoadingIndicator size={8} />
-                <p>Saving...</p>
-              </motion.div>
-            )}
-          </header>
-          <br />
-          <motion.section className={styles.liftEditorViews}>
-            {state.map((lift, index) => (
-              <motion.div
-                key={`lift-${index}`}
-                {...mountAnimationProps}
-                exit={{
-                  opacity: 0,
-                  y: -100,
-                  transition: { duration: 0.2 },
-                }}
-              >
-                <LiftViewEditor
-                  lift={lift}
-                  editorDispatch={dispatch}
-                  index={index}
-                />
-              </motion.div>
-            ))}
-            <motion.footer
-              className={styles.editorFooter}
-              layoutId="workout-editor-footer"
+      <Layout className={styles.layout}>
+        {/* <div className={styles.layout}> */}
+        <header className={styles.editorHeader}>
+          <h1>Editor</h1>
+          {isLoading && (
+            <motion.div
+              {...defaultMountAnimation}
+              className={styles.savingInfo}
             >
-              <Button
-                onClick={handleAddLift}
-                text="Add Exercise"
-                icon={faAdd}
+              <LoadingIndicator size={8} />
+              <p>Saving...</p>
+            </motion.div>
+          )}
+        </header>
+        <br />
+        <motion.section className={styles.liftEditorViews}>
+          {state.map((lift, index) => (
+            <motion.div key={`lift-${index}`} {...defaultMountAnimation}>
+              <LiftViewEditor
+                lift={lift}
+                editorDispatch={dispatch}
+                index={index}
               />
-              <Button
-                onClick={loadMockWorkout}
-                text="Load Mock Workout"
-                icon={faCopy}
-              />
-              {/* <Button
+            </motion.div>
+          ))}
+          <motion.footer
+            className={styles.editorFooter}
+            {...defaultMountAnimation}
+            layoutId="workout-editor-footer"
+          >
+            <Button onClick={handleAddLift} text="Add Exercise" icon={faAdd} />
+            <Button
+              onClick={loadMockWorkout}
+              text="Load Mock Workout"
+              icon={faCopy}
+            />
+            {/* <Button
                 
                 onClick={resetEditor}
                 text="Reset"
                 icon={faPowerOff}
               /> */}
-            </motion.footer>
-          </motion.section>
-        </div>
+          </motion.footer>
+        </motion.section>
+        {/* </div> */}
       </Layout>
     </>
   );

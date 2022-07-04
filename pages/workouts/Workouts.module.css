@@ -1,0 +1,59 @@
+.layout {
+  flex: 1;
+  font-size: 1em;
+  flex-direction: column;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  row-gap: 1em;
+}
+
+.selectedWorkoutInfo {
+  flex: 1;
+  overflow: hidden;
+}
+
+.workoutsHeader {
+  flex-direction: column;
+  row-gap: 1em;
+}
+
+.itemOverlay {
+  z-index: 10;
+  position: fixed;
+  top: calc(var(--navbar-height) + 1em);
+  bottom: 1em;
+  left: 1em;
+  right: 1em;
+  display: block;
+}
+
+.filters {
+  align-items: center;
+  column-gap: 0.5em;
+  overflow: hidden;
+}
+
+.resultsLengthText {
+  color: var(--fg-color);
+  font-size: 0.9em;
+}
+
+.overlay {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.searchContainer {
+  align-items: center;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  column-gap: 1em;
+}

@@ -29,7 +29,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  row-gap: 2em;
+  row-gap: 1em;
 }
 
 .heroOverlayShadow {
@@ -42,6 +42,7 @@
   z-index: 100;
   justify-content: space-between;
   column-gap: 1em;
+  margin-top: 1em;
 }
 .heroOverlayButtons > button {
   font-size: 1em;
@@ -96,4 +97,20 @@
   align-items: center;
   text-align: center;
   row-gap: 0.5em;
+}
+
+.heroOverlaySubtext {
+  font-size: 0.8em;
+  text-align: center;
+  color: var(--font-secondary);
+  transition: var(--transition-md);
+  z-index: 100;
+}
+
+.heroOverlaySubtext:hover {
+  color: var(--font-primary);
+}
+
+.heroOverlaySubtext:active {
+  color: var(--font-secondary);
 }

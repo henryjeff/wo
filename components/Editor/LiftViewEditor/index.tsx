@@ -4,9 +4,8 @@ import React, { useCallback } from "react";
 import { EditorActions } from "@/hooks/useWorkoutEditor";
 import styles from "./LiftViewEditor.module.css";
 import { motion } from "framer-motion";
-import { mountAnimationProps } from "@/styles/animation";
+import { defaultMountAnimation } from "@/styles/animation";
 import Button from "@/components/Button";
-import { z } from "zod";
 
 type LiftViewEditorProps = {
   index: number;
@@ -102,11 +101,12 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
 
   return (
     <div className={styles.container}>
-      <div className={styles.liftNameRow}>
-        <motion.div
-          {...mountAnimationProps}
-          layoutId={`lift-name-input-${index}`}
-        >
+      <motion.div
+        layoutId={`lift-header-${index}`}
+        {...defaultMountAnimation}
+        className={styles.liftNameRow}
+      >
+        <div>
           <input
             className={styles.liftNameInput}
             onChange={handleLiftNameChange}
@@ -114,7 +114,7 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
             type="text"
             placeholder="Exercise name"
           />
-        </motion.div>
+        </div>
         <div className={styles.deleteLiftButton} onClick={handleDeleteLift}>
           <p>Delete</p>
           <FontAwesomeIcon
@@ -123,14 +123,14 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
             className={styles.deleteLiftButtonIcon}
           />
         </div>
-      </div>
+      </motion.div>
       <table className={styles.liftSetTable}>
         <tbody>
           {sets.map((set, i) => {
             return (
               <motion.tr
                 key={`lift-view-editor-tr-${index}-${i}`}
-                {...mountAnimationProps}
+                {...defaultMountAnimation}
                 className={styles.row}
                 layoutId={`lift-view-editor-tr-${name}-${index}-${i}`}
               >
@@ -190,7 +190,7 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
       </table>
       <motion.div
         layoutId={`lift-${index}-editor-footer`}
-        {...mountAnimationProps}
+        {...defaultMountAnimation}
         className={styles.liftFooter}
       >
         <Button onClick={createNewSet} text="Add Set" icon={faAdd} />

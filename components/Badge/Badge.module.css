@@ -6,7 +6,8 @@
   align-items: center;
   flex-shrink: 1;
   border-radius: var(--br-md);
-  background-color: var(--fg-color);
+  /* background-color: var(--fg-color); */
+  border: var(--layout-border);
   white-space: nowrap;
   overflow: hidden;
   column-gap: 0.25em;

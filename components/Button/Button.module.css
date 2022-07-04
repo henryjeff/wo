@@ -27,20 +27,20 @@
 }
 
 .outlined {
-  background-color: transparent;
+  background-color: var(--bg-color);
   border: var(--layout-border);
   border-color: var(--fg-color);
   color: var(--font-primary);
 }
 
 .outlined:hover {
-  background-color: transparent;
+  background-color: var(--bg-color);
   color: var(--font-primary);
   border-color: var(--font-secondary);
 }
 
 .outlined:active {
-  background-color: transparent;
+  background-color: var(--bg-color);
   color: var(--font-secondary);
   border-color: var(--mg-color);
 }
