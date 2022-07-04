@@ -85,8 +85,12 @@ const Home: NextPage = () => {
                 alt="logo"
               />
               <div className={styles.heroOverlayButtons}>
-                <Button icon={faChartLine} text="Start Tracking" />
-                <Button icon={faArrowRight} text="Login" />
+                <Button
+                  icon={faChartLine}
+                  text="Start Tracking"
+                  href="/signup"
+                />
+                <Button icon={faArrowRight} text="Login" href="/signin" />
               </div>
               <div className={styles.heroOverlaySubtext}>
                 <a href="https://github.com/henryjeff/wo">

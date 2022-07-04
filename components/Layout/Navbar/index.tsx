@@ -83,7 +83,11 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
         onChange={handleNavbarMenuClick}
       />
       <div className={styles.leftContent}>
-        <Image src={logo} color="#fff" width={64} height={24} alt="logo" />
+        <Link href="/">
+          <a>
+            <Image src={logo} color="#fff" width={64} height={24} alt="logo" />
+          </a>
+        </Link>
       </div>
       <div className={styles.navBtn}>
         <label htmlFor={styles.navCheck}>
@@ -110,7 +114,7 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
         </span>
       </div>
       <div className={styles.rightContent}>
-        <Button text="Sign Up" />
+        <Button text="Sign Up" href="/signup" />
       </div>
     </div>
   );
