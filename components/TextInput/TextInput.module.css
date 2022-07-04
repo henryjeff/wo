@@ -1,0 +1,29 @@
+.container {
+  border: var(--layout-border);
+  border-radius: var(--br-md);
+  column-gap: 0.5em;
+  padding: 0 1em;
+  transition: var(--transition-md);
+  color: var(--mg-color);
+  flex-grow: 1;
+}
+
+.container:hover {
+  color: var(--fg-color);
+  border-color: var(--fg-color);
+}
+
+.container:focus-within {
+  border-color: var(--font-secondary);
+  color: var(--font-primary);
+}
+
+.input {
+  flex: 1;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  color: var(--font-primary);
+  padding: 0.5em 0;
+}

@@ -64,7 +64,7 @@ const Home: NextPage = () => {
             {...mountAnimation({ delay: 0.2, duration: 1 })}
             className={styles.heroContainer}
           >
-            <AnimatedCanvasWrapper delay={1} duration={3}>
+            <AnimatedCanvasWrapper delay={1} duration={1}>
               <WavePlane />
               <OrbitControls
                 position={{ x: 4 }}
@@ -96,7 +96,7 @@ const Home: NextPage = () => {
             </div>
           </motion.section>
           <motion.section
-            {...mountAnimation({ delay: 1.5, duration: 1 })}
+            {...mountAnimation({ delay: 1.2, duration: 1 })}
             className={styles.heroCards}
           >
             <HeroCard headerText="Track" subText="Easily track your Lifts">

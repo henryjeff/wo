@@ -41,6 +41,10 @@
   display: none;
 }
 
+.mobileOnlyLinks {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .nav {
     padding: 0 1em;
@@ -70,6 +74,10 @@
   }
   .rightContent {
     display: none;
+  }
+
+  .mobileOnlyLinks {
+    display: block;
   }
   .nav > .navLinks {
     position: absolute;

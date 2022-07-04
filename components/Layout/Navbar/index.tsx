@@ -104,6 +104,10 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
         <NavbarLink name="Home" href="/" />
         <NavbarLink name="Workouts" href="/workouts" />
         <NavbarLink name="Editor" href="/editor" />
+        <span className={styles.mobileOnlyLinks}>
+          <NavbarLink name="Sign In" href="/signin" />
+          <NavbarLink name="Sign Up" href="/signup" />
+        </span>
       </div>
       <div className={styles.rightContent}>
         <Button text="Sign Up" />

@@ -44,3 +44,7 @@
   color: var(--font-secondary);
   border-color: var(--fg-color);
 }
+
+.flex {
+  flex: 1;
+}
