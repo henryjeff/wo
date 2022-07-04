@@ -27,6 +27,7 @@ export function inputLiftsToBasicLifts(
 export function basicLiftToInputLift(basicLift: BasicLift): InputLift {
   return {
     name: basicLift.name,
+    key: basicLift.key,
     sets: basicLift.sets.map((set) => {
       return {
         weight: set.weight.toString(),
