@@ -21,13 +21,13 @@ const NavbarLink: React.FC<NavbarLinkProps> = ({ name, href }) => {
     <Link href={href}>
       <div className={`${styles.navLinkContainer}`}>
         <a className={`${isHere && styles.navLinkHere}`}>{name}</a>
-        <motion.div
-          layoutId={`navbar-loc-${href}`}
+        {/* <motion.div
+          layoutId={`navbar-loc`}
           className={styles.locationIndicator}
           animate={isHere ? "here" : "away"}
           variants={navLocationIndicatorVars}
           initial="away"
-        />
+        /> */}
       </div>
     </Link>
   );
