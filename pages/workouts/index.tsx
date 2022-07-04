@@ -68,7 +68,7 @@ const Dashboard: NextPage = () => {
         <div className={styles.layout}>
           <div className={styles.workoutsHeader}>
             <h1>Workouts</h1>
-            <div className={styles.searchContainer}>
+            {/* <div className={styles.searchContainer}>
               <div className={styles.filters}>
                 <Popover text="By Type" icon={faFilter}>
                   <h3>Type</h3>
@@ -101,7 +101,7 @@ const Dashboard: NextPage = () => {
                 up={sorting.isReversed}
                 setUp={sorting.setIsReversed}
               />
-            </div>
+            </div> */}
           </div>
           <WorkoutCardList
             workouts={workouts}
