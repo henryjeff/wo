@@ -73,6 +73,7 @@
   color: var(--fg-color);
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 }
 
 .locationIndicator {
