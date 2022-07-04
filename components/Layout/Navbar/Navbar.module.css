@@ -1,4 +1,4 @@
-.container {
+.nav {
   height: var(--navbar-height);
   border-bottom: 2px solid var(--mg-color);
   background-color: var(--bg-color);
@@ -12,7 +12,11 @@
   justify-content: space-between;
 }
 
-.navLinks {
+.nav > .navBtn {
+  display: none;
+}
+
+.nav > .navLinks {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,21 +26,72 @@
   font-weight: bold;
 }
 
+.nav > .navLinks > a {
+  display: inline-block;
+  text-decoration: none;
+  color: #efefef;
+}
+
+.nav > .navLinks > a:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.nav > #navCheck {
+  display: none;
+}
+
 @media (max-width: 768px) {
-  .navLinks {
-    display: none;
-  }
-  .container {
+  .nav {
     padding: 0 1em;
   }
-}
+  .nav > .navBtn {
+    display: inline-block;
+    position: absolute;
+    right: 1em;
+    cursor: pointer;
+  }
+  .nav > .navBtn > label {
+    display: inline-block;
+    transition: var(--transition-md);
+    cursor: pointer;
+  }
 
-.navLinkContainer:hover {
-  color: var(--fg-color);
-}
-
-.navLinkHere {
-  color: var(--font-primary);
+  .nav > .navBtn > label:active {
+    color: var(--fg-color);
+  }
+  .nav > .navBtn > label:hover {
+    color: var(--font-secondary);
+  }
+  .nav #navCheck:checked ~ .navBtn > label {
+    /* background-color: rgba(0, 0, 0, 0.3); */
+    /* color: var(--font-primary); */
+    cursor: pointer;
+  }
+  .rightContent {
+    display: none;
+  }
+  .nav > .navLinks {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: var(--bg-color);
+    height: 0px;
+    padding: 0.5em;
+    transition: var(--transition-md);
+    overflow-y: hidden;
+    top: var(--navbar-height);
+  }
+  .nav > .navLinks > a {
+    display: block;
+    width: 100%;
+  }
+  .nav > #navCheck:not(:checked) ~ .navLinks {
+    height: 0px;
+  }
+  .nav > #navCheck:checked ~ .navLinks {
+    height: calc(100vh - 50px);
+    overflow-y: auto;
+  }
 }
 
 .leftContent {
@@ -53,16 +108,23 @@
   justify-content: flex-end;
 }
 
+.navLinkContainer:hover {
+  color: var(--font-secondary);
+}
+
+.navLinkHere {
+  color: var(--font-primary);
+}
+
+.navLinkContainer {
+  transition: var(--transition-md);
+  padding: 1em 0;
+  color: var(--fg-color);
+}
+
 .locationIndicator {
   width: 3em;
   height: 0.25em;
   margin-top: 0.5em;
   background-color: var(--font-primary);
-}
-
-.navLinkContainer {
-  transition: 0.2s;
-  flex-direction: column;
-  align-items: center;
-  color: var(--mg-color);
 }

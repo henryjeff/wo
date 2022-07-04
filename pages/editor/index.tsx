@@ -67,12 +67,16 @@ const copyData: BasicLift[] = [
 const Editor: NextPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [state, dispatch] = useWorkoutEditor();
+  const [lastId, setLastId] = useState(0);
+  // const [copiedWorkout] = useLocalStorage("copiedWorkout", {});
 
   const handleAddLift = () => {
+    setLastId(lastId + 1);
     dispatch({
       type: "ADD_LIFT",
       lift: {
         name: "",
+        key: `lift_${lastId}`,
         sets: [],
       },
     });
@@ -85,6 +89,10 @@ const Editor: NextPage = () => {
       setIsLoading(false);
     }, Math.random() * 5 * 200);
   }, [state]);
+
+  // useEffect(() => {
+  //   console.log(copiedWorkout);
+  // }, [copiedWorkout]);
 
   const loadMockWorkout = () => {
     const inputLifts = basicLiftsToInputLifts(copyData);
@@ -126,7 +134,7 @@ const Editor: NextPage = () => {
         <br />
         <motion.section className={styles.liftEditorViews}>
           {state.map((lift, index) => (
-            <motion.div key={`lift-${index}`} {...defaultMountAnimation}>
+            <motion.div key={`${lift.key}`} {...defaultMountAnimation}>
               <LiftViewEditor
                 lift={lift}
                 editorDispatch={dispatch}

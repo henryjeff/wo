@@ -19,6 +19,7 @@ import useOrganizedWorkouts from "@/hooks/useOrganizedWorkouts";
 import useFetchWorkouts from "@/hooks/useFetchWorkouts";
 
 import styles from "./Workouts.module.css";
+import Button from "@/components/Button";
 
 const Dashboard: NextPage = () => {
   const fetchWorkouts = useFetchWorkouts();
@@ -62,6 +63,7 @@ const Dashboard: NextPage = () => {
           className={styles.overlay}
           animate={selectedId !== "" ? "open" : "closed"}
           variants={overlayVars}
+          onClick={() => console.log("OKAAY")}
         />
         <div className={styles.layout}>
           <div className={styles.workoutsHeader}>

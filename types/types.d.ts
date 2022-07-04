@@ -43,6 +43,7 @@ type Lift = {
 
 type InputLift = {
   name: string;
+  key: string;
   sets: InputLiftSet[];
 };
 

@@ -54,8 +54,6 @@ const Controls: React.FC<OrbitControlsProps> = ({
       functionalPositions.y
         ? (camera.position.y = functionalPositions.y(elapsedTime, state, delta))
         : {};
-
-      console.log("HELLO??", camera.position.y);
       functionalPositions.z
         ? (camera.position.z = functionalPositions.z(elapsedTime, state, delta))
         : {};

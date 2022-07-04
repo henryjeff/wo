@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import pagination from "@/util/pagination";
 import { mountAnimation } from "@/styles/animation";
+// import useLocalStorage from "@/hooks/useLocalStorage";
 
 type WorkoutCardListProps = {
   workouts: Workout[];
@@ -21,6 +22,7 @@ const WorkoutCardList: React.FC<WorkoutCardListProps> = ({
 }) => {
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  // const [_, setCopiedWorkout] = useLocalStorage("copiedWorkout", {});
 
   const handleNextPage = useCallback(() => {
     if (page + 1 >= totalPages) return;
@@ -79,6 +81,7 @@ const WorkoutCardList: React.FC<WorkoutCardListProps> = ({
           return (
             <MemoWorkoutCardRow
               onClick={onCardClick}
+              // setCopiedWorkout={setCopiedWorkout}
               key={`workout-card-${workout.key}`}
               workout={workout}
               index={i}
@@ -93,16 +96,26 @@ type WorkoutCardRowProps = {
   index: number;
   workout: Workout;
   onClick: (id: string) => void;
+  // setCopiedWorkout: (workout: Workout) => void;
 };
 
 const WorkoutCardRow: React.FC<WorkoutCardRowProps> = ({
   index,
   workout,
   onClick,
+  // setCopiedWorkout,
 }) => {
   const clickHandler = useCallback(() => {
     onClick(workout.key);
   }, [workout, onClick]);
+
+  const handleCopyWorkout = useCallback(
+    (workout: Workout) => {
+      // setCopiedWorkout(workout);
+    },
+    []
+    // [setCopiedWorkout]
+  );
 
   return (
     <motion.div
@@ -112,7 +125,11 @@ const WorkoutCardRow: React.FC<WorkoutCardRowProps> = ({
       style={{ display: "block" }}
     >
       <motion.div {...mountAnimation({ delay: index / 100 })}>
-        <WorkoutCard workout={workout} id={`${workout.key}`} />
+        <WorkoutCard
+          workout={workout}
+          id={`${workout.key}`}
+          onCopyWorkout={handleCopyWorkout}
+        />
       </motion.div>
     </motion.div>
   );

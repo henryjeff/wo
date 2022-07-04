@@ -2,7 +2,7 @@ import styles from "./Navbar.module.css";
 import logo from "@/public/logo-new.svg";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useAnimation, useAnimationFrame } from "framer-motion";
 import { useRouter } from "next/router";
 import Button from "@/components/Button";
 
@@ -48,18 +48,63 @@ const navLocationIndicatorVars = {
 
 export type NavbarProps = {};
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faClose } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+import {
+  defaultMountAnimation,
+  Easing,
+  mountAnimation,
+} from "@/styles/animation";
+
 const Navbar: React.FC<NavbarProps> = ({}) => {
+  const [navbarOpen, setNavbarOpen] = useState(false);
+  const navbarMenuButtonControls = useAnimation();
+
+  const handleNavbarMenuClick = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    await navbarMenuButtonControls.start({
+      scaleY: 0,
+      transition: { ease: Easing.expIn, duration: 0.1 },
+    });
+    setNavbarOpen(e.target.checked);
+    await navbarMenuButtonControls.start({
+      scaleY: 1,
+      transition: { ease: Easing.expOut, duration: 0.1 },
+    });
+  };
+
   return (
-    <div className={styles.container}>
+    <div className={styles.nav}>
+      <input
+        type="checkbox"
+        id={styles.navCheck}
+        onChange={handleNavbarMenuClick}
+      />
       <div className={styles.leftContent}>
         <Image src={logo} color="#fff" width={64} height={24} alt="logo" />
-        {/* <h4>by henry heffernan</h4> */}
       </div>
-      <nav className={styles.navLinks}>
+      <div className={styles.navBtn}>
+        <label htmlFor={styles.navCheck}>
+          <motion.div
+            // layoutId="navigation-open-close"
+            animate={navbarMenuButtonControls}
+          >
+            <FontAwesomeIcon
+              icon={navbarOpen ? faClose : faBars}
+              width={navbarOpen ? "1.5em" : "1.5em"}
+              height={navbarOpen ? "1.8em" : "1.5em"}
+            />
+          </motion.div>
+        </label>
+      </div>
+
+      <div className={styles.navLinks}>
         <NavbarLink name="Home" href="/" />
         <NavbarLink name="Workouts" href="/workouts" />
         <NavbarLink name="Editor" href="/editor" />
-      </nav>
+      </div>
       <div className={styles.rightContent}>
         <Button text="Sign Up" />
       </div>

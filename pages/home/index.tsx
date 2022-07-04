@@ -21,6 +21,9 @@ import Image from "next/image";
 import logo from "@/public/logo-new.svg";
 import { defaultMountAnimation, mountAnimation } from "@/styles/animation";
 
+import unit from "@/public/unit.svg";
+import TrackAnimation from "./TrackAnimation";
+
 const Box = () => {
   const box = useRef<any>();
   const randRef = useRef(Math.random());

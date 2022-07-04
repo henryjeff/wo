@@ -106,6 +106,7 @@ const LiftViewEditor: React.FC<LiftViewEditorProps> = ({
         {...defaultMountAnimation}
         className={styles.liftNameRow}
       >
+        {/* <p>{lift.key}</p> */}
         <div>
           <input
             className={styles.liftNameInput}

@@ -7,14 +7,16 @@ import LiftView from "./LiftView";
 import styles from "./WorkoutCard.module.css";
 import DifficultyIndicator from "./DifficultyIndicator";
 import colors from "@/styles/colors";
-import { faClose } from "@fortawesome/free-solid-svg-icons";
+import { faClose, faCopy } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Button from "../Button";
 
 export type WorkoutCardProps = {
   workout: Workout;
   id: string;
   expanded?: boolean;
   onClose?: () => void;
+  onCopyWorkout?: (workout: Workout) => void;
 };
 
 const intensityToNumber = {
@@ -34,6 +36,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({
   id,
   expanded,
   onClose,
+  onCopyWorkout,
 }) => {
   const [momentDate] = useState(moment(workout.date));
   const [opened, setIsOpened] = useState(true);
@@ -41,6 +44,10 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({
   const handleClick = useCallback(() => {
     setIsOpened(!opened);
   }, [opened]);
+
+  const handleCopyWorkout = useCallback(() => {
+    onCopyWorkout && onCopyWorkout(workout);
+  }, [onCopyWorkout, workout]);
 
   const intensity =
     workout.numSets > 22 ? "hard" : workout.numSets > 14 ? "medium" : "easy";
@@ -127,6 +134,15 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({
             </div>
           </div>
         </>
+      )}
+      {expanded && (
+        <div>
+          <Button
+            icon={faCopy}
+            onClick={handleCopyWorkout}
+            text="Copy Workout to Editor"
+          />
+        </div>
       )}
     </motion.div>
   );
