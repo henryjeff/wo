@@ -4,6 +4,7 @@ import {
 } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import React from "react";
+import LoadingIndicator from "../LoadingIndicator";
 import styles from "./Button.module.css";
 
 type ButtonProps = {
@@ -15,6 +16,8 @@ type ButtonProps = {
   flex?: boolean;
   onClick?: () => void;
   href?: string;
+  disabled?: boolean;
+  loading?: boolean;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -26,6 +29,8 @@ const Button: React.FC<ButtonProps> = ({
   flex,
   onClick,
   href,
+  loading,
+  disabled,
 }) => {
   const Wrapper = ({ children }: { children: React.ReactNode }) =>
     href ? (
@@ -42,12 +47,21 @@ const Button: React.FC<ButtonProps> = ({
         onClick={onClick}
         className={`${styles.button} ${filled || styles.outlined} ${
           flex && styles.flex
-        }`}
+        } ${(disabled || loading) && styles.disabled}`}
+        disabled={disabled || loading}
       >
-        {icon && <FontAwesomeIcon icon={icon} width={"1em"} height={"1em"} />}
-        {<>{StartItem}</>}
-        <p>{text}</p>
-        {<>{EndItem}</>}
+        {loading ? (
+          <LoadingIndicator />
+        ) : (
+          <>
+            {icon && (
+              <FontAwesomeIcon icon={icon} width={"1em"} height={"1em"} />
+            )}
+            {<>{StartItem}</>}
+            <p>{text}</p>
+            {<>{EndItem}</>}
+          </>
+        )}
       </button>
     </Wrapper>
   );

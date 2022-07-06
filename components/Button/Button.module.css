@@ -9,6 +9,8 @@
   font-weight: bold;
   padding: 0.5em 1em;
   border: none;
+  font-size: 0.9em;
+  min-height: 3em;
   border-radius: var(--br-md);
   transition: var(--transition-md);
   cursor: pointer;
@@ -47,4 +49,14 @@
 
 .flex {
   flex: 1;
+}
+
+.disabled {
+  border-color: var(--fg-color);
+  cursor: not-allowed;
+}
+
+.disabled:hover {
+  border-color: var(--fg-color);
+  cursor: not-allowed;
 }

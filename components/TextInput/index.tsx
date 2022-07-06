@@ -2,7 +2,7 @@ import {
   FontAwesomeIcon,
   FontAwesomeIconProps,
 } from "@fortawesome/react-fontawesome";
-import { useCallback, useState } from "react";
+import { HTMLInputTypeAttribute, useCallback, useState } from "react";
 import styles from "./TextInput.module.css";
 
 type TextInputProps = {
@@ -15,6 +15,7 @@ type TextInputProps = {
   onClear?: () => void;
   onFocus?: () => void;
   onBlur?: () => void;
+  type?: HTMLInputTypeAttribute;
 };
 
 // create a search input based off of search input props
@@ -27,6 +28,7 @@ const TextInput: React.FC<TextInputProps> = ({
   onEscape,
   onFocus,
   onBlur,
+  type,
 }) => {
   const [value, setValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
@@ -63,10 +65,11 @@ const TextInput: React.FC<TextInputProps> = ({
 
   return (
     <div className={`${styles.container}`}>
-      {icon && <FontAwesomeIcon icon={icon} width={"0.8em"} />}
+      {icon && (
+        <FontAwesomeIcon icon={icon} width={"0.8em"} className={styles.icon} />
+      )}
       <input
         className={styles.input}
-        type="text"
         value={value}
         name={name}
         placeholder={placeholder || ""}
@@ -74,6 +77,7 @@ const TextInput: React.FC<TextInputProps> = ({
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}
         onKeyDown={handleOnKeyDown}
+        type={type || "text"}
       />
     </div>
   );

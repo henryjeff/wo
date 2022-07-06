@@ -6,8 +6,13 @@ import styles from "./SignUp.module.css";
 import Button from "@/components/Button";
 import { faKey, faUser } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import useSignUp from "@/hooks/auth/useSignUp";
+import { motion } from "framer-motion";
+import { defaultMountAnimation } from "@/styles/animation";
 
 const SignUp: NextPage = () => {
+  const form = useSignUp();
+
   return (
     <>
       <Head>
@@ -15,13 +20,13 @@ const SignUp: NextPage = () => {
       </Head>
       <Layout className={styles.layout}>
         <h1>Sign Up</h1>
-        <form className={styles.form}>
+        <div className={styles.form}>
           <label htmlFor="email">
             <TextInput
               icon={faUser}
               name="email"
               placeholder="Email Address"
-              onChange={() => {}}
+              onChange={form.setEmail}
             />
           </label>
 
@@ -30,7 +35,8 @@ const SignUp: NextPage = () => {
               icon={faKey}
               name="password"
               placeholder="Password"
-              onChange={() => {}}
+              onChange={form.setPassword}
+              type="password"
             />
           </label>
 
@@ -39,16 +45,27 @@ const SignUp: NextPage = () => {
               icon={faKey}
               name="confirmPassword"
               placeholder="Confirm Password"
-              onChange={() => {}}
+              onChange={form.setConfirmPassword}
+              type="password"
             />
           </label>
           <div className={styles.formFooter}>
-            <Button text="Sign Up" />
+            <Button
+              text="Sign Up"
+              onClick={form.signUp}
+              loading={form.loading}
+            />
             <Link href="/signin">
               <a>Or click here to Sign In</a>
             </Link>
+            <br />
+            {form.error && (
+              <motion.p className={styles.errorText} {...defaultMountAnimation}>
+                {form.error}
+              </motion.p>
+            )}
           </div>
-        </form>
+        </div>
       </Layout>
     </>
   );

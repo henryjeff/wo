@@ -2,9 +2,14 @@ import styles from "./Navbar.module.css";
 import logo from "@/public/logo-new.svg";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useAnimation, useAnimationFrame } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { useRouter } from "next/router";
 import Button from "@/components/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faClose } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+import { Easing } from "@/styles/animation";
+import { signOut, useSession } from "next-auth/react";
 
 export type NavbarLinkProps = {
   name: string;
@@ -12,54 +17,24 @@ export type NavbarLinkProps = {
 };
 
 const NavbarLink: React.FC<NavbarLinkProps> = ({ name, href }) => {
-  // check if we are currently at the href
   const router = useRouter();
   const isHere = router.pathname === href;
-  // const isActive = href === window.location.pathname;
 
   return (
     <Link href={href}>
       <div className={`${styles.navLinkContainer}`}>
         <a className={`${isHere && styles.navLinkHere}`}>{name}</a>
-        {/* <motion.div
-          layoutId={`navbar-loc`}
-          className={styles.locationIndicator}
-          animate={isHere ? "here" : "away"}
-          variants={navLocationIndicatorVars}
-          initial="away"
-        /> */}
       </div>
     </Link>
   );
 };
 
-const navLocationIndicatorVars = {
-  away: {
-    scaleX: 0,
-  },
-  here: {
-    scaleX: 1,
-    transition: {
-      duration: 0.4,
-      ease: "easeOut",
-    },
-  },
-};
-
 export type NavbarProps = {};
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faClose } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
-import {
-  defaultMountAnimation,
-  Easing,
-  mountAnimation,
-} from "@/styles/animation";
 
 const Navbar: React.FC<NavbarProps> = ({}) => {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const navbarMenuButtonControls = useAnimation();
+  const session = useSession();
 
   const handleNavbarMenuClick = async (
     e: React.ChangeEvent<HTMLInputElement>
@@ -91,10 +66,7 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
       </div>
       <div className={styles.navBtn}>
         <label htmlFor={styles.navCheck}>
-          <motion.div
-            // layoutId="navigation-open-close"
-            animate={navbarMenuButtonControls}
-          >
+          <motion.div animate={navbarMenuButtonControls}>
             <FontAwesomeIcon
               icon={navbarOpen ? faClose : faBars}
               width={navbarOpen ? "1.5em" : "1.5em"}
@@ -105,16 +77,31 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
       </div>
 
       <div className={styles.navLinks}>
-        <NavbarLink name="Home" href="/" />
-        <NavbarLink name="Workouts" href="/workouts" />
-        <NavbarLink name="Editor" href="/editor" />
-        <span className={styles.mobileOnlyLinks}>
-          <NavbarLink name="Sign In" href="/signin" />
-          <NavbarLink name="Sign Up" href="/signup" />
-        </span>
+        {session.status === "unauthenticated" ? (
+          <span className={styles.mobileOnlyLinks}>
+            <NavbarLink name="Sign In" href="/signin" />
+            <NavbarLink name="Sign Up" href="/signup" />
+          </span>
+        ) : (
+          <>
+            <NavbarLink name="Home" href="/" />
+            <NavbarLink name="Workouts" href="/workouts" />
+            <NavbarLink name="Editor" href="/editor" />
+            <span className={styles.mobileOnlyLinks}>
+              <NavbarLink name="Sign Out" href="/signout" />
+            </span>
+          </>
+        )}
       </div>
       <div className={styles.rightContent}>
-        <Button text="Sign Up" href="/signup" />
+        {session.status === "unauthenticated" ? (
+          <>
+            <Button text="Sign In" href="/signin" />
+            <Button text="Sign Up" href="/signup" />
+          </>
+        ) : (
+          <Button text="Sign Out" onClick={signOut} />
+        )}
       </div>
     </div>
   );

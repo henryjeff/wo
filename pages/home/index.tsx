@@ -8,7 +8,11 @@ import {
   FontAwesomeIcon,
   FontAwesomeIconProps,
 } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faChartLine } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRight,
+  faChartLine,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
 // Components
 import { Layout, DefaultHeadMetaTags } from "@/components/Page";
 import Button from "@/components/Button";
@@ -23,6 +27,7 @@ import { defaultMountAnimation, mountAnimation } from "@/styles/animation";
 
 import unit from "@/public/unit.svg";
 import TrackAnimation from "./TrackAnimation";
+import { useSession } from "next-auth/react";
 
 const Box = () => {
   const box = useRef<any>();
@@ -53,6 +58,8 @@ const Box = () => {
 };
 
 const Home: NextPage = () => {
+  const session = useSession();
+
   return (
     <>
       <Head>
@@ -85,12 +92,25 @@ const Home: NextPage = () => {
                 alt="logo"
               />
               <div className={styles.heroOverlayButtons}>
-                <Button
-                  icon={faChartLine}
-                  text="Start Tracking"
-                  href="/signup"
-                />
-                <Button icon={faArrowRight} text="Login" href="/signin" />
+                {session.status === "unauthenticated" ? (
+                  <>
+                    <Button
+                      icon={faChartLine}
+                      text="Start Tracking"
+                      href="/signup"
+                    />
+                    <Button icon={faArrowRight} text="Login" href="/signin" />
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      icon={faChartLine}
+                      text="View Workouts"
+                      href="/workouts"
+                    />
+                    <Button icon={faPlus} text="New Workout" href="/editor" />
+                  </>
+                )}
               </div>
               <div className={styles.heroOverlaySubtext}>
                 <a href="https://github.com/henryjeff/wo">

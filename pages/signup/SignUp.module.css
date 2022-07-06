@@ -33,3 +33,8 @@
 .formFooter > a:hover {
   opacity: 0.8;
 }
+
+.errorText {
+  color: var(--negative-color);
+  font-size: 0.8em;
+}
